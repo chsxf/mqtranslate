@@ -22,7 +22,19 @@
 function qtrans_header(){
 	global $q_config;
 	echo "\n<meta http-equiv=\"Content-Language\" content=\"".str_replace('_','-',$q_config['locale'][$q_config['language']])."\" />\n";
-
+	$css = "<style type=\"text/css\" media=\"screen\">\n";
+	$css .=".qtrans_flag span { display:none }\n";
+	$css .=".qtrans_flag { height:12px; width:18px; display:block }\n";
+	$css .=".qtrans_flag_and_text { padding-left:20px }\n";
+	$baseurl = WP_CONTENT_URL;
+	if(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == '1' || $_SERVER['HTTPS'] == 'on')) {
+		$baseurl = preg_replace('#^http://#','https://', $baseurl);
+	}
+	foreach($q_config['enabled_languages'] as $language) {
+		$css .=".qtrans_flag_".$language." { background:url(".$baseurl.'/'.$q_config['flag_location'].$q_config['flag'][$language].") no-repeat }\n";
+	}
+	$css .="</style>\n";
+	echo apply_filters('mqtranslate_header_css',$css);
 	// skip the rest if 404
 	if(is_404()) return;
 	// set links to translations of current page
