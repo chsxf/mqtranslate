@@ -377,57 +377,27 @@ function qtrans_updateGettextDatabases($force = false, $only_for_language = '') 
 		if(!@mkdir(WP_LANG_DIR))
 			return false;
 	}
-	
-	// Building major WP version
-	$patterns = array('/(_|\-|\+)/', '/(\D+)/', '/\.{2,}/');
-	$replacements = array('.', '.$1', '.');
-	$wp = preg_replace($patterns, $replacements, $wp_version);
-	$wp = array_slice(explode('.', $wp), 0, 2);
-	$major_wp_version = implode('.', $wp);
-	
+
 	$next_update = get_option('mqtranslate_next_update_mo');
 	if(time() < $next_update && !$force) return true;
 	update_option('mqtranslate_next_update_mo', time() + 7*24*60*60);
-	foreach($q_config['locale'] as $lang => $locale) {
-		if(qtrans_isEnabled($only_for_language) && $lang != $only_for_language) continue;
-		if(!qtrans_isEnabled($lang)) continue;
-		if($ll = @fopen(trailingslashit(WP_LANG_DIR).$locale.'.mo.filepart','a')) {
-			// can access .mo file
-			fclose($ll);
-			// try to find a .mo file
-			if(!($locale == 'en_US' && $lcr = @fopen('http://www.qianqin.de/wp-content/languages/'.$locale.'.mo','r')))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.$locale.'/tags/'.$wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.$locale.'/tags/'.$major_wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.substr($locale,0,2).'/tags/'.$wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.substr($locale,0,2).'/tags/'.$major_wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.$locale.'/branches/'.$wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.$locale.'/branches/'.$major_wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.substr($locale,0,2).'/branches/'.$wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.substr($locale,0,2).'/branches/'.$major_wp_version.'/messages/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.$locale.'/branches/'.$wp_version.'/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.$locale.'/branches/'.$major_wp_version.'/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.substr($locale,0,2).'/branches/'.$wp_version.'/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.substr($locale,0,2).'/branches/'.$major_wp_version.'/'.$locale.'.mo','r'))
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.$locale.'/trunk/messages/'.$locale.'.mo','r')) 
-			if(!$lcr = @fopen('http://svn.automattic.com/wordpress-i18n/'.substr($locale,0,2).'/trunk/messages/'.$locale.'.mo','r')) {
-				// couldn't find a .mo file
-				if(filesize(trailingslashit(WP_LANG_DIR).$locale.'.mo.filepart')==0) unlink(trailingslashit(WP_LANG_DIR).$locale.'.mo.filepart');
-				continue;
-			}
-			// found a .mo file, update local .mo
-			$ll = fopen(trailingslashit(WP_LANG_DIR).$locale.'.mo.filepart','w');
-			while(!feof($lcr)) {
-				// try to get some more time
-				@set_time_limit(30);
-				$lc = fread($lcr, 8192);
-				fwrite($ll,$lc);
-			}
-			fclose($lcr);
-			fclose($ll);
-			// only use completely download .mo files
-			rename(trailingslashit(WP_LANG_DIR).$locale.'.mo.filepart',trailingslashit(WP_LANG_DIR).$locale.'.mo');
-		}
+
+	require_once ABSPATH . 'wp-admin/includes/translation-install.php';
+	include( ABSPATH . WPINC . '/version.php' ); // include an unmodified $wp_version
+	$result = translations_api( 'core', array( 'version' => $wp_version ) );
+	
+	foreach($result['translations'] as $translation) {
+	if(isset($q_config['locale'][$translation['language']]) && qtrans_isEnabled($translation['language'])
+	|| isset($q_config['locale'][substr($translation['language'], 0, 2)]) && qtrans_isEnabled(substr($translation['language'], 0, 2))) {
+	        $translation = (object) $translation;
+	        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+	        $skin = new Automatic_Upgrader_Skin;
+	        $upgrader = new Language_Pack_Upgrader( $skin );
+	        $translation->type = 'core';
+	        $result = $upgrader->upgrade( $translation, array( 'clear_update_cache' => false ) );
+	    }
 	}
+
 	return true;
 }
 
