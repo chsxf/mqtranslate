@@ -26,6 +26,21 @@ function qtrans_generateLanguageSelectCode($style='', $id='') {
 	else
 	{
 		global $q_config;
+
+		$css = "<style type=\"text/css\" media=\"screen\"> \n";
+		$css .= ".qtrans_flag span { display: none; } \n";
+		$css .= ".qtrans_flag { height: 12px; width: 18px; display: block; } \n";
+		$css .= ".qtrans_flag_and_text { padding-left: 20px; } \n";
+		$baseurl = WP_CONTENT_URL;
+		if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == '1' || $_SERVER['HTTPS'] == 'on')) {
+			$baseurl = preg_replace('#^http://#', 'https://', $baseurl);
+		}
+		foreach ($q_config['enabled_languages'] as $language) {
+			$css .=".qtrans_flag_".$language." { background: url(".$baseurl.'/'.$q_config['flag_location'].$q_config['flag'][$language].") no-repeat; }\n";
+		}
+		$css .="</style> \n";
+		echo $css;
+
 		if($style=='') $style='text';
 		if(is_bool($style)&&$style) $style='image';
 		if(is_404()) $url = get_option('home'); else $url = '';
