@@ -437,5 +437,3 @@ function qtrans_initJS() {
 		}
 		";
 }
-
-?>

@@ -122,7 +122,7 @@ function mqtranslate_language_form($lang = '', $language_code = '', $language_na
 	<input name="language_na_message" id="language_na_message" type="text" value="<?php echo $language_na_message; ?>"/>
 	<p>
 		<?php _e('Message to display if post is not available in the requested language. (Example: Sorry, this entry is only available in %LANG:, : and %.)', 'mqtranslate'); ?><br />
-		<?php _e('%LANG:&lt;normal_seperator&gt;:&lt;last_seperator&gt;% generates a list of languages seperated by &lt;normal_seperator&gt; except for the last one, where &lt;last_seperator&gt; will be used instead.', 'mqtranslate'); ?><br />
+		<?php _e('%LANG:&lt;normal_separator&gt;:&lt;last_separator&gt;% generates a list of languages separated by &lt;normal_separator&gt; except for the last one, where &lt;last_separator&gt; will be used instead.', 'mqtranslate'); ?><br />
 	</p>
 </div>
 <?php
@@ -474,7 +474,7 @@ function mqtranslate_conf() {
 						echo ' '.$q_config['language_name'][$language] . "</label><br />\n";
 					}
 				?>
-					</br>
+					<br/>
 					<?php printf(__('Choose the default language of your blog. This is the language which will be shown on %s. You can also change the order the languages by clicking on the arrows above.', 'mqtranslate'), get_bloginfo('url')); ?>
 					</fieldset>
 				</td>
@@ -522,7 +522,7 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e('Flag Image Path', 'mqtranslate');?></th>
+				<th scope="row"><label for="flag_location"><?php _e('Flag Image Path', 'mqtranslate');?></label></th>
 				<td>
 					<?php echo trailingslashit(WP_CONTENT_URL); ?><input type="text" name="flag_location" id="flag_location" value="<?php echo $q_config['flag_location']; ?>" style="width:50%"/>
 					<br/>
@@ -530,7 +530,7 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e('Ignore Links', 'mqtranslate');?></th>
+				<th scope="row"><label for="ignore_file_types"><?php _e('Ignore Links', 'mqtranslate');?></label></th>
 				<td>
 					<input type="text" name="ignore_file_types" id="ignore_file_types" value="<?php echo $q_config['ignore_file_types']; ?>" style="width:100%"/>
 					<br/>
@@ -546,7 +546,7 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e('Allowed Custom Post Types', 'mqtranslate'); ?></th>
+				<th scope="row"><label for="allowed_custom_post_types"><?php _e('Allowed Custom Post Types', 'mqtranslate'); ?></label></th>
 				<td>
 					<input type="text" name="allowed_custom_post_types" id="allowed_custom_post_types" value="<?php echo implode(', ', $q_config['allowed_custom_post_types']); ?>" style="width: 100%" />
 					<br />
@@ -589,7 +589,7 @@ function mqtranslate_conf() {
 				<th scope="row"><?php _e('Convert Database', 'mqtranslate');?></th>
 				<td>
 					<?php printf(__('If you are updating from qTranslate 1.x or Polyglot, <a href="%s">click here</a> to convert posts to the new language tag format.', 'mqtranslate'), $clean_uri.'&convert=true'); ?>
-					<?php printf(__('If you have installed mqTranslate for the first time on a Wordpress with existing posts, you can either go through all your posts manually and save them in the correct language or <a href="%s">click here</a> to mark all existing posts as written in the default language.', 'mqtranslate'), $clean_uri.'&markdefault=true'); ?>
+					<?php printf(__('If you have installed mqTranslate for the first time on a WordPress with existing posts, you can either go through all your posts manually and save them in the correct language or <a href="%s">click here</a> to mark all existing posts as written in the default language.', 'mqtranslate'), $clean_uri.'&markdefault=true'); ?>
 					<?php _e('Both processes are <b>irreversible</b>! Be sure to make a full database backup before clicking one of the links.', 'mqtranslate'); ?>
 				</td>
 			</tr>
@@ -606,7 +606,7 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 			<tr>
-				<th scope="row"><?php _e('Debugging Information', 'mqtranslate');?></th>
+				<th scope="row"><label for="mqtranslate_debug"><?php _e('Debugging Information', 'mqtranslate');?></label></th>
 				<td>
 					<p><?php printf(__('If you encounter any problems and you are unable to solve them yourself, you can visit the <a href="%s">Support Forum</a>. Posting the following Content will help other detect any misconfigurations.', 'mqtranslate'), 'http://www.qianqin.de/mqtranslate/forum/'); ?></p>
 					<textarea readonly="readonly" id="mqtranslate_debug"><?php

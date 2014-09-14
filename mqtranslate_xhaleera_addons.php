@@ -100,7 +100,7 @@ function mqtrans_userProfile($user) {
 	else if ($cu->has_cap('edit_users'))
 	{
 		if (empty($langs))
-			_e('No language available', 'mqtranslate')."\n";
+			_e('No language available', 'mqtranslate');
 		else
 		{
 			$checkboxes = array();
@@ -116,7 +116,7 @@ function mqtrans_userProfile($user) {
 	{
 		$intersect = array_intersect($langs, $user_langs);
 		if (empty($intersect))
-			_e('No language selected', 'mqtranslate')."\n";
+			_e('No language selected', 'mqtranslate');
 		else
 		{
 			$languages = array();
@@ -240,7 +240,7 @@ function mqtrans_postUpdated($post_ID, $after, $before) {
 	$wpdb->update($wpdb->posts, $data, $where);
 }
 
-function mqtrans_filterHomeURL($url, $path, $orig_scheme, $blog_id) {
+function mqtrans_filterHomeURL($url, $path) {
 	global $q_config;
 	return ((empty($path) && $q_config['url_mode'] == QT_URL_PATH) || $path == '/' || !empty($q_config['url_info']['explicit_default_language'])) ? qtrans_convertURL($url, '', false, $q_config['url_info']['explicit_default_language']) : $url;
 }
@@ -321,7 +321,7 @@ function mqtrans_editorExpand() {
 
 if (!defined('WP_ADMIN'))
 {
-	add_filter('home_url', 'mqtrans_filterHomeURL', 10, 4);
+	add_filter('home_url', 'mqtrans_filterHomeURL', 10, 2);
 	add_filter('get_post_metadata', 'mqtrans_filterPostMetaData', 10, 4);
 }
 else
@@ -335,4 +335,3 @@ add_action('post_updated',					'mqtrans_postUpdated', 10, 3);
 add_action('mqtranslate_configuration', 	'mqtrans_team_options', 9);
 add_action('mqtranslate_loadConfig',		'mqtrans_load_team_options');
 add_action('mqtranslate_saveConfig',		'mqtrans_save_team_options');
-?>

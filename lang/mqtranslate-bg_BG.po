@@ -122,13 +122,13 @@ msgstr ""
 
 #: ../mqtranslate_configuration.php:125
 msgid ""
-"%LANG:&lt;normal_seperator&gt;:&lt;last_seperator&gt;% generates a list of "
-"languages seperated by &lt;normal_seperator&gt; except for the last one, "
-"where &lt;last_seperator&gt; will be used instead."
+"%LANG:&lt;normal_separator&gt;:&lt;last_separator&gt;% generates a list of "
+"languages seperated by &lt;normal_separator&gt; except for the last one, "
+"where &lt;last_separator&gt; will be used instead."
 msgstr ""
-"%LANG:&lt;normal_seperator&gt;:&lt;last_seperator&gt;% създава списък на "
-"езиците, разделени с &lt;normal_seperator&gt; без последния, за който ще "
-"бъде използван &lt;last_seperator&gt;."
+"%LANG:&lt;normal_separator&gt;:&lt;last_separator&gt;% създава списък на "
+"езиците, разделени с &lt;normal_separator&gt; без последния, за който ще "
+"бъде използван &lt;last_separator&gt;."
 
 #: ../mqtranslate_configuration.php:188 ../mqtranslate_services.php:363
 msgid "Action"

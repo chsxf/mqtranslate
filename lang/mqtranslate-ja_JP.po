@@ -116,9 +116,9 @@ msgstr ""
 
 #: ../mqtranslate_configuration.php:125
 msgid ""
-"%LANG:&lt;normal_seperator&gt;:&lt;last_seperator&gt;% generates a list of "
-"languages seperated by &lt;normal_seperator&gt; except for the last one, "
-"where &lt;last_seperator&gt; will be used instead."
+"%LANG:&lt;normal_separator&gt;:&lt;last_separator&gt;% generates a list of "
+"languages seperated by &lt;normal_separator&gt; except for the last one, "
+"where &lt;last_separator&gt; will be used instead."
 msgstr ""
 "%LANG:&lt;通常区切り&gt;:&lt;最後区切り&gt;%が、最後の言語以外に、&lt;通常区"
 "切り&gt; で区切った言語のリストを生成します。最後の言語には &lt;最後区切り"

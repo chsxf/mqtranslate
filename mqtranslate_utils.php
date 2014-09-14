@@ -172,6 +172,7 @@ function qtrans_convertFormat($format, $default_format) {
 		case QT_STRFTIME:
 			return $format;
 		case QT_STRFTIME_OVERRIDE:
+        default:
 			return $default_format;
 	}
 }
@@ -202,17 +203,17 @@ function qtrans_convertTimeFormat($format) {
 
 function qtrans_formatCommentDateTime($format) {
 	global $comment;
-	return qtrans_strftime(qtrans_convertFormat($format, $format), mysql2date('U',$comment->comment_date), '', $before, $after);
+	return qtrans_strftime(qtrans_convertFormat($format, $format), mysql2date('U',$comment->comment_date), '');
 }
 
 function qtrans_formatPostDateTime($format) {
 	global $post;
-	return qtrans_strftime(qtrans_convertFormat($format, $format), mysql2date('U',$post->post_date), '', $before, $after);
+	return qtrans_strftime(qtrans_convertFormat($format, $format), mysql2date('U',$post->post_date), '');
 }
 
 function qtrans_formatPostModifiedDateTime($format) {
 	global $post;
-	return qtrans_strftime(qtrans_convertFormat($format, $format), mysql2date('U',$post->post_modified), '', $before, $after);
+	return qtrans_strftime(qtrans_convertFormat($format, $format), mysql2date('U',$post->post_modified), '');
 }
 
 function qtrans_realURL($url = '') {
@@ -232,4 +233,3 @@ function qtrans_getSortedLanguages($reverse = false) {
 	if($reverse) krsort($clean_languages);
 	return $clean_languages;
 }
-?>

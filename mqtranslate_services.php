@@ -453,9 +453,9 @@ function qs_config_hook($request_uri) {
 				foreach($service['service_required_fields'] as $field) {
 ?>
 	<tr valign="top">
-		<th scope="row"><?php echo $field['title']; ?></th>
+		<th scope="row"><label for="<?php echo 'qs_'.$service['service_id']."_".$field['name']; ?>"><?php echo $field['title']; ?></label></th>
 		<td>
-			<input type="<?php echo ($field['name']=='password')?'password':'text';?>" name="<?php echo 'qs_'.$service['service_id']."_".$field['name']; ?>" value="<?php echo (isset($service_settings[$service['service_id']][$field['name']])&&$field['name']!='password')?$service_settings[$service['service_id']][$field['name']]:''; ?>" style="width:100%"/>
+			<input type="<?php echo ($field['name']=='password')?'password':'text';?>" name="<?php echo 'qs_'.$service['service_id']."_".$field['name']; ?>" id="<?php echo 'qs_'.$service['service_id']."_".$field['name']; ?>" value="<?php echo (isset($service_settings[$service['service_id']][$field['name']])&&$field['name']!='password')?$service_settings[$service['service_id']][$field['name']]:''; ?>" style="width:100%"/>
 		</td>
 	</tr>
 <?php
@@ -810,7 +810,7 @@ if(!empty($message)) {
 	</div>
 	<div class="postbox closed">
 		<div class="handlediv" title="<?php _e('Click to toggle'); ?>" onclick="jQuery(this).parent().removeClass('closed');jQuery(this).hide();"><br></div>
-		<h3 class="hndle"><?php _e('Review Article', 'mqtranslate'); ?></h3>
+		<h3 class="hndle"><label for="qs_content_preview"><?php _e('Review Article', 'mqtranslate'); ?></label></h3>
 		<div class="inside">
 			<textarea name="qs_content_preview" id="qs_content_preview" readonly="readonly"><?php echo $post_content; ?></textarea>
 		</div>

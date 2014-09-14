@@ -90,4 +90,3 @@ function qtrans_widget_init() {
 		require_once('mqtranslate_widget.inc.php');
 	register_widget('mqTranslateWidget');
 }
-?>

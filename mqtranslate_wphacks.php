@@ -212,7 +212,7 @@ function qtrans_modifyExcerpt() {
 	$el = qtrans_getSortedLanguages();
 	foreach($el as $language) {
 		echo qtrans_createTitlebarButton('postexcerpt', $language, 'excerpt', 'qtrans_switcher_postexcerpt_'.$language);
-		echo qtrans_createTextArea('postexcerpt', $language, 'excerpt', 'qtrans_switcher_postexcerpt_'.$language);
+		echo qtrans_createTextArea('postexcerpt', $language, 'excerpt');
 	}
 	echo "qtrans_switch_postbox('postexcerpt','excerpt','".$q_config['default_language']."', false);";
 	echo "jQuery('#excerpt').hide();";
@@ -229,8 +229,7 @@ function qtrans_createTitlebarButton($parent, $language, $target, $id) {
 	return $html;
 }
 
-function qtrans_createTextArea($parent, $language, $target, $id) {
-	global $q_config;
+function qtrans_createTextArea($parent, $language, $target) {
 	$html = "
 		jQuery('#".$target."').after('<textarea name=\"qtrans_textarea_".$target."_".$language."\" id=\"qtrans_textarea_".$target."_".$language."\"></textarea>');
 		jQuery('#qtrans_textarea_".$target."_".$language."').attr('cols', jQuery('#".$target."').attr('cols'));
@@ -419,4 +418,3 @@ function qtrans_createEditorToolbarButton($language, $id, $js_function = 'switch
 		";
 	return $html;
 }
-?>

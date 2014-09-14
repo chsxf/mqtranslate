@@ -92,9 +92,9 @@ msgstr ""
 
 #: ../mqtranslate_configuration.php:125
 msgid ""
-"%LANG:&lt;normal_seperator&gt;:&lt;last_seperator&gt;% generates a list of "
-"languages seperated by &lt;normal_seperator&gt; except for the last one, "
-"where &lt;last_seperator&gt; will be used instead."
+"%LANG:&lt;normal_separator&gt;:&lt;last_separator&gt;% generates a list of "
+"languages seperated by &lt;normal_separator&gt; except for the last one, "
+"where &lt;last_separator&gt; will be used instead."
 msgstr ""
 
 #: ../mqtranslate_configuration.php:188 ../mqtranslate_services.php:363

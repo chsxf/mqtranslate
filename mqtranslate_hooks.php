@@ -102,7 +102,7 @@ function qtrans_adminHeader() {
 	echo "#post-body-content .postarea { margin-bottom: 10px; }";
 	do_action('mqtranslate_css');
 	echo "</style>\n";
-	return qtrans_optionFilter(false);
+	qtrans_optionFilter(false);
 }
 
 function qtrans_useCurrentLanguageIfNotFoundShowAvailable($content) {
@@ -152,7 +152,6 @@ function qtrans_postsFilter($posts) {
 	if(is_array($posts)) {
 		foreach($posts as $post) {
 			$post->post_content = qtrans_useCurrentLanguageIfNotFoundShowAvailable($post->post_content);
-			$post = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($post);
 		}
 	}
 	return $posts;
@@ -178,7 +177,7 @@ function qtrans_languageColumnHeader($columns){
 	if(isset($columns['categories']))	$new_columns['categories'] = '';
 	if(isset($columns['tags']))			$new_columns['tags'] = '';
 	$new_columns['language'] = __('Languages', 'mqtranslate');
-	return array_merge($new_columns, $columns);;
+	return array_merge($new_columns, $columns);
 }
 
 function qtrans_languageColumn($column) {
@@ -187,7 +186,6 @@ function qtrans_languageColumn($column) {
 		$available_languages = qtrans_getAvailableLanguages($post->post_content);
 		$missing_languages = array_diff($q_config['enabled_languages'], $available_languages);
 		$available_languages_name = array();
-		$missing_languages_name = array();
 		foreach($available_languages as $language) {
 			$available_languages_name[] = $q_config['language_name'][$language];
 		}
@@ -372,5 +370,3 @@ if(!defined('WP_ADMIN')) {
 	add_filter('get_comment_author',		'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
 	add_filter('the_author',				'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
 }
-
-?>

@@ -204,7 +204,7 @@ $q_config['locale']['gl'] = "gl_ES";
 $q_config['locale']['sr'] = 'sr_RS';
 
 // Language not available messages
-// %LANG:<normal_seperator>:<last_seperator>% generates a list of languages seperated by <normal_seperator> except for the last one, where <last_seperator> will be used instead.
+// %LANG:<normal_separator>:<last_separator>% generates a list of languages separated by <normal_separator> except for the last one, where <last_separator> will be used instead.
 $q_config['not_available']['de'] = "Leider ist der Eintrag nur auf %LANG:, : und % verfügbar.";
 $q_config['not_available']['en'] = "Sorry, this entry is only available in %LANG:, : and %.";
 $q_config['not_available']['zh'] = "对不起，此内容只适用于%LANG:，:和%。";
@@ -491,4 +491,3 @@ if(file_exists(dirname(__FILE__)."/mqtranslate_services.php"))
 require_once(dirname(__FILE__)."/mqtranslate_hooks.php");
 
 require_once(dirname(__FILE__)."/mqtranslate_xhaleera_addons.php");
-?>

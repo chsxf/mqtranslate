@@ -915,14 +915,14 @@ function qtrans_use($lang, $text, $show_available=false) {
 	$available_languages = array_unique($available_languages);
 	$language_list = "";
 	if (preg_match('/%LANG:([^:]*):([^%]*)%/S', $q_config['not_available'][$lang], $match)) {
-		$normal_seperator = $match[1];
-		$end_seperator = $match[2];
+		$normal_separator = $match[1];
+		$end_separator = $match[2];
 		// build available languages string backward
 		foreach ($available_languages as $k => $language) {
 			if ($k == 1)
-				$language_list = $end_seperator.$language_list;
+				$language_list = $end_separator.$language_list;
 			else if ($k > 1)
-				$language_list = $normal_seperator.$language_list;
+				$language_list = $normal_separator.$language_list;
 			$language_list = "<a href=\"".qtrans_convertURL('', $language)."\">".$q_config['language_name'][$language]."</a>".$language_list;
 		}
 	}
@@ -938,5 +938,3 @@ function qtrans_showAllSeperated($text) {
 	}
 	return $result;
 }
-
-?>
