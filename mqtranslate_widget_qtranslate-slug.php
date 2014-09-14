@@ -41,4 +41,4 @@ class mqTranslateWidget extends QtranslateSlugWidget {
 		parent::form($instance);
 	}
 }
-?>
+
