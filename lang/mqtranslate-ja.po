@@ -3,16 +3,15 @@ msgstr ""
 "Project-Id-Version: mqTranslate 2.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 16:30+0200\n"
-"PO-Revision-Date: 2011-02-14 23:07+0900\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2014-09-27 23:14+0900\n"
+"Last-Translator: atachibana <unofficialtokyo@gmail.com>\n"
 "Language-Team: Qian Qin <mail@qianqin.de>\n"
-"Language: \n"
+"Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Japanese\n"
-"X-Poedit-Country: JAPAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.6.9\n"
 
 #: ../mqtranslate_configuration.php:25
 msgid "Language Management"
@@ -41,7 +40,7 @@ msgstr "国旗"
 
 #: ../mqtranslate_configuration.php:82
 msgid "Incorrect Flag Image Path! Please correct it!"
-msgstr "国旗画像のパスが間違っています！直してください！"
+msgstr "国旗画像ファイルのパスが間違っています! 修正してください!"
 
 #: ../mqtranslate_configuration.php:85
 msgid "Choose the corresponding country flag for language. (Example: gb.png)"
@@ -129,9 +128,8 @@ msgid "Action"
 msgstr "アクション"
 
 #: ../mqtranslate_configuration.php:199
-#, fuzzy
 msgid "Switching Language"
-msgstr "言語編集"
+msgstr "言語の切り換え"
 
 #: ../mqtranslate_configuration.php:199
 #, php-format
@@ -139,15 +137,16 @@ msgid ""
 "Switching language to %1$s... If the Dashboard isn't loading, use this <a "
 "href=\"%2$s\" title=\"Dashboard\">link</a>."
 msgstr ""
+"言語を %1$s に切り換え中...。ダッシュボードをロードできない場合、この<a href="
+"\"%2$s\" title=\"Dashboard\">リンク</a>を使用してください。"
 
 #: ../mqtranslate_configuration.php:220
-#, fuzzy
 msgid "mqTranslate has been reset."
-msgstr "qTranslate はリセットされました。"
+msgstr "mqTranslate はリセットされました。"
 
 #: ../mqtranslate_configuration.php:244
 msgid "Gettext databases updated."
-msgstr "Gettext のデータベースは更新されました。"
+msgstr "Gettext データベースは更新されました。"
 
 #: ../mqtranslate_configuration.php:249
 msgid "The Language must have a Not-Available Message!"
@@ -218,19 +217,18 @@ msgid "Save Changes &raquo;"
 msgstr "変更を保存 &raquo;"
 
 #: ../mqtranslate_configuration.php:454
-#, fuzzy
 msgid "Language Management (mqTranslate Configuration)"
-msgstr "言語管理 （qTranslate 設定）"
+msgstr "言語管理 （mqTranslate 設定）"
 
 #: ../mqtranslate_configuration.php:455
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "For help on how to configure mqTranslate correctly, take a look at the <a "
 "href=\"%1$s\">qTranslate FAQ</a> and the <a href=\"%2$s\">Support Forum</a>."
 msgstr ""
-"qTranslateを正しく設定する手伝いには、 <a href=\"%1$s\">qTranslate FAQ</a> あ"
-"るいは <a href=\"%2$s\">サポートフォーラム</a>（英語のみ）へ問い合わせてくだ"
-"さい."
+"mqTranslate を正しく設定できない場合には <a href=\"%1$s\">qTranslate FAQ</a> "
+"または <a href=\"%2$s\">サポートフォーラム</a> (英語のみ) に問い合わせてくだ"
+"さい。"
 
 #: ../mqtranslate_configuration.php:457
 msgid "General Settings"
@@ -274,22 +272,19 @@ msgstr ""
 "ジが表示されます。"
 
 #: ../mqtranslate_configuration.php:488
-#, fuzzy
 msgid ""
 "This function will not work correctly if you installed mqTranslate on a blog "
 "with existing entries. In this case you will need to take a look at "
 "\"Convert Database\" under \"Advanced Settings\"."
 msgstr ""
-"既存の投稿があるブログに qTranslateをインストールすれば、この機能は正常に作動"
-"しません。この場合ならば、「詳細設定」の「データベースを変換」を見る必要とな"
-"ります。"
+"すでに投稿が存在するブログに mqTranslateをインストールした場合、この機能は正"
+"しく動作しません。「詳細設定」の「データベースを変換」を参照してください。"
 
 #: ../mqtranslate_configuration.php:491
-#, fuzzy
 msgid ""
 "Show displayed language prefix when Content is not available for the "
 "selected language."
-msgstr "選択した言語によって利用できないコンテンツを隠す"
+msgstr "選択された言語でコンテンツが利用できない場合、言語の接頭辞を表示する。"
 
 #: ../mqtranslate_configuration.php:496
 msgid "Detect Browser Language"
@@ -297,7 +292,7 @@ msgstr "ブラウザの言語を検出"
 
 #: ../mqtranslate_configuration.php:498
 msgid "Detect the language of the browser and redirect accordingly."
-msgstr "ブラウザの言語を検出し、それに応じてリダイレクトします。"
+msgstr "ブラウザの言語を検出しリダイレクトします。"
 
 #: ../mqtranslate_configuration.php:501
 msgid ""
@@ -315,7 +310,7 @@ msgstr "詳細設定"
 #: ../mqtranslate_configuration.php:506 ../mqtranslate_services.php:370
 #: ../mqtranslate_xhaleera_addons.php:279
 msgid "Show / Hide"
-msgstr ""
+msgstr "表示 / 非表示"
 
 #: ../mqtranslate_configuration.php:509 ../mqtranslate_configuration.php:511
 msgid "URL Modification Mode"
@@ -327,19 +322,19 @@ msgstr "クエリーモードを使用 （?lang=ja）"
 
 #: ../mqtranslate_configuration.php:513
 msgid "Use Pre-Path Mode (Default, puts /en/ in front of URL)"
-msgstr "事前パスモード （デフォルト、/ja/ をURLの前に入れます）"
+msgstr "事前パスモードを使用 （デフォルト、/ja/ をURLの前に入れます）"
 
 #: ../mqtranslate_configuration.php:514
 msgid "Use Pre-Domain Mode (uses http://en.yoursite.com)"
-msgstr "事前ドメインモード （http://ja.yoursite.com を使用）"
+msgstr "事前ドメインモードを使用 （http://ja.yoursite.com を使用）"
 
 #: ../mqtranslate_configuration.php:517
 msgid ""
 "Pre-Path and Pre-Domain mode will only work with mod_rewrite/pretty "
 "permalinks. Additional Configuration is needed for Pre-Domain mode!"
 msgstr ""
-"mod_rewrite/\"Pretty\" パーマリンクを使用しないと、事前パスモードと事前ドメイ"
-"ンモードが機能できません。事前ドメインモードには追加設定が必要です！"
+"事前パスモードと事前ドメインモードは mod_rewrite/pretty パーマリンクでのみ正"
+"常に動作します。事前ドメインモードには追加設定が必要です!"
 
 #: ../mqtranslate_configuration.php:520
 msgid "Hide URL language information for default language."
@@ -347,16 +342,15 @@ msgstr "デフォルト言語の URL 言語情報を隠す"
 
 #: ../mqtranslate_configuration.php:524
 msgid "Flag Image Path"
-msgstr "国旗画像のパス"
+msgstr "国旗画像ファイルのパス"
 
 #: ../mqtranslate_configuration.php:528
-#, fuzzy
 msgid ""
 "Path to the flag images under wp-content, with trailing slash. (Default: "
 "plugins/mqtranslate/flags/)"
 msgstr ""
-"国旗画像へのパスは、末尾のスラッシュが込まれて wp-content の下にあります。 "
-"（デフォルト: plugins/qtranslate/flags/）"
+"wp-content 下の国旗画像ファイルのパス。末尾にスラッシュが必要 (デフォルト: "
+"plugins/qtranslate/flags/ )"
 
 #: ../mqtranslate_configuration.php:532
 msgid "Ignore Links"
@@ -367,39 +361,39 @@ msgid ""
 "Don't convert Links to files of the given file types. (Default: gif,jpg,jpeg,"
 "png,pdf,swf,tif,rar,zip,7z,mpg,divx,mpeg,avi,css,js)"
 msgstr ""
-"この既定のファイルの種類へのリンクを変換しません （デフォルト: gif,jpg,jpeg,"
-"png,pdf,swf,tif,rar,zip,7z,mpg,divx,mpeg,avi,css,js）"
+"指定されたファイルタイプのファイルへのリンクを変換しない ( デフォルト:gif,"
+"jpg,jpeg,png,pdf,swf,tif,rar,zip,7z,mpg,divx,mpeg,avi,css,js）"
 
 #: ../mqtranslate_configuration.php:540
 msgid "Allowed Custom Post Types"
-msgstr ""
+msgstr "対象のカスタム投稿タイプ"
 
 #: ../mqtranslate_configuration.php:544
 msgid ""
 "Comma-separated list of the custom post types for which you want mqTranslate "
 "to keep multi-language values."
 msgstr ""
+"mqTranslateで多言語対応するカスタム投稿タイプ。複数の場合はコンマで区切る。"
 
 #: ../mqtranslate_configuration.php:548
 msgid "Update Gettext Databases"
-msgstr "Gettext のデータベースを更新"
+msgstr "Gettext データベースを更新"
 
 #: ../mqtranslate_configuration.php:550
 msgid "Automatically check for .mo-Database Updates of installed languages."
-msgstr "インストールされた言語の .mo のデータベースの更新を自動でチェック"
+msgstr "インストールされた言語の .mo データベースの更新を自動でチェック"
 
 #: ../mqtranslate_configuration.php:552
 msgid "Update Gettext databases now."
-msgstr "今すぐ Gettext のデータベースを更新"
+msgstr "今すぐ Gettext データベースを更新"
 
 #: ../mqtranslate_configuration.php:554
-#, fuzzy
 msgid ""
 "mqTranslate will query the Wordpress Localisation Repository every week and "
 "download the latest Gettext Databases (.mo Files)."
 msgstr ""
-"qTranslate は毎週 WordPress ローカライゼーションレポジトリにクエリーし、"
-"Gettext の最新データベースをダウンロードします （.mo のファイル）。"
+"mqTranslate は毎週 WordPress ローカライゼーションレポジトリを照会し、最新の "
+"Gettext データベースをダウンロードします(.mo ファイル)。"
 
 #: ../mqtranslate_configuration.php:558
 msgid "Date / Time Conversion"
@@ -438,37 +432,33 @@ msgstr ""
 "ります。"
 
 #: ../mqtranslate_configuration.php:568
-#, fuzzy
 msgid "Reset mqTranslate"
-msgstr "qTranslate をリセット"
+msgstr "mqTranslate のリセット"
 
 #: ../mqtranslate_configuration.php:570
-#, fuzzy
 msgid ""
 "Check this box and click Save Changes to reset all mqTranslate settings."
 msgstr ""
-"qTranslate のすべての設定をリセットするには、このチェックボックスにチェックを"
-"入れ、「変更を保存」のボタンをクリックしてください。"
+"mqTranslate のすべての設定をリセットするには、このチェックボックスにチェック"
+"を入れ、「変更を保存」のボタンをクリックしてください。"
 
 #: ../mqtranslate_configuration.php:572
-#, fuzzy
 msgid "Yes, I really want to reset mqTranslate."
-msgstr "はい、qTranslate を本当にリセットしたいです。"
+msgstr "はい、本当に mqTranslate をリセットします。"
 
 #: ../mqtranslate_configuration.php:574
 msgid "Also delete Translations for Categories/Tags/Link Categories."
 msgstr "カテゴリー/タグ/リンクカテゴリーの翻訳も削除します。"
 
 #: ../mqtranslate_configuration.php:576
-#, fuzzy
 msgid ""
 "If something isn't working correctly, you can always try to reset all "
 "mqTranslate settings. A Reset won't delete any posts but will remove all "
 "settings (including all languages added)."
 msgstr ""
-"もし何かが正常に機能していない場合、qTranslate のすべての設定をリセットをする"
-"ことができます。リセットをしても、投稿は削除されませんが、qTranslate のすべて"
-"の設定は削除されます （追加したすべての言語込み）。"
+"正常に機能しない場合、いつでも mqTranslate のすべての設定をリセットできます。"
+"リセットしても投稿は削除されず、mqTranslate のすべての設定だけが削除されます "
+"(追加されたすべての言語を含む)。"
 
 #: ../mqtranslate_configuration.php:580
 msgid "Convert Database"
@@ -484,46 +474,44 @@ msgstr ""
 "フォーマットに変換するには<a href=\"%s\">ここ</a>をクリックしてください。"
 
 #: ../mqtranslate_configuration.php:583
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "If you have installed mqTranslate for the first time on a Wordpress with "
 "existing posts, you can either go through all your posts manually and save "
 "them in the correct language or <a href=\"%s\">click here</a> to mark all "
 "existing posts as written in the default language."
 msgstr ""
-"既存の投稿がある Wordpress に qTranslate を初めてインストールした場合、投稿ご"
-"とに手動で正しい言語として保存、もしくは<a href=\"%s\">ここ</a>をクリックし、"
-"すべての既存の投稿を、デフォルト言語で書かれているように登録できます。"
+"すでに投稿の存在する Wordpress に初めて mqTranslate をインストールする場合、"
+"投稿ごとに手動で正しい言語として保存するか、または<a href=\"%s\">ここ</a>をク"
+"リックして、すべての既存の投稿をデフォルトの言語で登録できます。"
 
 #: ../mqtranslate_configuration.php:584
 msgid ""
 "Both processes are <b>irreversible</b>! Be sure to make a full database "
 "backup before clicking one of the links."
 msgstr ""
-"過程は両方とも<b>不可逆</b>です！リンクをどちらもクリックする以前に、必ず完全"
-"バックアップを行ってください。"
+"どちらの処理も<b>元に戻せません!</b> リンクをクリックする前に、必ず完全バック"
+"アップを取得してください。"
 
 #: ../mqtranslate_configuration.php:588
-#, fuzzy
 msgid "Settings Migration"
-msgstr "設定"
+msgstr "設定の移行"
 
 #: ../mqtranslate_configuration.php:590
 msgid "Do not migrate any setting"
-msgstr ""
+msgstr "設定を移行しない"
 
 #: ../mqtranslate_configuration.php:592
 msgid "Import settings from qTranslate"
-msgstr ""
+msgstr "qTranslateから設定をインポート"
 
 #: ../mqtranslate_configuration.php:594
-#, fuzzy
 msgid "Export settings to qTranslate"
-msgstr "qTranslate をリセット"
+msgstr "qTranslate に設定をエクスポート"
 
 #: ../mqtranslate_configuration.php:596
 msgid "Export settings only if qTranslate is installed."
-msgstr ""
+msgstr "qTranslateがインストールされている場合のみ設定をエクスポートする。"
 
 #: ../mqtranslate_configuration.php:600
 msgid "Debugging Information"
@@ -536,9 +524,9 @@ msgid ""
 "can visit the <a href=\"%s\">Support Forum</a>. Posting the following "
 "Content will help other detect any misconfigurations."
 msgstr ""
-"自分で解決できない問題が発生した際、<a href=\"%s\">サポートフォーラム</a>（英"
-"語のみ）を利用できます。記下のコンテンツを書き込むと、他の人々に、間違い設定"
-"などを検出できるように助かります。"
+"問題が発生し、解決できない場合には <a href=\"%s\">サポートフォーラム</a>（英"
+"語のみ）を参照してください。投稿に次のコンテンツを含めると、他の人が設定の間"
+"違いを見つけやすくなります。"
 
 #: ../mqtranslate_configuration.php:630
 msgid "Save Changes"
@@ -565,14 +553,13 @@ msgid "Delete"
 msgstr "削除"
 
 #: ../mqtranslate_configuration.php:668
-#, fuzzy
 msgid ""
 "Enabling a language will cause mqTranslate to update the Gettext-Database "
 "for the language, which can take a while depending on your server's "
 "connection speed."
 msgstr ""
-"言語を有効にすると、qTranslate が Gettext のデータベースを更新することになり"
-"ます。サーバー接続速度により、しばらく時間がかかる場合があります。"
+"言語を有効にすると、mqTranslate は対象の言語の Gettext データベースを更新しま"
+"す。これにはサーバーの接続速度により、しばらく時間がかかる場合があります。"
 
 #: ../mqtranslate_configuration.php:675
 msgid "Add Language"
@@ -600,7 +587,7 @@ msgstr "そのサービスはありません。"
 
 #: ../mqtranslate_services.php:61
 msgid "The system could not process your order."
-msgstr "システムはご注文を処理できませんでした。"
+msgstr "システムは注文を処理できませんでした。"
 
 #: ../mqtranslate_services.php:62
 msgid "There has been an error with the selected service."
@@ -625,15 +612,15 @@ msgstr "翻訳対象の言語"
 
 #: ../mqtranslate_services.php:307
 msgid "Order deleted."
-msgstr "ご注文を削除しました。"
+msgstr "注文を削除しました。"
 
 #: ../mqtranslate_services.php:311
 msgid "Status updated for all open orders."
-msgstr "すべての見計注文の状況が最新されました。"
+msgstr "すべての注文の状況が更新されました。"
 
 #: ../mqtranslate_services.php:331
 msgid "Please save your post first."
-msgstr ""
+msgstr "投稿を最初に保存してください。"
 
 #: ../mqtranslate_services.php:359
 msgid "Post Title"
@@ -645,7 +632,7 @@ msgstr "サービス"
 
 #: ../mqtranslate_services.php:361
 msgid "Source Language"
-msgstr "元言語"
+msgstr "元の言語"
 
 #: ../mqtranslate_services.php:362
 msgid "Target Language"
@@ -674,17 +661,16 @@ msgid "Enable qTranslate Services"
 msgstr "qTranslate サービスを有効にする"
 
 #: ../mqtranslate_services.php:378
-#, fuzzy
 msgid ""
 "With qTranslate Services, you will be able to use professional human "
 "translation services with a few clicks."
 msgstr ""
-"qTranslate サービスでは、プロフェッショナルな人間翻訳を何回かクリックするだけ"
-"で利用できます。 （OpenSSLが必須）"
+"qTranslate サービスでは、数回のクリックでプロフェッショナルの翻訳を利用できま"
+"す。"
 
 #: ../mqtranslate_services.php:388
 msgid "Open Orders"
-msgstr "見計注文"
+msgstr "注文"
 
 #: ../mqtranslate_services.php:410
 #, php-format
@@ -708,21 +694,20 @@ msgid ""
 "translations are finished and update your posts accordingly. You can always "
 "<a href=\"%s\">check manually</a>."
 msgstr ""
-"qTranslate サービスは毎時に自動で翻訳が仕上がったかを確認し、それに応じて投稿"
-"を更新します。なお、いつでも<a href=\"%s\">手動でチェック</a>もできます。"
+"qTranslate サービスは1時間ごとに自動で翻訳の完了を確認し、投稿を更新します。"
+"なお、いつでも<a href=\"%s\">手動でチェック</a>できます。"
 
 #: ../mqtranslate_services.php:430
 msgid ""
 "Deleting an open order doesn't cancel it. You will have to logon to the "
 "service homepage and cancel it there."
 msgstr ""
-"見計注文を削除しても、取り消しになるわけではありません。見計注文を取り消した"
-"い場合、サービスのホームページまで行ってログインし、そこで取り消すことができ"
-"ます。"
+"注文を削除してもキャンセルされません。サービスのホームページにログオンし、そ"
+"ちらでキャンセルする必要があります。"
 
 #: ../mqtranslate_services.php:432
 msgid "No open orders."
-msgstr "見計注文はありません。"
+msgstr "注文はありません。"
 
 #: ../mqtranslate_services.php:438
 msgid "Service Configuration"
@@ -733,19 +718,20 @@ msgid ""
 "Below, you will find configuration settings for qTranslate Service "
 "Providers, which are required for them to operate."
 msgstr ""
-"以下には、 qTranslate サービス会社の設定があります。それは、操作ができるため"
-"に必要です。"
+"以下は qTranslate サービスプロバイダーの構成設定です。操作のために必要となり"
+"ます。"
 
 #: ../mqtranslate_services.php:530
 #, php-format
 msgid ""
 "To translate a post, please go to the <a href=\"%s\">edit posts overview</a>."
-msgstr "「%s」という ID をもった投稿が見つかりませんでした。"
+msgstr ""
+"投稿を翻訳するには、<a href=\"%s\">投稿の編集の概要</a> に移動してください。"
 
 #: ../mqtranslate_services.php:546
 #, php-format
 msgid "Post with id \"%s\" not found!"
-msgstr "「%s」という ID をもった投稿が見つかりませんでした。"
+msgstr "ID「%s」の投稿が見つかりませんでした。"
 
 #: ../mqtranslate_services.php:554
 msgid "The requested Post has no content, no Translation possible."
@@ -757,8 +743,8 @@ msgid ""
 "translation request is send, the current text for the target language will "
 "be overwritten."
 msgstr ""
-"この投稿は既に、選択した対象の言語のコンテンツをもっています。翻訳要請を送信"
-"すると、対象の言語の現在のコンテンツが上書きされます。"
+"この投稿は既に、選択した対象の言語のコンテンツをもっています。翻訳のリクエス"
+"トを送信すると、対象の言語の現在のコンテンツが上書きされます。"
 
 #: ../mqtranslate_services.php:627
 #, php-format
@@ -776,27 +762,27 @@ msgid ""
 "An serious error occured and qTranslate Services cannot proceed. For help, "
 "please visit the <a href=\"%s\">Support Forum</a>"
 msgstr ""
-"重大なエラーが発生し、 qTranslate サービスは進むことができません。ヘルプにつ"
-"いては、<a href=\"%s\">サポートフォーラム</a>（英語のみ）に参照してください。"
+"重大なエラーが発生したため qTranslate サービスを続行できません。<a href=\"%s"
+"\">サポートフォーラム</a>（英語のみ）を参照してください。"
 
 #: ../mqtranslate_services.php:659
 msgid "Order successfully sent."
-msgstr "ご注文の送信に成功しました。"
+msgstr "注文は正常に送信されました。"
 
 #: ../mqtranslate_services.php:660
 msgid ""
 "Your translation order has been successfully transfered to the selected "
 "service."
-msgstr "あなたの翻訳要請は選択したサービスへの転送に成功しました。"
+msgstr "翻訳の注文は選択したサービスに正常に送信されました。"
 
 #: ../mqtranslate_services.php:664
 #, php-format
 msgid "The service returned this message: %s"
-msgstr "サービスがこのメッセージを返信しました: %s"
+msgstr "サービスが次のメッセージを返信しました: %s"
 
 #: ../mqtranslate_services.php:668
 msgid "Feel free to choose an action:"
-msgstr "ご自由にアクションを選んでください:"
+msgstr "自由にアクションを選んでください:"
 
 #: ../mqtranslate_services.php:670
 msgid "Translate this post to another language."
@@ -804,19 +790,19 @@ msgstr "この投稿を他の言語に翻訳"
 
 #: ../mqtranslate_services.php:671
 msgid "Translate a different post."
-msgstr "別な投稿を翻訳"
+msgstr "別の投稿を翻訳"
 
 #: ../mqtranslate_services.php:672
 msgid "View all open orders."
-msgstr "すべての見計注文を表示"
+msgstr "すべての注文を表示"
 
 #: ../mqtranslate_services.php:673
 msgid "Let qTranslate Services check if any open orders are finished."
-msgstr "qTranslate サービスに、仕上がった見計注文があるかを確認させます。"
+msgstr "qTranslate サービスの、仕上がった見計注文があるかを確認させます。"
 
 #: ../mqtranslate_services.php:674
 msgid "View this post."
-msgstr "この投稿を表示"
+msgstr "この投稿の表示"
 
 #: ../mqtranslate_services.php:699
 #, php-format
@@ -824,8 +810,8 @@ msgid ""
 "Your article is available in multiple languages. If you do not want to "
 "translate from %1$s, you can switch to one of the following languages: %2$s"
 msgstr ""
-"この投稿はマルチ言語で利用できます。%1$sから翻訳したくない場合、以下の言語に"
-"切り替えることができます: %2$s"
+"投稿は複数の言語で利用できます。%1$sから翻訳したくない場合、以下の言語に切り"
+"替えることができます: %2$s"
 
 #: ../mqtranslate_services.php:707
 msgid "Please choose the language you want to translate to:"
@@ -837,25 +823,23 @@ msgstr "続く"
 
 #: ../mqtranslate_services.php:730 ../mqtranslate_services.php:733
 msgid "Confirm Order"
-msgstr ""
+msgstr "注文の確認"
 
 #: ../mqtranslate_services.php:732
-#, fuzzy
 msgid "Please confirm your order."
-msgstr "システムはご注文を処理できませんでした。"
+msgstr "注文を確認してください。"
 
 #: ../mqtranslate_services.php:740 ../mqtranslate_services.php:875
 msgid "Request Translation"
-msgstr "翻訳を要求"
+msgstr "翻訳の要求"
 
 #: ../mqtranslate_services.php:742
-#, fuzzy
 msgid "Javascript is required for qTranslate Services"
-msgstr "qTranslate サービスを有効にする"
+msgstr "qTranslate サービスには Javascript が必要です"
 
 #: ../mqtranslate_services.php:743
 msgid "Please choose a service first"
-msgstr ""
+msgstr "最初にサービスを選択してください。"
 
 #: ../mqtranslate_services.php:752
 msgid ""
@@ -865,9 +849,8 @@ msgstr ""
 "い。"
 
 #: ../mqtranslate_services.php:760
-#, fuzzy
 msgid "Translation Service"
-msgstr "qTranslate サービス"
+msgstr "翻訳サービス"
 
 #: ../mqtranslate_services.php:776
 #, php-format
@@ -876,19 +859,19 @@ msgid ""
 "in for this service."
 msgstr ""
 "すべての<a href=\"%s\">必須のフィールド</a>が記入されていないため、このサービ"
-"スが利用できません。"
+"スを利用できません。"
 
 #: ../mqtranslate_services.php:791
 msgid "<p><img src=\"images/wpspin_light.gif\"> Getting Quote...</p>"
-msgstr ""
+msgstr "<p><img src=\"images/wpspin_light.gif\"> 見積もり中...</p>"
 
 #: ../mqtranslate_services.php:812
 msgid "Click to toggle"
-msgstr ""
+msgstr "クリックしてトグル"
 
 #: ../mqtranslate_services.php:813
 msgid "Review Article"
-msgstr ""
+msgstr "記事のレビュー"
 
 #: ../mqtranslate_services.php:819
 msgid ""
@@ -897,33 +880,31 @@ msgid ""
 "qTranslate Services receives the translated text, it will automatically "
 "appear on your blog."
 msgstr ""
-"あなたの投稿は SSL で暗号化され、qTranslate サービスまで安全に送信されます。"
-"そして、 qTranslate サービスは選択した翻訳サービスまであなたの投稿を転送しま"
-"す。qTranslate サービスが翻訳された投稿を受け取ると、それを自動でブログに表示"
-"されるようになります。"
+"投稿は SSL で暗号化され、qTranslate サービスまで安全に送信され、選択した翻訳"
+"サービスに転送されます。qTranslate サービスが翻訳された投稿を受け取ると、自動"
+"的にブログに表示されます。"
 
 #: ../mqtranslate_services.php:858 ../mqtranslate_services.php:865
 msgid "unavailable"
-msgstr ""
+msgstr "利用不可"
 
 #: ../mqtranslate_services.php:863
 msgid "free"
-msgstr ""
+msgstr "無料"
 
 #: ../mqtranslate_services.php:870
 #, php-format
 msgid "<p>Price: %1$s %2$s</p>"
-msgstr ""
+msgstr "<p>価格: %1$s %2$s</p>"
 
 #: ../mqtranslate_services.php:871
 #, php-format
 msgid "~ %1$s %2$s"
-msgstr ""
+msgstr "~ %1$s %2$s"
 
 #: ../mqtranslate_services.php:878
-#, fuzzy
 msgid "An error occured!"
-msgstr "エラーが発生しました: %s"
+msgstr "エラーが発生しました!"
 
 #: ../mqtranslate_services.php:896
 msgid "Translate"
@@ -932,11 +913,10 @@ msgstr "翻訳"
 #: ../mqtranslate_widget.inc.php:24
 #: ../mqtranslate_widget_qtranslate-slug.php:24
 msgid "Allows your visitors to choose a Language."
-msgstr "言語が選ぶことを訪問者に許可します。"
+msgstr "訪問者に言語の選択を許可します。"
 
 #: ../mqtranslate_widget.inc.php:25
 #: ../mqtranslate_widget_qtranslate-slug.php:25
-#, fuzzy
 msgid "mqTranslate Language Chooser"
 msgstr "qtranslate 言語選択機能"
 
@@ -980,76 +960,77 @@ msgid ""
 "mqTranslate to the <a href=\"http://wordpress.org/plugins/mqtranslate/\" "
 "target=\"_blank\">corresponding version</a>."
 msgstr ""
+"mqTranslateエディターは無効化されました。まだこのバージョンの WordPress では"
+"テストされていないため、システムを不安定にする可能性があります。このメッセー"
+"ジを非表示にするには mqTranslate を<a href=\"http://wordpress.org/plugins/"
+"mqtranslate/\" target=\"_blank\">対応するバージョン</a>でアップデートしてくだ"
+"さい。"
 
 #: ../mqtranslate_wphacks.php:358
 msgid "Title"
 msgstr "タイトル"
 
 #: ../mqtranslate_wphacks.php:360 ../mqtranslate_wphacks.php:405
-#, fuzzy
 msgid "Read only"
-msgstr "テキストのみ"
+msgstr "読み出しのみ"
 
 #: ../mqtranslate_xhaleera_addons.php:76
-#, fuzzy
 msgid "mqTranslate User Language Settings"
-msgstr "qTranslate サービス設定"
+msgstr "mqTranslate ユーザー言語設定"
 
 #: ../mqtranslate_xhaleera_addons.php:87
 msgid "You can edit posts in"
-msgstr ""
+msgstr "投稿を編集可能な言語"
 
 #: ../mqtranslate_xhaleera_addons.php:89
 msgid "This user can edit posts in"
-msgstr ""
+msgstr "投稿を編集可能な言語"
 
 #: ../mqtranslate_xhaleera_addons.php:94
 #: ../mqtranslate_xhaleera_addons.php:103
-#, fuzzy
 msgid "No language available"
-msgstr "この言語は既に無効にしてあります。"
+msgstr "有効な言語がありません。"
 
 #: ../mqtranslate_xhaleera_addons.php:96
 msgid "As an Administrator, you can edit posts in all languages."
-msgstr ""
+msgstr "管理者としてすべての言語で編集できます。"
 
 #: ../mqtranslate_xhaleera_addons.php:98
 msgid "As an Administrator, this user can edit posts in all languages."
-msgstr ""
+msgstr "管理者としてすべての言語で編集できます。"
 
 #: ../mqtranslate_xhaleera_addons.php:119
 msgid "No language selected"
-msgstr ""
+msgstr "どの言語も選択されていません。"
 
 #: ../mqtranslate_xhaleera_addons.php:134
-#, fuzzy
 msgid "Master language"
-msgstr "対象の言語"
+msgstr "メインの言語"
 
 #: ../mqtranslate_xhaleera_addons.php:137
 msgid "Not applicable to Administrators"
-msgstr ""
+msgstr "管理者には当てはまりません。"
 
 #: ../mqtranslate_xhaleera_addons.php:150
 msgid "Language from which texts should be translated by this user"
-msgstr ""
+msgstr "テキストが翻訳される言語"
 
 #: ../mqtranslate_xhaleera_addons.php:279
-#, fuzzy
 msgid "mqTranslate Team Settings"
-msgstr "qTranslate サービス設定"
+msgstr "mqTranslate チーム設定"
 
 #: ../mqtranslate_xhaleera_addons.php:282
 msgid "User-level Language Protection"
-msgstr ""
+msgstr "ユーザーレベルの言語保護"
 
 #: ../mqtranslate_xhaleera_addons.php:284
 msgid "Enable user-level language protection"
-msgstr ""
+msgstr "ユーザーレベルの言語保護の有効化"
 
 #: ../mqtranslate_xhaleera_addons.php:286
 msgid ""
 "When enabled, this option allows you to select which language is editable on "
 "a user-level account basis."
 msgstr ""
-
+"このオプションを有効化すると、ユーザーレベルでアカウントごとに編集可能な言語"
+"を選択できます。"
