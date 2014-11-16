@@ -184,6 +184,7 @@ function qtrans_modifyRichEditor($old_content) {
 	// make tinyMCE and mediauploader get the correct data
 	$content_append .=$q_config['js']['qtrans_tinyMCEOverload'];
 	$content_append .=$q_config['js']['qtrans_wpActiveEditorOverload'];
+	$content_append .=$q_config['js']['qtrans_QTagsOverload'];
 	$content_append .="}\n";
 	$content_append .=$q_config['js']['qtrans_editorInit'];
 	if($init_editor) {

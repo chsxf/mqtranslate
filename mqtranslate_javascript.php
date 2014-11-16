@@ -220,7 +220,39 @@ function qtrans_initJS() {
 			}
 		}
 		";
-		
+	
+	$q_config['js']['qtrans_QTagsOverload'] = "
+		QTags.insertContent = function(content) {
+			var sel, startPos, endPos, scrollTop, text, canvas = document.getElementById('qtrans_textarea_content');
+
+			if ( !canvas ) {
+				return false;
+			}
+			if ( document.selection ) { //IE
+				canvas.focus();
+				sel = document.selection.createRange();
+				sel.text = content;
+				canvas.focus();
+			} else if ( canvas.selectionStart || canvas.selectionStart === 0 ) { // FF, WebKit, Opera
+				text = canvas.value;
+				startPos = canvas.selectionStart;
+				endPos = canvas.selectionEnd;
+				scrollTop = canvas.scrollTop;
+
+				canvas.value = text.substring(0, startPos) + content + text.substring(endPos, text.length);
+
+				canvas.focus();
+				canvas.selectionStart = startPos + content.length;
+				canvas.selectionEnd = startPos + content.length;
+				canvas.scrollTop = scrollTop;
+			} else {
+				canvas.value += content;
+				canvas.focus();
+			}
+			return true;
+		};
+		";
+	
 	$q_config['js']['qtrans_tinyMCEOverload'] = "
 		tinyMCE.get2 = tinyMCE.get;
 		tinyMCE.get = function(id) {
