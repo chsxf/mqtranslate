@@ -94,7 +94,7 @@ Tags: multilingual, multi, language, admin, tinymce, mqTranslate, Polyglot, bili
 // mqTranslate Editor will only activated for the given version of Wordpress.
 // Can be changed to use with other versions but might cause problems and/or data loss!
 define('QT_MIN_SUPPORTED_WP_MINOR_VERSION', '3.9');
-define('QT_MAX_SUPPORTED_WP_MAJOR_VERSION', '4.0');
+define('QT_MAX_SUPPORTED_WP_MAJOR_VERSION', '4.0.1');
 define('QT_STRING',		1);
 define('QT_BOOLEAN',	2);
 define('QT_INTEGER',	3);
