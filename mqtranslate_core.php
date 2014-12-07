@@ -144,7 +144,7 @@ function qtrans_init() {
 	if(!defined('WP_ADMIN')) {
 		$alloptions = wp_load_alloptions();
 		foreach($alloptions as $option => $value) {
-	// To optimize mQtranslate, this improved the loading time
+	// Fix to optimize mQtranslate this improved the loading time
 	//	add_filter('option_'.$option, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
 		}
 	}
