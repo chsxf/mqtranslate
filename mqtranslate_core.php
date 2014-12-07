@@ -144,7 +144,8 @@ function qtrans_init() {
 	if(!defined('WP_ADMIN')) {
 		$alloptions = wp_load_alloptions();
 		foreach($alloptions as $option => $value) {
-			add_filter('option_'.$option, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
+	// To optimize mQtranslate, this improved the loading time
+	//	add_filter('option_'.$option, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
 		}
 	}
 	
