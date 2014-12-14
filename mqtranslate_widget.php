@@ -34,6 +34,7 @@ function qtrans_generateLanguageSelectCode($style='', $id='') {
 		switch($style) {
 			case 'image':
 			case 'text':
+			case 'lang-code':
 			case 'dropdown':
 				echo '<ul class="qtrans_language_chooser" id="'.$id.'">';
 				foreach(qtrans_getSortedLanguages() as $language) {
@@ -48,7 +49,12 @@ function qtrans_generateLanguageSelectCode($style='', $id='') {
 					echo '><span';
 					if($style=='image')
 						echo ' style="display:none"';
-					echo '>'.$q_config['language_name'][$language].'</span></a></li>';
+					echo '>';
+					if($style == 'lang-code')
+						echo $language;
+					else
+						echo $q_config['language_name'][$language];
+					echo '</span></a></li>';
 				}
 				echo "</ul><div class=\"qtrans_widget_end\"></div>";
 				if($style=='dropdown') {
