@@ -25,13 +25,13 @@ function qtrans_parseURL($url) {
 	
 	preg_match ( $r, $url, $out );
 	$result = @array(
-			"scheme" => $out[1],
-			"host" => $out[4].(($out[5]=='')?'':':'.$out[5]),
-			"user" => $out[2],
-			"pass" => $out[3],
-			"path" => $out[6],
-			"query" => $out[7],
-			"fragment" => $out[8]
+		"scheme" 	=> isset( $out[1] ) ? $out[1] : '',
+		"host" 		=> isset( $out[4] ) ? $out[4] . ( ( isset($out[5]) && $out[5] != '' ) ? ':' . $out[5] : '' ) : '',
+		"user" 		=> isset( $out[2] ) ? $out[2] : '',
+		"pass" 		=> isset( $out[3] ) ? $out[3] : '',
+		"path" 		=> isset( $out[6] ) ? $out[6] : '',
+		"query"		=> isset( $out[7] ) ? $out[7] : '',
+		"fragment" 	=> isset( $out[8] ) ? $out[8] : ''
 	);
 	return $result;
 }
@@ -97,7 +97,12 @@ function qtrans_getAvailableLanguages($text) {
 function qtrans_isAvailableIn($post_id, $language='') {
 	global $q_config;
 	if($language == '') $language = $q_config['default_language'];
-	$post = &get_post($post_id);
+	if(phpversion() >= 5.4) {
+		$post = get_post($post_id);
+	}
+	else {
+		$post = &get_post($post_id);
+	}
 	$languages = qtrans_getAvailableLanguages($post->post_content);
 	return in_array($language,$languages);
 }
