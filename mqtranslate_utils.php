@@ -25,13 +25,13 @@ function qtrans_parseURL($url) {
 	
 	preg_match ( $r, $url, $out );
 	$result = @array(
-			"scheme" => isset( $out[1] ) ? $out[1] : '',
-			"host" => isset( $out[4] ) ? $out[4] : ''.(isset($out[5]) && ($out[5]!='')?':'.$out[5]:''),
-			"user" => isset( $out[2] ) ? $out[2] : '',
-			"pass" => isset( $out[3] ) ? $out[3] : '',
-			"path" => isset( $out[6] ) ? $out[6] : '',
-			"query" => isset( $out[7] ) ? $out[7] : '',
-			"fragment" => isset( $out[8] ) ? $out[8] : ''
+		"scheme" 	=> isset( $out[1] ) ? $out[1] : '',
+		"host" 		=> isset( $out[4] ) ? $out[4] . ( ( isset($out[5]) && $out[5] != '' ) ? ':' . $out[5] : '' ) : '',
+		"user" 		=> isset( $out[2] ) ? $out[2] : '',
+		"pass" 		=> isset( $out[3] ) ? $out[3] : '',
+		"path" 		=> isset( $out[6] ) ? $out[6] : '',
+		"query"		=> isset( $out[7] ) ? $out[7] : '',
+		"fragment" 	=> isset( $out[8] ) ? $out[8] : ''
 	);
 	return $result;
 }
