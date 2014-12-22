@@ -939,7 +939,14 @@ function qtrans_use($lang, $text, $show_available=false) {
 				$language_list = $end_seperator.$language_list;
 			else if ($k > 1)
 				$language_list = $normal_seperator.$language_list;
-			$language_list = "<a href=\"".qtrans_convertURL('', $language)."\">".$q_config['language_name'][$language]."</a>".$language_list;
+			if (function_exists('is_plugin_active') && is_plugin_active('qtranslate-slug/qtranslate-slug.php')) {
+				global $qtranslate_slug;
+				$link = $qtranslate_slug->get_current_url($language);
+			}
+			else{
+				$link = qtrans_convertURL( '', $language );
+			}
+			$language_list = "<a href=\"".$link."\">".$q_config['language_name'][$language]."</a>".$language_list;
 		}
 	}
 	return "<p>".preg_replace('/%LANG:([^:]*):([^%]*)%/S', $language_list, $q_config['not_available'][$lang])."</p>";
