@@ -306,9 +306,9 @@ function qtrans_initJS() {
 				ed.on('SaveContent', function(e) {
 					if (!ed.isHidden() && ed.id.match(/^qtrans_/)) {
 						e.content = e.content.replace( /<p>(<br ?\/?>|\u00a0|\uFEFF)?<\/p>/g, '<p>&nbsp;</p>' );
-						if ( ed.getParam( 'wpautop', true ) )
-							e.content = switchEditors.pre_wpautop(e.content);
-						qtrans_save(e.content);
+						if (ed.id.match(/^qtrans_/)) {
+							qtrans_save(switchEditors.pre_wpautop(e.content));
+						};
 					}
 				});
 				ed.on('init', function(e) {
