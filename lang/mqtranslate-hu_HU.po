@@ -2,20 +2,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mqTranslate 2.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 16:30+0200\n"
-"PO-Revision-Date: 2011-03-03 19:33+0100\n"
-"Last-Translator: Németh Balázs <nb0000@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2014-12-27 21:39+0100\n"
+"PO-Revision-Date: 2014-12-27 21:39+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../mqtranslate.php:99
+#, php-format
+msgid ""
+"Sorry, but mqTranslate can not be activated. You have to deactivate %s first."
+msgstr ""
 
 #: ../mqtranslate_configuration.php:25
 msgid "Language Management"
 msgstr "Nyelvek kezelése"
 
-#: ../mqtranslate_configuration.php:25 ../mqtranslate_configuration.php:637
+#: ../mqtranslate_configuration.php:25 ../mqtranslate_configuration.php:670
 #: ../mqtranslate_hooks.php:180
 msgid "Languages"
 msgstr "Nyelvek"
@@ -127,9 +139,8 @@ msgid "Action"
 msgstr "Művelet"
 
 #: ../mqtranslate_configuration.php:199
-#, fuzzy
 msgid "Switching Language"
-msgstr "Nyelv szerkesztése"
+msgstr "Nyelv-váltás"
 
 #: ../mqtranslate_configuration.php:199
 #, php-format
@@ -137,111 +148,111 @@ msgid ""
 "Switching language to %1$s... If the Dashboard isn't loading, use this <a "
 "href=\"%2$s\" title=\"Dashboard\">link</a>."
 msgstr ""
+"Nyelv váltása erre: %1$s... Ha a Vezérlőpult nem tölt be, akkor használja <a "
+"href=\"%2$s\" title=\"Dashboard\">ezt a linket</a>!"
 
 #: ../mqtranslate_configuration.php:220
-#, fuzzy
 msgid "mqTranslate has been reset."
-msgstr "A qTranslate alaphelyzetbe lett állítva."
+msgstr "Az mqTranslate alaphelyzetbe lett állítva."
 
-#: ../mqtranslate_configuration.php:244
+#: ../mqtranslate_configuration.php:248
 msgid "Gettext databases updated."
 msgstr "Gettext adatbázis frissítve."
 
-#: ../mqtranslate_configuration.php:249
+#: ../mqtranslate_configuration.php:253
 msgid "The Language must have a Not-Available Message!"
 msgstr "A nyelvhez meg kell adni a nem elérhető üzenetet!"
 
-#: ../mqtranslate_configuration.php:250
+#: ../mqtranslate_configuration.php:254
 msgid "The Language must have a Locale!"
 msgstr "A nyelvhez kell Locale!"
 
-#: ../mqtranslate_configuration.php:251
+#: ../mqtranslate_configuration.php:255
 msgid "The Language must have a name!"
 msgstr "A nyelvnek meg kell adni a nevét!"
 
-#: ../mqtranslate_configuration.php:252
+#: ../mqtranslate_configuration.php:256
 msgid "Language Code has to be 2 characters long!"
 msgstr "A nyelvi kódnak pontosan 2 betűből kell állnia!"
 
-#: ../mqtranslate_configuration.php:256 ../mqtranslate_configuration.php:262
+#: ../mqtranslate_configuration.php:260 ../mqtranslate_configuration.php:266
 msgid "There is already a language with the same Language Code!"
 msgstr "Már létezik nyelv ezzel a nyelvi kóddal!"
 
-#: ../mqtranslate_configuration.php:367
+#: ../mqtranslate_configuration.php:371
 msgid "Language is already enabled or invalid!"
 msgstr "A nyelv már engedélyezve van vagy érvénytelen!"
 
-#: ../mqtranslate_configuration.php:372
+#: ../mqtranslate_configuration.php:376
 msgid "Cannot disable Default Language!"
 msgstr "Az alap nyelvet nem lehet kikapcsolni!"
 
-#: ../mqtranslate_configuration.php:375 ../mqtranslate_configuration.php:382
-#: ../mqtranslate_configuration.php:398
+#: ../mqtranslate_configuration.php:379 ../mqtranslate_configuration.php:386
+#: ../mqtranslate_configuration.php:402
 msgid "No such language!"
 msgstr "Nincs ilyen nyelv!"
 
-#: ../mqtranslate_configuration.php:378
+#: ../mqtranslate_configuration.php:382
 msgid "Language is already disabled!"
 msgstr "A nyelv már ki van kapcsolva!"
 
-#: ../mqtranslate_configuration.php:386
+#: ../mqtranslate_configuration.php:390
 msgid "Language is already first!"
 msgstr "A nyelv már az első!"
 
-#: ../mqtranslate_configuration.php:392 ../mqtranslate_configuration.php:408
+#: ../mqtranslate_configuration.php:396 ../mqtranslate_configuration.php:412
 msgid "New order saved."
 msgstr "Új sorrend elmentve."
 
-#: ../mqtranslate_configuration.php:402
+#: ../mqtranslate_configuration.php:406
 msgid "Language is already last!"
 msgstr "A nyelv már az utolsó!"
 
-#: ../mqtranslate_configuration.php:419
+#: ../mqtranslate_configuration.php:423
 msgid "Options saved."
 msgstr "Beállítások mentve."
 
-#: ../mqtranslate_configuration.php:424
+#: ../mqtranslate_configuration.php:428
 #, php-format
 msgid "Could not write to \"%s\", Gettext Databases could not be downloaded!"
 msgstr ""
 "Nem sikerült írni \"%s\", a Gettext adatbázisokat nem sikerült letölteni!"
 
-#: ../mqtranslate_configuration.php:446
+#: ../mqtranslate_configuration.php:450
 msgid "Edit Language"
 msgstr "Nyelv szerkesztése"
 
-#: ../mqtranslate_configuration.php:449
+#: ../mqtranslate_configuration.php:453
 msgid "Save Changes &raquo;"
 msgstr "Változások mentése &raquo;"
 
-#: ../mqtranslate_configuration.php:454
-#, fuzzy
+#: ../mqtranslate_configuration.php:458
 msgid "Language Management (mqTranslate Configuration)"
-msgstr "Nyelv kezelő (qTranslate beállítások)"
+msgstr "Nyelv kezelő (mqTranslate beállítások)"
 
-#: ../mqtranslate_configuration.php:455
-#, fuzzy, php-format
+#: ../mqtranslate_configuration.php:459
+#, php-format
 msgid ""
 "For help on how to configure mqTranslate correctly, take a look at the <a "
 "href=\"%1$s\">qTranslate FAQ</a> and the <a href=\"%2$s\">Support Forum</a>."
 msgstr ""
-"A qTranslate helyes beállításához, tekintse meg a <a href=\"%1$s"
+"Az mqTranslate helyes beállításához, tekintse meg a <a href=\"%1$s"
 "\">qTranslate GyIK</a> és a <a href=\"%2$s\">Fórum</a> oldalakat."
 
-#: ../mqtranslate_configuration.php:457
+#: ../mqtranslate_configuration.php:461
 msgid "General Settings"
 msgstr "Általános beállítások"
 
-#: ../mqtranslate_configuration.php:460
+#: ../mqtranslate_configuration.php:464
 msgid "Default Language / Order"
 msgstr "Alap nyelv / sorrend"
 
-#: ../mqtranslate_configuration.php:462 ../mqtranslate_xhaleera_addons.php:141
+#: ../mqtranslate_configuration.php:466 ../mqtranslate_xhaleera_addons.php:141
 #: ../mqtranslate_xhaleera_addons.php:155
 msgid "Default Language"
 msgstr "Alap nyelv"
 
-#: ../mqtranslate_configuration.php:477
+#: ../mqtranslate_configuration.php:481
 #, php-format
 msgid ""
 "Choose the default language of your blog. This is the language which will be "
@@ -251,15 +262,15 @@ msgstr ""
 "Válassza ki az oldal alapértelmezett nyelvét. Ez az a nyelv, ami megjelenik "
 "itt: %s. A nyelvek sorrendje is megváltoztatható a nyilakra kattintva."
 
-#: ../mqtranslate_configuration.php:482
+#: ../mqtranslate_configuration.php:486
 msgid "Hide Untranslated Content"
 msgstr "Lefordítatlan tartalom elrejtése"
 
-#: ../mqtranslate_configuration.php:484
+#: ../mqtranslate_configuration.php:488
 msgid "Hide Content which is not available for the selected language."
 msgstr "Tartalom elrejtése, ami nem érhető el a kiválasztott nyelven."
 
-#: ../mqtranslate_configuration.php:487
+#: ../mqtranslate_configuration.php:491
 msgid ""
 "When checked, posts will be hidden if the content is not available for the "
 "selected language. If unchecked, a message will appear showing all the "
@@ -269,33 +280,33 @@ msgstr ""
 "érhetők el a kiválasztott nyelven. Ha nincs bejelölve, akkor egy üzenet "
 "jelenik meg a bejegyzés elérhető nyelveinek listájával."
 
-#: ../mqtranslate_configuration.php:488
-#, fuzzy
+#: ../mqtranslate_configuration.php:492
 msgid ""
 "This function will not work correctly if you installed mqTranslate on a blog "
 "with existing entries. In this case you will need to take a look at "
 "\"Convert Database\" under \"Advanced Settings\"."
 msgstr ""
-"Ez a funkció nem fog jól működni, ha a qTranslate beépülőt a bejgyzések "
+"Ez a funkció nem fog jól működni, ha az mqTranslate beépülőt a bejgyzések "
 "felvitele után telepítette. Ebben az esetben, tekintse meg az „Adatbázis "
 "átalakítása” részt a „Haladó beállítások” között!"
 
-#: ../mqtranslate_configuration.php:491
-#, fuzzy
+#: ../mqtranslate_configuration.php:495
 msgid ""
 "Show displayed language prefix when Content is not available for the "
 "selected language."
-msgstr "Tartalom elrejtése, ami nem érhető el a kiválasztott nyelven."
+msgstr ""
+"Ha egy tartalom nem érhető el egy nyelven, akkor a használt nyelv neve "
+"jelenjen meg a cím elején zárójelben."
 
-#: ../mqtranslate_configuration.php:496
+#: ../mqtranslate_configuration.php:500
 msgid "Detect Browser Language"
 msgstr "Böngésző nyelvének felismerése"
 
-#: ../mqtranslate_configuration.php:498
+#: ../mqtranslate_configuration.php:502
 msgid "Detect the language of the browser and redirect accordingly."
 msgstr "Átirányítás a böngésző nyelvének megfelelő nyelvű oldalra."
 
-#: ../mqtranslate_configuration.php:501
+#: ../mqtranslate_configuration.php:505
 msgid ""
 "When the frontpage is visited via bookmark/external link/type-in, the "
 "visitor will be forwarded to the correct URL for the language specified by "
@@ -305,32 +316,32 @@ msgstr ""
 "írással lett megnyitva, akkor a látogató a böngésző nyelvének megfelelő URl-"
 "re lesz átirányítva."
 
-#: ../mqtranslate_configuration.php:506
+#: ../mqtranslate_configuration.php:510
 msgid "Advanced Settings"
 msgstr "Haladó beállítások"
 
-#: ../mqtranslate_configuration.php:506 ../mqtranslate_services.php:370
+#: ../mqtranslate_configuration.php:510 ../mqtranslate_services.php:370
 #: ../mqtranslate_xhaleera_addons.php:279
 msgid "Show / Hide"
-msgstr ""
+msgstr "mutat / elrejt"
 
-#: ../mqtranslate_configuration.php:509 ../mqtranslate_configuration.php:511
+#: ../mqtranslate_configuration.php:513 ../mqtranslate_configuration.php:515
 msgid "URL Modification Mode"
 msgstr "URL módosítás módja"
 
-#: ../mqtranslate_configuration.php:512
+#: ../mqtranslate_configuration.php:516
 msgid "Use Query Mode (?lang=en)"
 msgstr "Query mód (?lang=en)"
 
-#: ../mqtranslate_configuration.php:513
+#: ../mqtranslate_configuration.php:517
 msgid "Use Pre-Path Mode (Default, puts /en/ in front of URL)"
 msgstr "Előtag mód (alapértelmezett, /en/ az URL elejére)"
 
-#: ../mqtranslate_configuration.php:514
+#: ../mqtranslate_configuration.php:518
 msgid "Use Pre-Domain Mode (uses http://en.yoursite.com)"
 msgstr "Aldomain mód (http://en.te-oldalad.hu)"
 
-#: ../mqtranslate_configuration.php:517
+#: ../mqtranslate_configuration.php:521
 msgid ""
 "Pre-Path and Pre-Domain mode will only work with mod_rewrite/pretty "
 "permalinks. Additional Configuration is needed for Pre-Domain mode!"
@@ -338,28 +349,27 @@ msgstr ""
 "Az előtag és aldomain mód csak mod_rewrite és csinos állandó linkek esetén "
 "működik. Az aldomain módhoz további beállítás szükséges!"
 
-#: ../mqtranslate_configuration.php:520
+#: ../mqtranslate_configuration.php:524
 msgid "Hide URL language information for default language."
 msgstr "Nyelvi információ elrejtése az URL-ből alap nyelv esetén."
 
-#: ../mqtranslate_configuration.php:524
+#: ../mqtranslate_configuration.php:528
 msgid "Flag Image Path"
 msgstr "Zászló képek elérési útja"
 
-#: ../mqtranslate_configuration.php:528
-#, fuzzy
+#: ../mqtranslate_configuration.php:532
 msgid ""
 "Path to the flag images under wp-content, with trailing slash. (Default: "
 "plugins/mqtranslate/flags/)"
 msgstr ""
 "Elérési út a zászló képekhez a wp-content mappán belül, lezáró per jellel. "
-"(Alapérték: plugins/qtranslate/flags/)"
+"(Alapérték: plugins/mqtranslate/flags/)"
 
-#: ../mqtranslate_configuration.php:532
+#: ../mqtranslate_configuration.php:536
 msgid "Ignore Links"
 msgstr "Egynyelvű hivatkozások"
 
-#: ../mqtranslate_configuration.php:536
+#: ../mqtranslate_configuration.php:540
 msgid ""
 "Don't convert Links to files of the given file types. (Default: gif,jpg,jpeg,"
 "png,pdf,swf,tif,rar,zip,7z,mpg,divx,mpeg,avi,css,js)"
@@ -367,46 +377,81 @@ msgstr ""
 "Az itt megadott típusú fájlokra mutató hivatkozások nem módosulnak. "
 "(Alapérték: gif,jpg,jpeg,png,pdf,swf,tif,rar,zip,7z,mpg,divx,mpeg,avi,css,js)"
 
-#: ../mqtranslate_configuration.php:540
-msgid "Allowed Custom Post Types"
+#: ../mqtranslate_configuration.php:544
+msgid "Remove plugin CSS from head"
+msgstr "Bővítmény CSS nem kell"
+
+#: ../mqtranslate_configuration.php:546
+msgid "Remove inline CSS code added by plugin from the head"
+msgstr "Ne rakjon CSS kódot a bővítmény a &lt;head&gt; elembe"
+
+#: ../mqtranslate_configuration.php:548
+msgid ""
+"This will remove default styles applyied to mqTranslate Language Chooser"
+msgstr ""
+"Eltávolítja az mqTranslate nyelv-választóra érvényesülő alap stílusokat"
+
+#: ../mqtranslate_configuration.php:552
+msgid "Cookie Settings"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:544
+#: ../mqtranslate_configuration.php:554
+msgid "Disable all client cookies"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:556
+msgid "If checked, language will not be saved for visitors between sessions."
+msgstr ""
+
+#: ../mqtranslate_configuration.php:559
+msgid "Make mqTranslate cookie available only through HTTPS connections"
+msgstr "Az mqTranslate sütije csak HTTPS kapcsolat esetén legyen elérhető."
+
+#: ../mqtranslate_configuration.php:561
+msgid "Don't check this if you don't know what you're doing!"
+msgstr "Ne jelölje be, ha nem érti, hogy mit jelent!"
+
+#: ../mqtranslate_configuration.php:565
+msgid "Allowed Custom Post Types"
+msgstr "Többnyelvű egyedi bejegyzés típusok"
+
+#: ../mqtranslate_configuration.php:569
 msgid ""
 "Comma-separated list of the custom post types for which you want mqTranslate "
 "to keep multi-language values."
 msgstr ""
+"Azon egyedi bejegyzés típusok vesszővel elválasztott listája, amiknél az "
+"mqTranslate bővítménynek kell kezelni a többnyelvű tartalmat."
 
-#: ../mqtranslate_configuration.php:548
+#: ../mqtranslate_configuration.php:573
 msgid "Update Gettext Databases"
 msgstr "Gettext adatbázis frissítése"
 
-#: ../mqtranslate_configuration.php:550
+#: ../mqtranslate_configuration.php:575
 msgid "Automatically check for .mo-Database Updates of installed languages."
 msgstr "Automatikusan figyeli és letölti a telepített nyelvek .mo adatbázisát."
 
-#: ../mqtranslate_configuration.php:552
+#: ../mqtranslate_configuration.php:577
 msgid "Update Gettext databases now."
 msgstr "Gettext adatbázis frissítése most."
 
-#: ../mqtranslate_configuration.php:554
-#, fuzzy
+#: ../mqtranslate_configuration.php:579
 msgid ""
 "mqTranslate will query the Wordpress Localisation Repository every week and "
 "download the latest Gettext Databases (.mo Files)."
 msgstr ""
-"A qTranslate lekérdezi a WordPress fordítás tárat minden héten és letölti a "
-"legújabb gettext adatbázist (.mo fájlok)."
+"Az mqTranslate lekérdezi a WordPress fordítás tárat minden héten, és letölti "
+"a legújabb gettext adatbázist (.mo fájlok)."
 
-#: ../mqtranslate_configuration.php:558
+#: ../mqtranslate_configuration.php:583
 msgid "Date / Time Conversion"
 msgstr "Dátum / idő átalakítás"
 
-#: ../mqtranslate_configuration.php:560
+#: ../mqtranslate_configuration.php:585
 msgid "Use emulated date function."
 msgstr "Emulált date függvény használata"
 
-#: ../mqtranslate_configuration.php:561
+#: ../mqtranslate_configuration.php:586
 msgid ""
 "Use emulated date function and replace formats with the predefined formats "
 "for each language."
@@ -414,11 +459,11 @@ msgstr ""
 "Emulált date függvényt használ és a megadottakra cseréli a formátumokat "
 "minden nyelvnél."
 
-#: ../mqtranslate_configuration.php:562
+#: ../mqtranslate_configuration.php:587
 msgid "Use strftime instead of date."
 msgstr "strftime használata a date helyett"
 
-#: ../mqtranslate_configuration.php:563
+#: ../mqtranslate_configuration.php:588
 msgid ""
 "Use strftime instead of date and replace formats with the predefined formats "
 "for each language."
@@ -426,7 +471,7 @@ msgstr ""
 "Az strftime függvényt használja és a megadottakra cseréli a formátumokat "
 "minden nyelvnél."
 
-#: ../mqtranslate_configuration.php:564
+#: ../mqtranslate_configuration.php:589
 msgid ""
 "Depending on the mode selected, additional customizations of the theme may "
 "be needed."
@@ -434,44 +479,54 @@ msgstr ""
 "A választott mód függvényében az aktuális sablon testreszabására lehet "
 "szükség."
 
-#: ../mqtranslate_configuration.php:568
-#, fuzzy
-msgid "Reset mqTranslate"
-msgstr "qTranslate alap helyzetbe állítása"
+#: ../mqtranslate_configuration.php:593
+msgid "Optimization Settings"
+msgstr ""
 
-#: ../mqtranslate_configuration.php:570
-#, fuzzy
+#: ../mqtranslate_configuration.php:595
+msgid "Filter all WordPress options"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:597
+msgid ""
+"If unchecked, some texts may not be translated anymore. However, disabling "
+"this feature may greatly improve loading times."
+msgstr ""
+
+#: ../mqtranslate_configuration.php:601
+msgid "Reset mqTranslate"
+msgstr "mqTranslate alaphelyzetbe állítása"
+
+#: ../mqtranslate_configuration.php:603
 msgid ""
 "Check this box and click Save Changes to reset all mqTranslate settings."
 msgstr ""
-"Jelölje be ezt a jelölőnégyzetet és kattintson a Változások mentése gombra a "
-"qTranslate beállításainak alaphelyzetbe állításához."
+"Jelölje be ezt a jelölőnégyzetet és kattintson a Változások mentése gombra "
+"az mqTranslate beállításainak alaphelyzetbe állításához."
 
-#: ../mqtranslate_configuration.php:572
-#, fuzzy
+#: ../mqtranslate_configuration.php:605
 msgid "Yes, I really want to reset mqTranslate."
-msgstr "Igen, tényleg alapra szeretném állítani a qTranslate beépülőt."
+msgstr "Igen, tényleg alapra szeretném állítani az mqTranslate bővítményt."
 
-#: ../mqtranslate_configuration.php:574
+#: ../mqtranslate_configuration.php:607
 msgid "Also delete Translations for Categories/Tags/Link Categories."
 msgstr "A kategóriák, címkék és link kategóriák fordításait is törölje."
 
-#: ../mqtranslate_configuration.php:576
-#, fuzzy
+#: ../mqtranslate_configuration.php:609
 msgid ""
 "If something isn't working correctly, you can always try to reset all "
 "mqTranslate settings. A Reset won't delete any posts but will remove all "
 "settings (including all languages added)."
 msgstr ""
-"Ha valami nem működik mindig meg lehet próbálni alaphelyzetre állítani a "
-"qTranslate beállításait. Az alapraállítás nem töröl egy bejegyzést se, de "
-"minden beállítást (a hozzáadott nyelveket is) eltávolít."
+"Ha valami nem jól működik, mindig meg lehet próbálni alaphelyzetre állítani "
+"az mqTranslate beállításait. Az alapra állítás nem töröl egy bejegyzést se, "
+"de minden beállítást eltávolít (a hozzáadott nyelveket is)."
 
-#: ../mqtranslate_configuration.php:580
+#: ../mqtranslate_configuration.php:613
 msgid "Convert Database"
 msgstr "Adatbázis átalakítása"
 
-#: ../mqtranslate_configuration.php:582
+#: ../mqtranslate_configuration.php:615
 #, php-format
 msgid ""
 "If you are updating from qTranslate 1.x or Polyglot, <a href=\"%s\">click "
@@ -480,54 +535,52 @@ msgstr ""
 "Ha a qTranslate 1.x vagy Polyglot bővítményekről frissít, akkor <a href=\"%s"
 "\">kattintson ide</a> a bejgeyzések új nyelvi tag formátumra konvertálásához."
 
-#: ../mqtranslate_configuration.php:583
-#, fuzzy, php-format
+#: ../mqtranslate_configuration.php:616
+#, php-format
 msgid ""
 "If you have installed mqTranslate for the first time on a Wordpress with "
 "existing posts, you can either go through all your posts manually and save "
 "them in the correct language or <a href=\"%s\">click here</a> to mark all "
 "existing posts as written in the default language."
 msgstr ""
-"Ha először telepítette a qTranslate beépülőt egy bejegyzéseket már "
+"Ha először telepítette az mqTranslate beépülőt egy bejegyzéseket már "
 "tartalmazó Wordpress oldara, akkor vagy egyesével újra menti a "
 "bejegyzéseket, vagy <a href=\"%s\">ide kattinthat</a> a bejegyzések "
 "alapértelmezett nyelvűként megjelöléséhez."
 
-#: ../mqtranslate_configuration.php:584
+#: ../mqtranslate_configuration.php:617
 msgid ""
 "Both processes are <b>irreversible</b>! Be sure to make a full database "
 "backup before clicking one of the links."
 msgstr ""
-"Mindkét művelet <b>megfordíthatatlan</b>! Készítsen teljes biztonsági "
+"Mindkét művelet <b>visszavonhatatlan</b>! Készítsen teljes biztonsági "
 "másolatot az adatbázisról, mielőtt a linkek bármelyikére kattint!"
 
-#: ../mqtranslate_configuration.php:588
-#, fuzzy
+#: ../mqtranslate_configuration.php:621
 msgid "Settings Migration"
-msgstr "Beállítások"
+msgstr "Migrációs beállítások"
 
-#: ../mqtranslate_configuration.php:590
+#: ../mqtranslate_configuration.php:623
 msgid "Do not migrate any setting"
-msgstr ""
+msgstr "Ne migráljon semilyen beállítást"
 
-#: ../mqtranslate_configuration.php:592
+#: ../mqtranslate_configuration.php:625
 msgid "Import settings from qTranslate"
-msgstr ""
+msgstr "Beállítások átvétele a qTranslate bővítményből"
 
-#: ../mqtranslate_configuration.php:594
-#, fuzzy
+#: ../mqtranslate_configuration.php:627
 msgid "Export settings to qTranslate"
-msgstr "qTranslate alap helyzetbe állítása"
+msgstr "Bállítások exportálása a qTranslate bővítménybe"
 
-#: ../mqtranslate_configuration.php:596
+#: ../mqtranslate_configuration.php:629
 msgid "Export settings only if qTranslate is installed."
-msgstr ""
+msgstr "Csak akkor exportálja a beállításokat, ha a qTranslate telepítve van."
 
-#: ../mqtranslate_configuration.php:600
+#: ../mqtranslate_configuration.php:633
 msgid "Debugging Information"
-msgstr "Rovarkereső indormáció"
+msgstr "Rovarkereső információ"
 
-#: ../mqtranslate_configuration.php:602
+#: ../mqtranslate_configuration.php:635
 #, php-format
 msgid ""
 "If you encounter any problems and you are unable to solve them yourself, you "
@@ -539,46 +592,45 @@ msgstr ""
 "az információkat, akkor mások segíthetnet a beállítások hibáinak "
 "felfedezésében."
 
-#: ../mqtranslate_configuration.php:630
+#: ../mqtranslate_configuration.php:663
 msgid "Save Changes"
 msgstr "Változások mentése"
 
-#: ../mqtranslate_configuration.php:661
+#: ../mqtranslate_configuration.php:694
 msgid "Disable"
 msgstr "Kikapcsol"
 
-#: ../mqtranslate_configuration.php:661
+#: ../mqtranslate_configuration.php:694
 msgid "Enable"
 msgstr "Bekapcsol"
 
-#: ../mqtranslate_configuration.php:662
+#: ../mqtranslate_configuration.php:695
 msgid "Edit"
 msgstr "Szerkeszt"
 
-#: ../mqtranslate_configuration.php:663
+#: ../mqtranslate_configuration.php:696
 msgid "Default"
 msgstr "Alap"
 
-#: ../mqtranslate_configuration.php:663
+#: ../mqtranslate_configuration.php:696
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../mqtranslate_configuration.php:668
-#, fuzzy
+#: ../mqtranslate_configuration.php:701
 msgid ""
 "Enabling a language will cause mqTranslate to update the Gettext-Database "
 "for the language, which can take a while depending on your server's "
 "connection speed."
 msgstr ""
-"Egy nyelv engedélyezésekor a qTranslate megpróbálja frissíteni a nyelv "
+"Egy nyelv engedélyezésekor az mqTranslate megpróbálja frissíteni a nyelv "
 "gettext adatbázisát. Ez az Internet sebességének függvényében eltarthat egy "
 "ideig."
 
-#: ../mqtranslate_configuration.php:675
+#: ../mqtranslate_configuration.php:708
 msgid "Add Language"
 msgstr "Nyelv hozzáadása"
 
-#: ../mqtranslate_configuration.php:678
+#: ../mqtranslate_configuration.php:711
 msgid "Add Language &raquo;"
 msgstr "Nyelv hozzáadása &raquo;"
 
@@ -633,7 +685,7 @@ msgstr "Állapot frissítve minden nyitott megrendelésnél."
 
 #: ../mqtranslate_services.php:331
 msgid "Please save your post first."
-msgstr ""
+msgstr "Kérem, előbb mentse a bejegyzést."
 
 #: ../mqtranslate_services.php:359
 msgid "Post Title"
@@ -674,13 +726,12 @@ msgid "Enable qTranslate Services"
 msgstr "qTranslate szolgáltatások engedélyezése"
 
 #: ../mqtranslate_services.php:378
-#, fuzzy
 msgid ""
 "With qTranslate Services, you will be able to use professional human "
 "translation services with a few clicks."
 msgstr ""
 "A qTranslate szolgáltatások segítségével profi emberi fordító "
-"szolgáltatásokat vehet igénybe néhány kattintással. (OpenSSL kell hozzá)"
+"szolgáltatásokat vehet igénybe néhány kattintással."
 
 #: ../mqtranslate_services.php:388
 msgid "Open Orders"
@@ -842,25 +893,23 @@ msgstr "Folytatás"
 
 #: ../mqtranslate_services.php:730 ../mqtranslate_services.php:733
 msgid "Confirm Order"
-msgstr ""
+msgstr "Rendelés megerősítése"
 
 #: ../mqtranslate_services.php:732
-#, fuzzy
 msgid "Please confirm your order."
-msgstr "A rendszer nem tudta feldolgozni a megrendelését."
+msgstr "Kérem, erősítse meg rendelését."
 
 #: ../mqtranslate_services.php:740 ../mqtranslate_services.php:875
 msgid "Request Translation"
 msgstr "Fordítás kérése"
 
 #: ../mqtranslate_services.php:742
-#, fuzzy
 msgid "Javascript is required for qTranslate Services"
-msgstr "qTranslate szolgáltatások engedélyezése"
+msgstr "Javascript szükséges a qTranslate szolgáltatásokhoz"
 
 #: ../mqtranslate_services.php:743
 msgid "Please choose a service first"
-msgstr ""
+msgstr "Előbb válasszon ki egy szolgáltatást"
 
 #: ../mqtranslate_services.php:752
 msgid ""
@@ -870,9 +919,8 @@ msgstr ""
 "próbálja újra később."
 
 #: ../mqtranslate_services.php:760
-#, fuzzy
 msgid "Translation Service"
-msgstr "qTranslate szolgáltatások"
+msgstr "Fordítás szolgáltatás"
 
 #: ../mqtranslate_services.php:776
 #, php-format
@@ -885,15 +933,15 @@ msgstr ""
 
 #: ../mqtranslate_services.php:791
 msgid "<p><img src=\"images/wpspin_light.gif\"> Getting Quote...</p>"
-msgstr ""
+msgstr "<p><img src=\"images/wpspin_light.gif\"> Idézet lekérése...</p>"
 
 #: ../mqtranslate_services.php:812
 msgid "Click to toggle"
-msgstr ""
+msgstr "Kattintson a váltáshoz"
 
 #: ../mqtranslate_services.php:813
 msgid "Review Article"
-msgstr ""
+msgstr "Cikk átnézése"
 
 #: ../mqtranslate_services.php:819
 msgid ""
@@ -909,26 +957,25 @@ msgstr ""
 
 #: ../mqtranslate_services.php:858 ../mqtranslate_services.php:865
 msgid "unavailable"
-msgstr ""
+msgstr "nem elérhető"
 
 #: ../mqtranslate_services.php:863
 msgid "free"
-msgstr ""
+msgstr "ingyenes"
 
 #: ../mqtranslate_services.php:870
 #, php-format
 msgid "<p>Price: %1$s %2$s</p>"
-msgstr ""
+msgstr "<p>Ár: %1$s %2$s</p>"
 
 #: ../mqtranslate_services.php:871
 #, php-format
 msgid "~ %1$s %2$s"
-msgstr ""
+msgstr "~ %1$s %2$s"
 
 #: ../mqtranslate_services.php:878
-#, fuzzy
 msgid "An error occured!"
-msgstr "Egy hiba lépett föl: %s"
+msgstr "Hiba történt!"
 
 #: ../mqtranslate_services.php:896
 msgid "Translate"
@@ -941,9 +988,8 @@ msgstr "Lehetővé teszi a látogatóknak a nyelvválasztást."
 
 #: ../mqtranslate_widget.inc.php:25
 #: ../mqtranslate_widget_qtranslate-slug.php:25
-#, fuzzy
 msgid "mqTranslate Language Chooser"
-msgstr "qTranslate nyelv választó"
+msgstr "mqTranslate nyelv-választó"
 
 #: ../mqtranslate_widget.inc.php:32
 msgid "Language"
@@ -985,149 +1031,92 @@ msgid ""
 "mqTranslate to the <a href=\"http://wordpress.org/plugins/mqtranslate/\" "
 "target=\"_blank\">corresponding version</a>."
 msgstr ""
+"Az mqTranslate szerkesztő letiltotta magát, mert a WordPress ezen "
+"verziójával még nem lett tesztelve. Így elkerülhető a WordPress hibás "
+"működése. E figyelmeztetés eltüntetéséhez, frissítse az mqTranslate "
+"bővítményt a <a href=\"http://wordpress.org/plugins/mqtranslate/\" target="
+"\"_blank\">megfelelő verzióra</a>."
 
-#: ../mqtranslate_wphacks.php:358
+#: ../mqtranslate_wphacks.php:360
 msgid "Title"
 msgstr "Cím"
 
-#: ../mqtranslate_wphacks.php:360 ../mqtranslate_wphacks.php:405
-#, fuzzy
+#: ../mqtranslate_wphacks.php:362 ../mqtranslate_wphacks.php:407
 msgid "Read only"
-msgstr "Csak szöveg"
+msgstr "Csak olvasható"
 
 #: ../mqtranslate_xhaleera_addons.php:76
-#, fuzzy
 msgid "mqTranslate User Language Settings"
-msgstr "qTranslate szolgáltatás beállítások"
+msgstr "mqTranslate felhasználói nyelv beállítások"
 
 #: ../mqtranslate_xhaleera_addons.php:87
 msgid "You can edit posts in"
-msgstr ""
+msgstr "Ezeken a nyelveken szerkeszthet:"
 
 #: ../mqtranslate_xhaleera_addons.php:89
 msgid "This user can edit posts in"
-msgstr ""
+msgstr "Ezeket a nyelveket szerkesztheti:"
 
 #: ../mqtranslate_xhaleera_addons.php:94
 #: ../mqtranslate_xhaleera_addons.php:103
-#, fuzzy
 msgid "No language available"
-msgstr "A nyelv már ki van kapcsolva!"
+msgstr "Nincs elérhető nyelv"
 
 #: ../mqtranslate_xhaleera_addons.php:96
 msgid "As an Administrator, you can edit posts in all languages."
-msgstr ""
+msgstr "Mint admin, minden nyelvű tartalmat szerkeszthetsz."
 
 #: ../mqtranslate_xhaleera_addons.php:98
 msgid "As an Administrator, this user can edit posts in all languages."
-msgstr ""
+msgstr "Mint admin, ez a felhasználó minden nyelvű tartalmat szerkeszthet."
 
 #: ../mqtranslate_xhaleera_addons.php:119
 msgid "No language selected"
-msgstr ""
+msgstr "Nincs kiválasztva nyelv"
 
 #: ../mqtranslate_xhaleera_addons.php:134
-#, fuzzy
 msgid "Master language"
-msgstr "Célnyelv"
+msgstr "Fő nyelv"
 
 #: ../mqtranslate_xhaleera_addons.php:137
 msgid "Not applicable to Administrators"
-msgstr ""
+msgstr "Nem vonatkozik adminokra"
 
 #: ../mqtranslate_xhaleera_addons.php:150
 msgid "Language from which texts should be translated by this user"
-msgstr ""
+msgstr "Erről a nyelvről fordíthat ez a felhasználó"
 
 #: ../mqtranslate_xhaleera_addons.php:279
-#, fuzzy
 msgid "mqTranslate Team Settings"
-msgstr "qTranslate szolgáltatás beállítások"
+msgstr "mqTranslate csapat beállítások"
 
 #: ../mqtranslate_xhaleera_addons.php:282
 msgid "User-level Language Protection"
-msgstr ""
+msgstr "Felhasználónként megadható nyelvek"
 
 #: ../mqtranslate_xhaleera_addons.php:284
 msgid "Enable user-level language protection"
-msgstr ""
+msgstr "Felhasználói szintű nyelv-védelem engedélyezése"
 
 #: ../mqtranslate_xhaleera_addons.php:286
 msgid ""
 "When enabled, this option allows you to select which language is editable on "
 "a user-level account basis."
 msgstr ""
+"Ha be van kapcsolva, akkor minden admin felhasználónál megadható, hogy "
+"melyik nyelvek tartalmát szerkesztheti."
+
+#~ msgid "Use Secure Cookie"
+#~ msgstr "Biztonságos süti"
 
 #~ msgid ""
-#~ "Adds userfriendly multilingual content support into Wordpress. For "
-#~ "Problems visit the <a href=\"http://www.qianqin.de/qtranslate/forum/"
-#~ "\">Support Forum</a>."
+#~ "Adds userfriendly multilingual content support into Wordpress. "
+#~ "mqTranslate is a fork of the well-known <a href=\"http://www.qianqin.de/"
+#~ "mqtranslate/\">qTranslate</a> plugin by <a href=\"http://www.qianqin.de/"
+#~ "\">Qian Qin</a>, extending the original software with collaborative and "
+#~ "team-oriented features."
 #~ msgstr ""
-#~ "Felhasználóbarát többnyelvűség a Wordpresshez. Problémák esetén látogassa "
-#~ "meg a <a href=\"http://www.qianqin.de/qtranslate/forum/\">Segítő fórum</"
-#~ "a>ot."
-
-#~ msgid "Category Name"
-#~ msgstr "Kategória név"
-
-#~ msgid "Please review your article and <a href=\"%s\">edit</a> it if needed."
-#~ msgstr ""
-#~ "Kérem vizsgálja felül a bejegyzést, és <a href=\"%s\">szerkessze</a> ha "
-#~ "szükséges."
-
-#~ msgid "Qian Qin"
-#~ msgstr "Qian Qin"
-
-#~ msgid "Save after enabling to see more Configuration options."
-#~ msgstr "Mentsen a bekapcsolás után, hogy az összes beállítást lássa."
-
-#~ msgid "Show"
-#~ msgstr "mutat"
-
-#~ msgid "Tag Name"
-#~ msgstr "Címke név"
-
-#~ msgid ""
-#~ "This version of qTranslate has not been tested with your Wordpress "
-#~ "version. To prevent Wordpress from malfunctioning, the qTranslate Editor "
-#~ "has been disabled. You can reenable it by <a href=\"javascript:"
-#~ "qtrans_editorInit();\" title=\"Activate qTranslate\" id=\"qtrans_imsg_link"
-#~ "\">clicking here</a> (may cause <b>data loss</b>!). To remove this "
-#~ "message, please update qTranslate to the <a href=\"http://www.qianqin.de/"
-#~ "qtranslate/download/\">corresponding version</a>."
-#~ msgstr ""
-#~ "A qTranslate ezen verziója nem lett letesztelve a Wordpress ezzen "
-#~ "verziójával. A Wordpress hibás működését elkerülendő a qTranslate "
-#~ "szerkesztő ki lett kapcsolva. Újra engedélyezheti, ha <a href="
-#~ "\"javascript:qtrans_editorInit();\" title=\"qTranslate bekapcsolása\" id="
-#~ "\"qtrans_imsg_link\">ide kattint</a> (<b>adatvesztés</b>t okozhat!). Az "
-#~ "üzenet megszüntetéséhez kérem frissítse a qTranslate beépülőt a <a href="
-#~ "\"http://www.qianqin.de/qtranslate/download/\">megfelelő verzió</a>ra."
-
-#~ msgid "Use the following Translation Service:"
-#~ msgstr "A következő fordítási szolgáltatás használata:"
-
-#~ msgid "http://www.qianqin.de"
-#~ msgstr "http://www.qianqin.de"
-
-#~ msgid "http://www.qianqin.de/qtranslate/"
-#~ msgstr "http://www.qianqin.de/qtranslate/"
-
-#~ msgid "language_name"
-#~ msgstr "language_name"
-
-#~ msgid ""
-#~ "multilingual, multi, language, admin, tinymce, qTranslate, Polyglot, "
-#~ "bilingual, widget, switcher, professional, human, translation, service"
-#~ msgstr ""
-#~ "multilingual, multi, language, admin, tinymce, qTranslate, Polyglot, "
-#~ "bilingual, widget, switcher, professional, human, translation, service"
-
-#~ msgid "qTranslate"
-#~ msgstr "qTranslate"
-
-#~ msgid "service_description"
-#~ msgstr "szolgáltatás_leírás"
-
-#~ msgid "service_name"
-#~ msgstr "szolgáltatás_név"
+#~ "Felhasználóbarát több nyelv támogatás WordPresshez. Az mqTranslate a jól "
+#~ "ismert <a href=\"http://www.qianqin.de/mqtranslate/\">qTranslate</a> "
+#~ "bővítmény leágazása (eredeti szerző: <a href=\"http://www.qianqin.de/"
+#~ "\">Qian Qin</a>). Új funkciók: csapat-alapú képességek."

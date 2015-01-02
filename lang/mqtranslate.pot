@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mqTranslate 2.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-13 14:33+0100\n"
-"PO-Revision-Date: 2014-09-13 14:33+0100\n"
+"POT-Creation-Date: 2014-12-27 21:41+0100\n"
+"PO-Revision-Date: 2014-12-27 21:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_US\n"
@@ -16,16 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.7.1\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
+
+#: ../mqtranslate.php:99
+#, php-format
+msgid ""
+"Sorry, but mqTranslate can not be activated. You have to deactivate %s first."
+msgstr ""
 
 #: ../mqtranslate_configuration.php:25
 msgid "Language Management"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:25 ../mqtranslate_configuration.php:646
+#: ../mqtranslate_configuration.php:25 ../mqtranslate_configuration.php:670
 #: ../mqtranslate_hooks.php:180
 msgid "Languages"
 msgstr ""
@@ -136,101 +142,101 @@ msgstr ""
 msgid "mqTranslate has been reset."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:245
+#: ../mqtranslate_configuration.php:248
 msgid "Gettext databases updated."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:250
+#: ../mqtranslate_configuration.php:253
 msgid "The Language must have a Not-Available Message!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:251
+#: ../mqtranslate_configuration.php:254
 msgid "The Language must have a Locale!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:252
+#: ../mqtranslate_configuration.php:255
 msgid "The Language must have a name!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:253
+#: ../mqtranslate_configuration.php:256
 msgid "Language Code has to be 2 characters long!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:257 ../mqtranslate_configuration.php:263
+#: ../mqtranslate_configuration.php:260 ../mqtranslate_configuration.php:266
 msgid "There is already a language with the same Language Code!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:368
+#: ../mqtranslate_configuration.php:371
 msgid "Language is already enabled or invalid!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:373
+#: ../mqtranslate_configuration.php:376
 msgid "Cannot disable Default Language!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:376 ../mqtranslate_configuration.php:383
-#: ../mqtranslate_configuration.php:399
+#: ../mqtranslate_configuration.php:379 ../mqtranslate_configuration.php:386
+#: ../mqtranslate_configuration.php:402
 msgid "No such language!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:379
+#: ../mqtranslate_configuration.php:382
 msgid "Language is already disabled!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:387
+#: ../mqtranslate_configuration.php:390
 msgid "Language is already first!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:393 ../mqtranslate_configuration.php:409
+#: ../mqtranslate_configuration.php:396 ../mqtranslate_configuration.php:412
 msgid "New order saved."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:403
+#: ../mqtranslate_configuration.php:406
 msgid "Language is already last!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:420
+#: ../mqtranslate_configuration.php:423
 msgid "Options saved."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:425
+#: ../mqtranslate_configuration.php:428
 #, php-format
 msgid "Could not write to \"%s\", Gettext Databases could not be downloaded!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:447
+#: ../mqtranslate_configuration.php:450
 msgid "Edit Language"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:450
+#: ../mqtranslate_configuration.php:453
 msgid "Save Changes &raquo;"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:455
+#: ../mqtranslate_configuration.php:458
 msgid "Language Management (mqTranslate Configuration)"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:456
+#: ../mqtranslate_configuration.php:459
 #, php-format
 msgid ""
 "For help on how to configure mqTranslate correctly, take a look at the <a "
 "href=\"%1$s\">qTranslate FAQ</a> and the <a href=\"%2$s\">Support Forum</a>."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:458
+#: ../mqtranslate_configuration.php:461
 msgid "General Settings"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:461
+#: ../mqtranslate_configuration.php:464
 msgid "Default Language / Order"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:463 ../mqtranslate_xhaleera_addons.php:141
+#: ../mqtranslate_configuration.php:466 ../mqtranslate_xhaleera_addons.php:141
 #: ../mqtranslate_xhaleera_addons.php:155
 msgid "Default Language"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:478
+#: ../mqtranslate_configuration.php:481
 #, php-format
 msgid ""
 "Choose the default language of your blog. This is the language which will be "
@@ -238,211 +244,245 @@ msgid ""
 "arrows above."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:483
+#: ../mqtranslate_configuration.php:486
 msgid "Hide Untranslated Content"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:485
+#: ../mqtranslate_configuration.php:488
 msgid "Hide Content which is not available for the selected language."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:488
+#: ../mqtranslate_configuration.php:491
 msgid ""
 "When checked, posts will be hidden if the content is not available for the "
 "selected language. If unchecked, a message will appear showing all the "
 "languages the content is available in."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:489
+#: ../mqtranslate_configuration.php:492
 msgid ""
 "This function will not work correctly if you installed mqTranslate on a blog "
 "with existing entries. In this case you will need to take a look at "
 "\"Convert Database\" under \"Advanced Settings\"."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:492
+#: ../mqtranslate_configuration.php:495
 msgid ""
 "Show displayed language prefix when Content is not available for the "
 "selected language."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:497
+#: ../mqtranslate_configuration.php:500
 msgid "Detect Browser Language"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:499
+#: ../mqtranslate_configuration.php:502
 msgid "Detect the language of the browser and redirect accordingly."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:502
+#: ../mqtranslate_configuration.php:505
 msgid ""
 "When the frontpage is visited via bookmark/external link/type-in, the "
 "visitor will be forwarded to the correct URL for the language specified by "
 "his browser."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:507
+#: ../mqtranslate_configuration.php:510
 msgid "Advanced Settings"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:507 ../mqtranslate_services.php:370
+#: ../mqtranslate_configuration.php:510 ../mqtranslate_services.php:370
 #: ../mqtranslate_xhaleera_addons.php:279
 msgid "Show / Hide"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:510 ../mqtranslate_configuration.php:512
+#: ../mqtranslate_configuration.php:513 ../mqtranslate_configuration.php:515
 msgid "URL Modification Mode"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:513
+#: ../mqtranslate_configuration.php:516
 msgid "Use Query Mode (?lang=en)"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:514
+#: ../mqtranslate_configuration.php:517
 msgid "Use Pre-Path Mode (Default, puts /en/ in front of URL)"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:515
+#: ../mqtranslate_configuration.php:518
 msgid "Use Pre-Domain Mode (uses http://en.yoursite.com)"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:518
+#: ../mqtranslate_configuration.php:521
 msgid ""
 "Pre-Path and Pre-Domain mode will only work with mod_rewrite/pretty "
 "permalinks. Additional Configuration is needed for Pre-Domain mode!"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:521
+#: ../mqtranslate_configuration.php:524
 msgid "Hide URL language information for default language."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:525
+#: ../mqtranslate_configuration.php:528
 msgid "Flag Image Path"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:529
+#: ../mqtranslate_configuration.php:532
 msgid ""
 "Path to the flag images under wp-content, with trailing slash. (Default: "
 "plugins/mqtranslate/flags/)"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:533
+#: ../mqtranslate_configuration.php:536
 msgid "Ignore Links"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:537
+#: ../mqtranslate_configuration.php:540
 msgid ""
 "Don't convert Links to files of the given file types. (Default: gif,jpg,jpeg,"
 "png,pdf,swf,tif,rar,zip,7z,mpg,divx,mpeg,avi,css,js)"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:541
+#: ../mqtranslate_configuration.php:544
 msgid "Remove plugin CSS from head"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:543
+#: ../mqtranslate_configuration.php:546
 msgid "Remove inline CSS code added by plugin from the head"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:545
+#: ../mqtranslate_configuration.php:548
 msgid ""
 "This will remove default styles applyied to mqTranslate Language Chooser"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:549
+#: ../mqtranslate_configuration.php:552
+msgid "Cookie Settings"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:554
+msgid "Disable all client cookies"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:556
+msgid "If checked, language will not be saved for visitors between sessions."
+msgstr ""
+
+#: ../mqtranslate_configuration.php:559
+msgid "Make mqTranslate cookie available only through HTTPS connections"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:561
+msgid "Don't check this if you don't know what you're doing!"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:565
 msgid "Allowed Custom Post Types"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:553
+#: ../mqtranslate_configuration.php:569
 msgid ""
 "Comma-separated list of the custom post types for which you want mqTranslate "
 "to keep multi-language values."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:557
+#: ../mqtranslate_configuration.php:573
 msgid "Update Gettext Databases"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:559
+#: ../mqtranslate_configuration.php:575
 msgid "Automatically check for .mo-Database Updates of installed languages."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:561
+#: ../mqtranslate_configuration.php:577
 msgid "Update Gettext databases now."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:563
+#: ../mqtranslate_configuration.php:579
 msgid ""
 "mqTranslate will query the Wordpress Localisation Repository every week and "
 "download the latest Gettext Databases (.mo Files)."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:567
+#: ../mqtranslate_configuration.php:583
 msgid "Date / Time Conversion"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:569
+#: ../mqtranslate_configuration.php:585
 msgid "Use emulated date function."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:570
+#: ../mqtranslate_configuration.php:586
 msgid ""
 "Use emulated date function and replace formats with the predefined formats "
 "for each language."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:571
+#: ../mqtranslate_configuration.php:587
 msgid "Use strftime instead of date."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:572
+#: ../mqtranslate_configuration.php:588
 msgid ""
 "Use strftime instead of date and replace formats with the predefined formats "
 "for each language."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:573
+#: ../mqtranslate_configuration.php:589
 msgid ""
 "Depending on the mode selected, additional customizations of the theme may "
 "be needed."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:577
+#: ../mqtranslate_configuration.php:593
+msgid "Optimization Settings"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:595
+msgid "Filter all WordPress options"
+msgstr ""
+
+#: ../mqtranslate_configuration.php:597
+msgid ""
+"If unchecked, some texts may not be translated anymore. However, disabling "
+"this feature may greatly improve loading times."
+msgstr ""
+
+#: ../mqtranslate_configuration.php:601
 msgid "Reset mqTranslate"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:579
+#: ../mqtranslate_configuration.php:603
 msgid ""
 "Check this box and click Save Changes to reset all mqTranslate settings."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:581
+#: ../mqtranslate_configuration.php:605
 msgid "Yes, I really want to reset mqTranslate."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:583
+#: ../mqtranslate_configuration.php:607
 msgid "Also delete Translations for Categories/Tags/Link Categories."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:585
+#: ../mqtranslate_configuration.php:609
 msgid ""
 "If something isn't working correctly, you can always try to reset all "
 "mqTranslate settings. A Reset won't delete any posts but will remove all "
 "settings (including all languages added)."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:589
+#: ../mqtranslate_configuration.php:613
 msgid "Convert Database"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:591
+#: ../mqtranslate_configuration.php:615
 #, php-format
 msgid ""
 "If you are updating from qTranslate 1.x or Polyglot, <a href=\"%s\">click "
 "here</a> to convert posts to the new language tag format."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:592
+#: ../mqtranslate_configuration.php:616
 #, php-format
 msgid ""
 "If you have installed mqTranslate for the first time on a Wordpress with "
@@ -451,37 +491,37 @@ msgid ""
 "existing posts as written in the default language."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:593
+#: ../mqtranslate_configuration.php:617
 msgid ""
 "Both processes are <b>irreversible</b>! Be sure to make a full database "
 "backup before clicking one of the links."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:597
+#: ../mqtranslate_configuration.php:621
 msgid "Settings Migration"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:599
+#: ../mqtranslate_configuration.php:623
 msgid "Do not migrate any setting"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:601
+#: ../mqtranslate_configuration.php:625
 msgid "Import settings from qTranslate"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:603
+#: ../mqtranslate_configuration.php:627
 msgid "Export settings to qTranslate"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:605
+#: ../mqtranslate_configuration.php:629
 msgid "Export settings only if qTranslate is installed."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:609
+#: ../mqtranslate_configuration.php:633
 msgid "Debugging Information"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:611
+#: ../mqtranslate_configuration.php:635
 #, php-format
 msgid ""
 "If you encounter any problems and you are unable to solve them yourself, you "
@@ -489,42 +529,42 @@ msgid ""
 "Content will help other detect any misconfigurations."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:639
+#: ../mqtranslate_configuration.php:663
 msgid "Save Changes"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:670
+#: ../mqtranslate_configuration.php:694
 msgid "Disable"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:670
+#: ../mqtranslate_configuration.php:694
 msgid "Enable"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:671
+#: ../mqtranslate_configuration.php:695
 msgid "Edit"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:672
+#: ../mqtranslate_configuration.php:696
 msgid "Default"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:672
+#: ../mqtranslate_configuration.php:696
 msgid "Delete"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:677
+#: ../mqtranslate_configuration.php:701
 msgid ""
 "Enabling a language will cause mqTranslate to update the Gettext-Database "
 "for the language, which can take a while depending on your server's "
 "connection speed."
 msgstr ""
 
-#: ../mqtranslate_configuration.php:684
+#: ../mqtranslate_configuration.php:708
 msgid "Add Language"
 msgstr ""
 
-#: ../mqtranslate_configuration.php:687
+#: ../mqtranslate_configuration.php:711
 msgid "Add Language &raquo;"
 msgstr ""
 
@@ -896,11 +936,11 @@ msgid ""
 "target=\"_blank\">corresponding version</a>."
 msgstr ""
 
-#: ../mqtranslate_wphacks.php:358
+#: ../mqtranslate_wphacks.php:360
 msgid "Title"
 msgstr ""
 
-#: ../mqtranslate_wphacks.php:360 ../mqtranslate_wphacks.php:405
+#: ../mqtranslate_wphacks.php:362 ../mqtranslate_wphacks.php:407
 msgid "Read only"
 msgstr ""
 

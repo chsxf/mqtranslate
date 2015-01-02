@@ -304,7 +304,7 @@ function qtrans_initJS() {
 		qtrans_hook_on_tinyMCE = function(id, initEditor) {
 			tinyMCEPreInit.mceInit[id].setup = function(ed) {
 				ed.on('SaveContent', function(e) {
-					if (!ed.isHidden()) {
+					if (!ed.isHidden() && ed.id.match(/^qtrans_/)) {
 						e.content = e.content.replace( /<p>(<br ?\/?>|\u00a0|\uFEFF)?<\/p>/g, '<p>&nbsp;</p>' );
 						if ( ed.getParam( 'wpautop', true ) )
 							e.content = switchEditors.pre_wpautop(e.content);

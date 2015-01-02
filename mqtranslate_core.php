@@ -48,7 +48,9 @@ function qtrans_init() {
 		delete_option('mqtranslate_ul_lang_protection');
 		delete_option('mqtranslate_allowed_custom_post_types');
 		delete_option('mqtranslate_disable_header_css');
+		delete_option('mqtranslate_disable_client_cookies');
 		delete_option('mqtranslate_use_secure_cookie');
+		delete_option('mqtranslate_filter_all_options');
 		if(isset($_POST['mqtranslate_reset3'])) {
 			delete_option('mqtranslate_term_name');
 		}
@@ -83,22 +85,32 @@ function qtrans_init() {
 	$q_config['url_info'] = qtrans_extractURL($_SERVER['REQUEST_URI'], $_SERVER["HTTP_HOST"], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
 	
 	// set test cookie
-	setcookie('qtrans_cookie_test', 'mqTranslate Cookie Test', 0, $q_config['url_info']['home'], $q_config['url_info']['host'], !empty($q_config['use_secure_cookie']));
+	if (empty($q_config['disable_client_cookies']) || defined('WP_ADMIN'))
+		setcookie('qtrans_cookie_test', 1, 0, $q_config['url_info']['home'], $q_config['url_info']['host_wo_port'], !empty($q_config['use_secure_cookie']));
 	// check cookies for admin
 	if(defined('WP_ADMIN')) {
 		if(isset($_GET['lang']) && qtrans_isEnabled($_GET['lang'])) {
-			$q_config['language'] = $q_config['url_info']['language'];
-			setcookie('qtrans_admin_language', $q_config['language'], time()+60*60*24*30, !empty($q_config['use_secure_cookie']));
-		} elseif(isset($_COOKIE['qtrans_admin_language']) && qtrans_isEnabled($_COOKIE['qtrans_admin_language'])) {
-			$q_config['language'] = $_COOKIE['qtrans_admin_language'];
-		} else {
-			$q_config['language'] = $q_config['default_language'];
+			qtrans_setLanguage($q_config['url_info']['language']);
+			setcookie('qtrans_admin_language', $q_config['language'], time()+60*60*24*30, NULL, NULL, !empty($q_config['use_secure_cookie']));
 		}
-	} else {
-		$q_config['language'] = $q_config['url_info']['language'];
+		elseif (isset($_COOKIE['qtrans_admin_language']) && qtrans_isEnabled($_COOKIE['qtrans_admin_language']))
+			qtrans_setLanguage($_COOKIE['qtrans_admin_language']);
+		else
+			qtrans_setLanguage($q_config['default_language']);
 	}
-	
-	$q_config['language'] = apply_filters('mqtranslate_language', $q_config['language']);
+	else {
+		qtrans_setLanguage($q_config['url_info']['language']);
+		/*
+		if (!isset($_COOKIE['qtrans_client_language']) || !qtrans_isEnabled($_COOKIE['qtrans_client_language'])
+				|| (($q_config['url_info']['language'] != $q_config['default_language'] || $q_config['url_info']['explicit_default_language']) && $q_config['url_info']['language'] != $_COOKIE['qtrans_client_language'])) {
+			qtrans_setLanguage($q_config['url_info']['language']);
+			if (empty($q_config['disable_client_cookies']))
+				setcookie('qtrans_client_language', $q_config['language'], time() + 86400 * 30, $q_config['url_info']['home'], $q_config['url_info']['host_wo_port'], !empty($q_config['use_secure_cookie']));
+		}
+		else
+			qtrans_setLanguage($_COOKIE['qtrans_client_language']);
+		*/
+	}
 	
 	// detect language and forward if needed
 	if($q_config['detect_browser_language'] && $q_config['url_info']['redirect'] && !isset($_COOKIE['qtrans_cookie_test']) && $q_config['url_info']['language'] == $q_config['default_language']) {
@@ -142,7 +154,7 @@ function qtrans_init() {
 	*/
 	
 	// Filter all options for language tags
-	if(!defined('WP_ADMIN')) {
+	if(!defined('WP_ADMIN') && !empty($q_config['filter_all_options'])) {
 		$alloptions = wp_load_alloptions();
 		foreach($alloptions as $option => $value) {
 			add_filter('option_'.$option, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
@@ -158,6 +170,12 @@ function qtrans_init() {
 	
 	// fix url to prevent xss
 	$q_config['url_info']['url'] = qtrans_convertURL(add_query_arg('lang',$q_config['default_language'],$q_config['url_info']['url']));
+}
+
+function qtrans_setLanguage($lang) {
+	global $q_config;
+	
+	$q_config['language'] = apply_filters('mqtranslate_language', $lang);
 }
 
 // returns the home in HTTP or HTTPS depending on the request
@@ -197,6 +215,9 @@ function qtrans_extractURL($url, $host = '', $referer = '') {
 	$result['explicit_default_language'] = false;
 	
 	switch($q_config['url_mode']) {
+		case QT_URL_QUERY:
+			$result['explicit_default_language'] = (!empty($_GET['lang']) && $_GET['lang'] == $q_config['default_language']);
+			break;
 		case QT_URL_PATH:
 			// pre url
 			$url = substr($url, strlen($home['path']));
@@ -219,6 +240,7 @@ function qtrans_extractURL($url, $host = '', $referer = '') {
 					if(qtrans_isEnabled($match[1])) {
 						// found language information
 						$result['language'] = $match[1];
+						$result['explicit_default_language'] = ($match[1] == $q_config['default_language']);
 						$result['host'] = substr($host, 3);
 					}
 				}
@@ -255,6 +277,8 @@ function qtrans_extractURL($url, $host = '', $referer = '') {
 		}
 	}
 	
+	$result['host_wo_port'] = preg_replace('#:.+$#', '', $result['host']);
+	
 	return $result;
 }
 
@@ -287,7 +311,9 @@ function qtrans_loadConfig() {
 	$hide_default_language = get_option('mqtranslate_hide_default_language');
 	$allowed_custom_post_types = get_option('mqtranslate_allowed_custom_post_types');
 	$disable_header_css = get_option('mqtranslate_disable_header_css');
+	$disable_client_cookies = get_option('mqtranslate_disable_client_cookies');
 	$use_secure_cookie = get_option('mqtranslate_use_secure_cookie');
+	$filter_all_options = get_option('mqtranslate_filter_all_options');
 	
 	// default if not set
 	if(!is_array($date_formats)) $date_formats = $q_config['date_format'];
@@ -318,7 +344,9 @@ function qtrans_loadConfig() {
 	$auto_update_mo = qtrans_validateBool($auto_update_mo, $q_config['auto_update_mo']);
 	$hide_default_language = qtrans_validateBool($hide_default_language, $q_config['hide_default_language']);
 	$disable_header_css = qtrans_validateBool($disable_header_css, $q_config['disable_header_css']);
+	$disable_client_cookies = qtrans_validateBool($disable_client_cookies, $q_config['disable_client_cookies']);
 	$use_secure_cookie = qtrans_validateBool($use_secure_cookie, $q_config['use_secure_cookie']);
+	$filter_all_options = qtrans_validateBool($filter_all_options, $q_config['filter_all_options']);
 	
 	// url fix for upgrading users
 	$flag_location = trailingslashit(preg_replace('#^wp-content/#','',$flag_location));
@@ -348,7 +376,9 @@ function qtrans_loadConfig() {
 	$q_config['term_name'] = $term_name;
 	$q_config['allowed_custom_post_types'] = $allowed_custom_post_types;
 	$q_config['disable_header_css'] = $disable_header_css;
+	$q_config['disable_client_cookies'] = $disable_client_cookies;
 	$q_config['use_secure_cookie'] = $use_secure_cookie;
+	$q_config['filter_all_options'] = $filter_all_options;
 	
 	do_action('mqtranslate_loadConfig');
 }
@@ -394,7 +424,9 @@ function qtrans_saveConfig() {
 	
 	update_option('mqtranslate_allowed_custom_post_types', implode(',', $q_config['allowed_custom_post_types']));
 	update_option('mqtranslate_disable_header_css', $q_config['disable_header_css'] ? '1' : '0');
+	update_option('mqtranslate_disable_client_cookies', $q_config['disable_client_cookies'] ? '1' : '0');
 	update_option('mqtranslate_use_secure_cookie', $q_config['use_secure_cookie'] ? '1' : '0');
+	update_option('mqtranslate_filter_all_options', $q_config['filter_all_options'] ? '1' : '0');
 		
 	do_action('mqtranslate_saveConfig');
 }
@@ -677,9 +709,8 @@ function qtrans_convertURL($url='', $lang='', $forceadmin = false, $forceaddlang
 	}
 	
 	// check for query language information and remove if found
-	if(preg_match("#(&|\?)lang=([^&\#]+)#i",$url,$match) && qtrans_isEnabled($match[2])) {
+	if (preg_match("#(&|\?)lang=([^&\#]+)#i",$url,$match) && qtrans_isEnabled($match[2]))
 		$url = preg_replace("#(&|\?)lang=".$match[2]."&?#i","$1",$url);
-	}
 	
 	// remove any slashes out front
 	$url = ltrim($url,"/");
@@ -711,18 +742,29 @@ function qtrans_convertURL($url='', $lang='', $forceadmin = false, $forceaddlang
 					$url = substr($url, 3);
 				}
 			}
-			if(!$q_config['hide_default_language']||$lang!=$q_config['default_language']||$forceaddlang) $url = $lang."/".$url;
+			if(!$q_config['hide_default_language']||$lang!=$q_config['default_language']||$forceaddlang)
+				$url = $lang."/".$url;
 			break;
-		case QT_URL_DOMAIN:	// pre domain 
-			if(!$q_config['hide_default_language']||$lang!=$q_config['default_language']) $home = preg_replace("#//#","//".$lang.".",$home,1);
+		case QT_URL_DOMAIN:	// pre domain
+			// might already have language information
+			if (preg_match('#//([a-z]{2})\.#i', $url, $_match)) {
+				if (qtrans_isEnabled($_match[1]))
+					$url = preg_replace("#//{$_match[1]}\.#i", '//', $url);
+			} 
+			if (!$q_config['hide_default_language']||$lang!=$q_config['default_language']||$forceaddlang)
+				$home = preg_replace("#//#","//{$lang}.",$home,1);
 			break;
 		default: // query
-			if(!$q_config['hide_default_language']||$lang!=$q_config['default_language']){
-				if(strpos($url,'?')===false) {
+			// might already have language information
+			if (preg_match('#(&|\?)lang=([a-zA-Z]{2})&?#', $url, $_match)) {
+				if (qtrans_isEnabled($_match[1]))
+					$url = preg_replace("#(&|/?)lang={$_match[1]}&?#", "$1", $url);
+			}
+			if(!$q_config['hide_default_language']||$lang!=$q_config['default_language']||$forceaddlang){
+				if (strpos($url,'?') === false)
 					$url .= '?';
-				} else {
+				else
 					$url .= '&';
-				}
 				$url .= "lang=".$lang;
 			}
 	}
@@ -730,7 +772,7 @@ function qtrans_convertURL($url='', $lang='', $forceadmin = false, $forceaddlang
 	// see if cookies are activated
 	if(!$q_config['cookie_enabled'] && !$q_config['url_info']['internal_referer'] && $urlinfo['path'] == '' && $lang == $q_config['default_language'] && $q_config['language'] != $q_config['default_language'] && $q_config['hide_default_language'] && !empty($match[2])) {
 		// :( now we have to make unpretty URLs
-		$url = preg_replace("#(&|\?)lang=".$match[2]."&?#i","$1",$url);
+		$url = preg_replace("#(&|\?)lang=[^&]+&?#i","$1",$url);
 		if(strpos($url,'?')===false) {
 			$url .= '?';
 		} else {
@@ -741,7 +783,7 @@ function qtrans_convertURL($url='', $lang='', $forceadmin = false, $forceaddlang
 	
 	// &amp; workaround
 	$complete = str_replace('&','&amp;',$home."/".$url);
-
+	
 	// remove trailing slash if there wasn't one to begin with
 	if($nottrailing && strpos($complete,'?')===false && strpos($complete,'#')===false && substr($complete,-1,1)=='/')
 		$complete = substr($complete,0,-1);

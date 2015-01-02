@@ -3,7 +3,7 @@
 Plugin Name: mqTranslate
 Plugin URI: http://wordpress.org/plugins/mqtranslate/
 Description: Adds userfriendly multilingual content support into Wordpress. mqTranslate is a fork of the well-known <a href="http://www.qianqin.de/mqtranslate/">qTranslate</a> plugin by <a href="http://www.qianqin.de/">Qian Qin</a>, extending the original software with collaborative and team-oriented features.
-Version: 2.9
+Version: 2.9.1.2
 Author: xhaleera
 Author URI: http://www.xhaleera.com
 Tags: multilingual, multi, language, admin, tinymce, mqTranslate, Polyglot, bilingual, widget, switcher, professional, human, translation, service
@@ -87,6 +87,29 @@ Tags: multilingual, multi, language, admin, tinymce, mqTranslate, Polyglot, bili
 	===============
 	All Supporters! Thanks for all the donations!
 */
+
+function mqtranslate_activation_check() {
+	$plugins = array(
+			'qTranslate' => 'qtranslate/qtranslate.php',
+			'zTranslate' => 'ztranslate/ztranslate.php',
+			'qTranslate-X' => 'qtranslate-x/qtranslate.php',
+			'qTranslate Plus' => 'qtranslate-xp/ppqtranslate.php'
+	);
+	
+	$msg = __("Sorry, but mqTranslate can not be activated. You have to deactivate %s first.", 'mqtranslate');
+	
+	foreach ($plugins as $k => $v) {
+		if ( is_plugin_active( $v ) ) {
+			deactivate_plugins(__FILE__); // Deactivate ourself
+			wp_die( sprintf($msg, $k) );
+		}
+	}
+}
+register_activation_hook(__FILE__, 'mqtranslate_activation_check');
+
+if (function_exists('qtrans_init'))
+	return;
+
 /* DEFAULT CONFIGURATION PART BEGINS HERE */
 
 /* There is no need to edit anything here! */
@@ -470,23 +493,28 @@ $q_config['allowed_custom_post_types'] = array();
 // Disable CSS in head
 $q_config['disable_header_css'] = 0;
 
-// Use secure cookie
+// Cookie settings
+$q_config['disable_client_cookies'] = 0;
 $q_config['use_secure_cookie'] = 0;
 
-// Load mqTranslate
-require_once(dirname(__FILE__)."/mqtranslate_javascript.php");
-require_once(dirname(__FILE__)."/mqtranslate_utils.php");
-require_once(dirname(__FILE__)."/mqtranslate_core.php");
-require_once(dirname(__FILE__)."/mqtranslate_wphacks.php");
-require_once(dirname(__FILE__)."/mqtranslate_widget.php");
-require_once(dirname(__FILE__)."/mqtranslate_configuration.php");
+// Optimisation settings
+$q_config['filter_all_options'] = 1;
 
-// load qTranslate Services if available
-if(file_exists(dirname(__FILE__)."/mqtranslate_services.php"))
-	require_once(dirname(__FILE__)."/mqtranslate_services.php");
-
-// set hooks at the end
-require_once(dirname(__FILE__)."/mqtranslate_hooks.php");
-
-require_once(dirname(__FILE__)."/mqtranslate_xhaleera_addons.php");
-?>
+//if (!function_exists('is_plugin_active') || is_plugin_active( 'mqtranslate/mqtranslate.php' )) {
+	// Load mqTranslate
+	require_once(dirname(__FILE__)."/mqtranslate_javascript.php");
+	require_once(dirname(__FILE__)."/mqtranslate_utils.php");
+	require_once(dirname(__FILE__)."/mqtranslate_core.php");
+	require_once(dirname(__FILE__)."/mqtranslate_wphacks.php");
+	require_once(dirname(__FILE__)."/mqtranslate_widget.php");
+	require_once(dirname(__FILE__)."/mqtranslate_configuration.php");
+	
+	// load qTranslate Services if available
+	if(file_exists(dirname(__FILE__)."/mqtranslate_services.php"))
+		require_once(dirname(__FILE__)."/mqtranslate_services.php");
+	
+	// set hooks at the end
+	require_once(dirname(__FILE__)."/mqtranslate_hooks.php");
+	
+	require_once(dirname(__FILE__)."/mqtranslate_xhaleera_addons.php");
+//}

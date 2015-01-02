@@ -3,7 +3,7 @@ Contributors: chsxf, michel.weimerskirch
 Tags: multilingual, language, admin, tinymce, bilingual, widget, switcher, i18n, l10n, multilanguage, professional, translation, service, human
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 2.9
+Stable tag: 2.9.1.2
 Donate Link: http://www.xhaleera.com/
 License: GPLv2
 
@@ -76,6 +76,21 @@ For Problems with mqTranslate-specific features, visits [our Support Page](http:
 3. qTranslate Services (Translation)
 
 == Changelog ==
+
+2.9.1.2:
+
+- [PARTIALLY REVERTED] Improved activation process in case qTranslate or another fork is already active (missing functions for plugin dependencies)
+
+2.9.1.1:
+
+- [REVERTED] Added client-side cookie to memorize language selection (this feature created a bug in qtranslate slug)
+
+2.9.1:
+
+- Improved activation process in case qTranslate or another fork is already active
+- Added client-side cookie to memorize language selection
+- Added optimization settings section (first setting allows disabling the filtering of all WordPress options)
+- Fixed potential bug with ACF additional wysiwyg fields (thanks to Fabien MOTTA from com1fruit.com)
 
 2.9:
 

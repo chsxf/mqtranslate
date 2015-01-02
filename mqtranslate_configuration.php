@@ -231,7 +231,9 @@ function mqtranslate_conf() {
 		qtrans_checkSetting('auto_update_mo',			true, QT_BOOLEAN);
 		qtrans_checkSetting('hide_default_language',	true, QT_BOOLEAN);
 		qtrans_checkSetting('disable_header_css',		true, QT_BOOLEAN);
+		qtrans_checkSetting('disable_client_cookies',	true, QT_BOOLEAN);
 		qtrans_checkSetting('use_secure_cookie', 		true, QT_BOOLEAN);
+		qtrans_checkSetting('filter_all_options', 		true, QT_BOOLEAN);
 		
 		if (isset($_POST['allowed_custom_post_types']))
 		{
@@ -547,8 +549,15 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e('Use Secure Cookie', 'mqtranslate'); ?></th>
+				<th scope="row"><?php _e('Cookie Settings', 'mqtranslate'); ?></th>
 				<td>
+					<label for="disable_client_cookies"><input type="checkbox" name="disable_client_cookies" id="disable_client_cookies" value="1"<?php echo empty($q_config['disable_client_cookies']) ? '' : ' checked="checked"' ?> /> <?php _e('Disable all client cookies', 'mqtranslate'); ?> </label>
+					<!-- 
+					<br />
+					<small><?php _e("If checked, language will not be saved for visitors between sessions.", 'mqtranslate') ?></small>
+					-->
+					<br /><br />
+					
 					<label for="use_secure_cookie"><input type="checkbox" name="use_secure_cookie" id="use_secure_cookie" value="1"<?php echo empty($q_config['use_secure_cookie']) ? '' : ' checked="checked"' ?> /> <?php _e('Make mqTranslate cookie available only through HTTPS connections', 'mqtranslate'); ?> </label>
 					<br />
 					<small><?php _e("Don't check this if you don't know what you're doing!", 'mqtranslate') ?></small>
@@ -580,6 +589,14 @@ function mqtranslate_conf() {
 					<label><input type="radio" name="use_strftime" value="<?php echo QT_STRFTIME; ?>" <?php echo ($q_config['use_strftime']==QT_STRFTIME)?' checked="checked"':''; ?>/> <?php _e('Use strftime instead of date.', 'mqtranslate'); ?></label><br />
 					<label><input type="radio" name="use_strftime" value="<?php echo QT_STRFTIME_OVERRIDE; ?>" <?php echo ($q_config['use_strftime']==QT_STRFTIME_OVERRIDE)?' checked="checked"':''; ?>/> <?php _e('Use strftime instead of date and replace formats with the predefined formats for each language.', 'mqtranslate'); ?></label><br />
 					<small><?php _e('Depending on the mode selected, additional customizations of the theme may be needed.', 'mqtranslate'); ?></small>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"><?php _e('Optimization Settings', 'mqtranslate'); ?></th>
+				<td>
+					<label for="filter_all_options"><input type="checkbox" name="filter_all_options" id="filter_all_options" value="1"<?php echo empty($q_config['filter_all_options']) ? '' : ' checked="checked"' ?> /> <?php _e('Filter all WordPress options', 'mqtranslate'); ?> </label>
+					<br />
+					<small><?php _e("If unchecked, some texts may not be translated anymore. However, disabling this feature may greatly improve loading times.", 'mqtranslate') ?></small>
 				</td>
 			</tr>
 			<tr valign="top">
