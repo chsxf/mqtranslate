@@ -77,6 +77,7 @@ Tags: multilingual, multi, language, admin, tinymce, mqTranslate, Polyglot, bili
 	ru by viaestvita
 	ro by ipuiu
 	sv by tobi
+	uk by Andrii Ryzhkov
 	
 	Sponsored Features
 	==================
@@ -179,6 +180,7 @@ $q_config['pre_domain']['pt'] = "pt";
 $q_config['pre_domain']['pl'] = "pl";
 $q_config['pre_domain']['gl'] = "gl";
 $q_config['pre_domain']['sr'] = 'sr';
+$q_config['pre_domain']['uk'] = 'uk';
 
 // Names for languages in the corresponding language, add more if needed
 $q_config['language_name']['de'] = "Deutsch";
@@ -199,6 +201,7 @@ $q_config['language_name']['pt'] = "Português";
 $q_config['language_name']['pl'] = "Polski";
 $q_config['language_name']['gl'] = "galego";
 $q_config['language_name']['sr'] = 'српски';
+$q_config['language_name']['uk'] = 'Українська';
 
 // Locales for languages
 // see locale -a for available locales
@@ -220,6 +223,7 @@ $q_config['locale']['pt'] = "pt_BR";
 $q_config['locale']['pl'] = "pl_PL";
 $q_config['locale']['gl'] = "gl_ES";
 $q_config['locale']['sr'] = 'sr_RS';
+$q_config['locale']['uk'] = 'uk';
 
 // Language not available messages
 // %LANG:<normal_seperator>:<last_seperator>% generates a list of languages seperated by <normal_seperator> except for the last one, where <last_seperator> will be used instead.
@@ -241,6 +245,7 @@ $q_config['not_available']['pt'] = "Desculpe-nos, mas este texto esta apenas dis
 $q_config['not_available']['pl'] = "Przepraszamy, ten wpis jest dostępny tylko w języku %LANG:, : i %.";
 $q_config['not_available']['gl'] = "Sentímolo moito, ista entrada atopase unicamente en %LANG;,: e %.";
 $q_config['not_available']['sr'] = "Zao nam je, ovaj ulaz je jedino moguc u %LANG:, : and %.";
+$q_config['not_available']['uk'] = "Вибачте, цей запис доступний лише на %LANG:, : та %.";
 
 // qTranslate Services
 $q_config['mqtranslate_services'] = false;
@@ -267,6 +272,7 @@ $q_config['date_format']['pt'] = '%d de %B de %Y';
 $q_config['date_format']['pl'] = '%d/%m/%y';
 $q_config['date_format']['gl'] = '%d de %B de %Y';
 $q_config['date_format']['sr'] = '%A, %d. %m. %Y';
+$q_config['date_format']['uk'] = '%d.%m.%Y';
 
 $q_config['time_format']['en'] = '%I:%M %p';
 $q_config['time_format']['de'] = '%H:%M';
@@ -286,6 +292,7 @@ $q_config['time_format']['pt'] = '%H:%M hrs.';
 $q_config['time_format']['pl'] = '%H:%M';
 $q_config['time_format']['gl'] = '%H:%M hrs.';
 $q_config['time_format']['sr'] = '%H.%M';
+$q_config['time_format']['uk'] = '%H.%M';
 
 // Flag images configuration
 // Look in /flags/ directory for a huge list of flags for usage
@@ -307,6 +314,7 @@ $q_config['flag']['pt'] = 'br.png';
 $q_config['flag']['gl'] = 'galego.png';
 $q_config['flag']['pl'] = 'pl.png';
 $q_config['flag']['sr'] = 'rs.png';
+$q_config['flag']['uk'] = 'ua.png';
 
 // Location of flags (needs trailing slash!)
 $q_config['flag_location'] = 'plugins/mqtranslate/flags/';
