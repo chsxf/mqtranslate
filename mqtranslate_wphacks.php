@@ -222,8 +222,12 @@ function qtrans_modifyExcerpt() {
 
 function qtrans_createTitlebarButton($parent, $language, $target, $id) {
 	global $q_config;
+	$current_url = WP_CONTENT_URL;
+	if(is_ssl()) {
+	$current_url = str_replace('http://', 'https://', $current_url);
+	}
 	$html = "
-		jQuery('#".$parent." .handlediv').after('<div class=\"mqtranslate_lang_div\" id=\"".$id."\"><img alt=\"".$language."\" title=\"".$q_config['language_name'][$language]."\" src=\"".WP_CONTENT_URL.'/'.$q_config['flag_location'].$q_config['flag'][$language]."\" /></div>');
+		jQuery('#".$parent." .handlediv').after('<div class=\"mqtranslate_lang_div\" id=\"".$id."\"><img alt=\"".$language."\" title=\"".$q_config['language_name'][$language]."\" src=\"".$current_url.'/'.$q_config['flag_location'].$q_config['flag'][$language]."\" /></div>');
 		jQuery('#".$id."').click(function() {qtrans_switch_postbox('".$parent."','".$target."','".$language."');});
 		";
 	return $html;
