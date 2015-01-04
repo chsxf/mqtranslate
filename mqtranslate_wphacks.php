@@ -19,8 +19,8 @@
 
 /* Modifications Hacks to get Wordpress work the way it should */
 
-// modifys term form to support multilingual content
-function qtrans_modifyTermForm($id, $name, $term) {
+// modifys term edit and new form to support multilingual content
+function qtrans_modifyTermForm($id, $name, $term, $action) {
 	global $q_config;
 	echo "<script type=\"text/javascript\">\n// <![CDATA[\r\n";
 	// ' workaround
@@ -30,12 +30,14 @@ function qtrans_modifyTermForm($id, $name, $term) {
 		$termname = "";
 	}
 	// create input fields for each language
-	foreach($q_config['enabled_languages'] as $language) {
-		if(isset($_GET['action']) && $_GET['action']=='edit') {
-			echo qtrans_insertTermInput2($id, $name, $termname, $language);
-		} else {
-			echo qtrans_insertTermInput($id, $name, $termname, $language);
-		}
+	if( $action === "edit" )
+	    foreach($q_config['enabled_languages'] as $language) {
+		   echo qtrans_insertTermInput($id, $name, $termname, $language,"edit");
+        }
+    elseif( $action === "new" ) {
+        foreach($q_config['enabled_languages'] as $language) {
+           echo qtrans_insertTermInput($id, $name, $termname, $language,"new");   
+        }
 	}
 	// hide real category text
 	echo "if (ins != null) ins.style.display='none';\n";
@@ -43,9 +45,13 @@ function qtrans_modifyTermForm($id, $name, $term) {
 }
 
 function qtrans_modifyTermFormFor($term) {
-	qtrans_modifyTermForm('name', __('Name'), $term);
-	qtrans_modifyTermForm('tag-name', __('Name'), $term);
+    if(isset($_GET['action']) && $_GET['action']=='edit') {
+	   qtrans_modifyTermForm('name', __('Name'), $term,"edit");
+    } else {
+	   qtrans_modifyTermForm('tag-name', __('Name'), $term,"new");
+    }
 }
+
 
 function qtrans_TinyMCE_init() {
 	if (user_can_richedit())
@@ -242,34 +248,49 @@ function qtrans_createTextArea($parent, $language, $target, $id) {
 	return $html;
 }
 
-function qtrans_insertTermInput($id,$name,$term,$language){
+function qtrans_insertTermInput($id,$name,$term,$language,$action){
 	global $q_config;
-	$html ="
-		var il = document.getElementsByTagName('input');
-		var d =  document.createElement('div');
-		var l = document.createTextNode('".$name." (".$q_config['language_name'][$language].")');
-		var ll = document.createElement('label');
-		var i = document.createElement('input');
-		var ins = null;
-		for(var j = 0; j < il.length; j++) {
-			if(il[j].id=='".$id."') {
-				ins = il[j];
-				break;
-			}
-		}
-		i.type = 'text';
-		i.id = i.name = ll.htmlFor ='qtrans_term_".$language."';
-	";
+	if( $action === "new") {
+	    $html ="
+        var il = document.getElementsByTagName('input');
+        var d =  document.createElement('div');
+        var l = document.createTextNode('".$name." (".$q_config['language_name'][$language].")');
+        var ll = document.createElement('label');
+        var i = document.createElement('input');
+        var ins = null;
+        for(var j = 0; j < il.length; j++) {
+            if(il[j].id=='".$id."') {
+                ins = il[j];
+                break;
+            }
+        }
+        i.type = 'text';
+        i.id = i.name = ll.htmlFor ='qtrans_term_".$language."';
+    ";
+	} elseif ( $action === "edit") {
+	    $html ="
+        var tr = document.createElement('tr');
+        var th = document.createElement('th');
+        var ll = document.createElement('label');
+        var l = document.createTextNode('".$name." (".$q_config['language_name'][$language].")');
+        var td = document.createElement('td');
+        var i = document.createElement('input');
+        var ins = document.getElementById('".$id."');
+        i.type = 'text';
+        i.id = i.name = ll.htmlFor ='qtrans_term_".$language."';
+    ";
+    }
 	if(isset($q_config['term_name'][$term][$language])) {
 	$html .="
-		i.value = '".addslashes(htmlspecialchars_decode($q_config['term_name'][$term][$language], ENT_NOQUOTES))."';
-		";
+	    i.value = '".addslashes(htmlspecialchars_decode($q_config['term_name'][$term][$language], ENT_QUOTES))."';";
+	    //43LC: applied ENT_QUOTES to both edit and new forms. 
 	} else {
 	$html .="
 		if (ins != null)
 			i.value = ins.value;
 		";
 	}
+	
 	if($language == $q_config['default_language']) {
 		$html .="
 			i.onchange = function() { 
@@ -286,69 +307,32 @@ function qtrans_insertTermInput($id,$name,$term,$language){
 			};
 			";
 	}
-	$html .="
-		if (ins != null)
-			ins = ins.parentNode;
-		d.className = 'form-field form-required';
-		ll.appendChild(l);
-		d.appendChild(ll);
-		d.appendChild(i);
-		if (ins != null)
-			ins.parentNode.insertBefore(d,ins);
-		";
+	if( $action === "new") {
+        $html .="
+        if (ins != null)
+            ins = ins.parentNode;
+        d.className = 'form-field form-required';
+        ll.appendChild(l);
+        d.appendChild(ll);
+        d.appendChild(i);
+        if (ins != null)
+            ins.parentNode.insertBefore(d,ins);
+        ";
+    } elseif ( $action === "edit") {
+        $html .="
+        ins = ins.parentNode.parentNode;
+        tr.className = 'form-field form-required';
+        th.scope = 'row';
+        th.vAlign = 'top';
+        ll.appendChild(l);
+        th.appendChild(ll);
+        tr.appendChild(th);
+        td.appendChild(i);
+        tr.appendChild(td);
+        ins.parentNode.insertBefore(tr,ins);
+        ";
+    }
 	return $html;	
-}
-
-function qtrans_insertTermInput2($id,$name,$term,$language){
-	global $q_config;
-	$html ="
-		var tr = document.createElement('tr');
-		var th = document.createElement('th');
-		var ll = document.createElement('label');
-		var l = document.createTextNode('".$name." (".$q_config['language_name'][$language].")');
-		var td = document.createElement('td');
-		var i = document.createElement('input');
-		var ins = document.getElementById('".$id."');
-		i.type = 'text';
-		i.id = i.name = ll.htmlFor ='qtrans_term_".$language."';
-	";
-	if(isset($q_config['term_name'][$term][$language])) {
-	$html .="
-		i.value = '".addslashes(htmlspecialchars_decode($q_config['term_name'][$term][$language], ENT_QUOTES))."';
-		";
-	} else {
-	$html .="
-		i.value = ins.value;
-		";
-	}
-	if($language == $q_config['default_language']) {
-		$html .="
-			i.onchange = function() { 
-				var il = document.getElementsByTagName('input');
-				var ins = null;
-				for(var j = 0; j < il.length; j++) {
-					if(il[j].id=='".$id."') {
-						ins = il[j];
-						break;
-					}
-				}
-				ins.value = document.getElementById('qtrans_term_".$language."').value;
-			};
-			";
-	}
-	$html .="
-		ins = ins.parentNode.parentNode;
-		tr.className = 'form-field form-required';
-		th.scope = 'row';
-		th.vAlign = 'top';
-		ll.appendChild(l);
-		th.appendChild(ll);
-		tr.appendChild(th);
-		td.appendChild(i);
-		tr.appendChild(td);
-		ins.parentNode.insertBefore(tr,ins);
-		";
-	return $html;
 }
 
 function qtrans_insertTitleInput($language){
