@@ -32,7 +32,7 @@ class mqTranslateWidget extends WP_Widget {
 		$title = empty($instance['title']) ? __('Language', 'mqtranslate') : apply_filters('widget_title', $instance['title']);
 		$hide_title = empty($instance['hide-title']) ? false : 'on';
 		$type = $instance['type'];
-		if($type!='text'&&$type!='image'&&$type!='both'&&$type!='dropdown') $type='text';
+		if($type!='text'&&$type!='image'&&$type!='both'&&$type!='dropdown'&&$type!='lang-code') $type='text';
 
 		if($hide_title!='on') { echo $before_title . $title . $after_title; };
 		qtrans_generateLanguageSelectCode($type, $this->id);
@@ -61,6 +61,7 @@ class mqTranslateWidget extends WP_Widget {
 		<p><label for="<?php echo $this->get_field_id('type'); ?>2"><input type="radio" name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>2" value="image"<?php echo ($type=='image')?' checked="checked"':'' ?>/> <?php _e('Image only', 'mqtranslate'); ?></label></p>
 		<p><label for="<?php echo $this->get_field_id('type'); ?>3"><input type="radio" name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>3" value="both"<?php echo ($type=='both')?' checked="checked"':'' ?>/> <?php _e('Text and Image', 'mqtranslate'); ?></label></p>
 		<p><label for="<?php echo $this->get_field_id('type'); ?>4"><input type="radio" name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>4" value="dropdown"<?php echo ($type=='dropdown')?' checked="checked"':'' ?>/> <?php _e('Dropdown Box', 'mqtranslate'); ?></label></p>
+		<p><label for="<?php echo $this->get_field_id('type'); ?>5"><input type="radio" name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>5" value="lang-code"<?php echo ($type=='lang-code')?' checked="checked"':'' ?>/> <?php _e('Language code', 'mqtranslate'); ?></label></p>
 <?php
 	}
 }
