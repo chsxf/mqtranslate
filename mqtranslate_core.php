@@ -845,7 +845,7 @@ function qtrans_convertURL($url='', $lang='', $forceadmin = false, $showDefaultL
 }
 
 // splits text with language tags into array
-function qtrans_split($text, $quicktags = true, array &$languageMap = NULL) {
+function qtrans_split($text, $quicktags = true, array &$languageMap = NULL, $respectDefault=false) {
 	global $q_config;
 	
 	//init vars
@@ -888,9 +888,13 @@ function qtrans_split($text, $quicktags = true, array &$languageMap = NULL) {
 		
 		// correctly categorize text block
 		if ($current_language == "") {
-			// general block, add to all languages
-			foreach ($q_config['enabled_languages'] as $language)
-				$result[$language] .= $block;
+            // general block
+            if ($respectDefault) { // Only add to default language
+                $result[$q_config["default_language"]] .= $block;
+            } else { // Add to all languages
+                foreach ($q_config['enabled_languages'] as $language)
+                    $result[$language] .= $block;
+            }
 		} elseif($current_language != "invalid") {
 			// specific block, only add to active language
 			$result[$current_language] .= $block;
