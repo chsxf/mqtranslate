@@ -114,8 +114,8 @@ function qtrans_languageColumn($column) {
 		}
 		$available_languages_names = join(", ", $available_languages_name);
 		
-		echo apply_filters('mqtranslate_available_languages_names',$available_languages_names);
-		do_action('mqtranslate_languageColumn', $available_languages, $missing_languages);
+		echo apply_filters('qtranslate_available_languages_names',$available_languages_names);
+		do_action('qtranslate_languageColumn', $available_languages, $missing_languages);
 	}
 	return $column;
 }

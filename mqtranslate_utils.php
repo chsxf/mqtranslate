@@ -19,7 +19,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
-/* mqTranslate Utilitys */
+/* mqTranslate Utilities */
 
 function qtrans_parseURL($url) {
 	$r  = '!(?:(\w+)://)?(?:(\w+)\:(\w+)@)?([^/:]+)?';

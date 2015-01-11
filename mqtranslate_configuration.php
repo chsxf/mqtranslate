@@ -26,7 +26,7 @@ function qtrans_update_config()
 {
 	//if(!defined('WP_ADMIN')) return;
 	if(!current_user_can('manage_options')) return;
-	if(isset($_POST['mqtranslate_reset']) && isset($_POST['mqtranslate_reset2'])) {
+	if(isset($_POST['qtranslate_reset']) && isset($_POST['qtranslate_reset2'])) {
 		// reset all settings
 		delete_option('mqtranslate_language_names');
 		delete_option('mqtranslate_enabled_languages');
@@ -53,7 +53,7 @@ function qtrans_update_config()
 		delete_option('mqtranslate_disable_client_cookies');
 		delete_option('mqtranslate_use_secure_cookie');
 		delete_option('mqtranslate_filter_all_options');
-		if(isset($_POST['mqtranslate_reset3'])) {
+		if(isset($_POST['qtranslate_reset3'])) {
 			delete_option('mqtranslate_term_name');
 			delete_option('mqtranslate_widget_css');
 		}
@@ -349,7 +349,7 @@ function qtrans_useAdminTermLib($obj) {
 }
 
 function qtrans_admin_section_start($section, $nm) {
-	echo '<h3>'.$section.'<span id="qtrans-show-'.$nm.'"> ( <a name="qtranslate_'.$nm.'_settings" href="#" onclick="return qtrans_toggleShowHide(\'qtranslate-admin-'.$nm.'\');">'.__('Show', 'qtranslate').' / '.__('Hide', 'qtranslate').'</a> )</span></h3>';
+	echo '<h3>'.$section.'<span id="qtrans-show-'.$nm.'"> ( <a name="qtranslate_'.$nm.'_settings" href="#" onclick="return qtrans_toggleShowHide(\'qtranslate-admin-'.$nm.'\');">'.__('Show', 'mqtranslate').' / '.__('Hide', 'mqtranslate').'</a> )</span></h3>';
 }
 
 function qtrans_admin_section_end($nm) {
@@ -384,10 +384,10 @@ function qtrans_conf() {
 	$language_default = '';
 	$altered_table = false;
 	
-	$message = apply_filters('mqtranslate_configuration_pre','');
+	$message = apply_filters('qtranslate_configuration_pre','');
 	
 	// check for action
-	if(isset($_POST['mqtranslate_reset']) && isset($_POST['mqtranslate_reset2'])) {
+	if(isset($_POST['qtranslate_reset']) && isset($_POST['qtranslate_reset2'])) {
 		$message = __('mqTranslate has been reset.', 'mqtranslate');
 	} elseif(isset($_POST['default_language'])) {
 		// save settings
@@ -607,7 +607,7 @@ function qtrans_conf() {
 	}
 	// don't accidentally delete/enable/disable twice
 	$clean_uri = preg_replace("/&(delete|enable|disable|convert|markdefault|moveup|movedown)=[^&#]*/i","",$_SERVER['REQUEST_URI']);
-	$clean_uri = apply_filters('mqtranslate_clean_uri', $clean_uri);
+	$clean_uri = apply_filters('qtranslate_clean_uri', $clean_uri);
 
 // Generate XHTML
 
@@ -622,7 +622,7 @@ function qtrans_conf() {
 <?php if(isset($_GET['edit'])) { ?>
 <div class="wrap">
 <h2><?php _e('Edit Language', 'mqtranslate'); ?></h2>
-<form action="" method="post" id="mqtranslate-edit-language">
+<form action="" method="post" id="qtranslate-edit-language">
 <?php qtrans_language_form($language_code, $language_code, $language_name, $language_locale, $language_date_format, $language_time_format, $language_flag, $language_na_message, $language_default, $original_lang); ?>
 <p class="submit"><input type="submit" name="submit" value="<?php _e('Save Changes &raquo;', 'mqtranslate'); ?>" /></p>
 </form>
@@ -712,9 +712,9 @@ function qtrans_conf() {
 			<tr valign="top">
 				<th scope="row"><?php _e('Ignore Links', 'mqtranslate');?></th>
 				<td>
-					<input type="text" name="ignore_file_types" id="ignore_file_types" value="<?php echo $q_config['ignore_file_types']; ?>" style="width:100%"/>
+					<input type="text" name="ignore_file_types" id="ignore_file_types" value="<?php echo implode(',',array_diff($q_config['ignore_file_types'],explode(',',QT_IGNORE_FILE_TYPES))); ?>" style="width:100%"/>
 					<br/>
-					<small><?php _e('Don\'t convert Links to files of the given file types. (Default: gif,jpg,jpeg,png,pdf,swf,tif,rar,zip,7z,mpg,divx,mpeg,avi,css,js)', 'mqtranslate'); ?></small>
+					<small><?php printf(__('Don\'t convert links to files of the given file types. (Always included: %s)', 'mqtranslate'),implode(', ',explode(',', QT_IGNORE_FILE_TYPES))); ?></small>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -777,37 +777,37 @@ function qtrans_conf() {
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e('Custom Fields', 'qtranslate');?></th>
+				<th scope="row"><?php _e('Custom Fields', 'mqtranslate');?></th>
 				<td>
-					<?php printf(__('Enter "id" or "class" attribute of text fields from your theme, which you wish to translate. This applies to post, page and media editors (/wp-admin/post*). To lookup "id" or "class", right-click on the field in the post or the page editor and choose "Inspect Element". Look for an attribute of the field named "id" or "class". Enter it below, as many as you need, space- or comma-separated. After saving configuration, these fields will start responding to the language switching buttons, and you can enter different text for each language. The input fields of type %s will be parsed using %s syntax, while single line text fields will use %s syntax. If you need to override this behaviour, prepend prefix %s or %s to the name of the field to specify which syntax to use. For more information, read %sFAQ%s.', 'qtranslate'),'\'textarea\'',esc_html('<!--:-->'),'[:]','\'<\'','\'[\'','<a href="https://wordpress.org/plugins/qtranslate-x/faq/">','</a>'); ?>
+					<?php printf(__('Enter "id" or "class" attribute of text fields from your theme, which you wish to translate. This applies to post, page and media editors (/wp-admin/post*). To lookup "id" or "class", right-click on the field in the post or the page editor and choose "Inspect Element". Look for an attribute of the field named "id" or "class". Enter it below, as many as you need, space- or comma-separated. After saving configuration, these fields will start responding to the language switching buttons, and you can enter different text for each language. The input fields of type %s will be parsed using %s syntax, while single line text fields will use %s syntax. If you need to override this behaviour, prepend prefix %s or %s to the name of the field to specify which syntax to use. For more information, read %sFAQ%s.', 'mqtranslate'),'\'textarea\'',esc_html('<!--:-->'),'[:]','\'<\'','\'[\'','<a href="https://wordpress.org/plugins/qtranslate-x/faq/">','</a>'); ?>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row" style="text-align: right">id:</th>
 				<td>
 					<input type="text" name="custom_fields" id="qtrans_custom_fields" value="<?php echo implode(' ',$q_config['custom_fields']); ?>" style="width:100%"><br />
-					<small><?php _e('The value of "id" attribute is normally unique within one page, otherwise the first field found, having an id specified, is picked up.', 'qtranslate'); ?></small>
+					<small><?php _e('The value of "id" attribute is normally unique within one page, otherwise the first field found, having an id specified, is picked up.', 'mqtranslate'); ?></small>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row" style="text-align: right">class:</th>
 				<td>
 					<input type="text" name="custom_field_classes" id="qtrans_custom_field_classes" value="<?php echo implode(' ',$q_config['custom_field_classes']); ?>" style="width:100%"><br>
-					<small><?php printf(__('All the fields of specified classes will respond to Language Switching Buttons. Be careful not to include a class, which would affect language-neutral fields. If you cannot uniquely identify a field needed neither by %s, nor by %s attribute, report the issue on %sSupport Forum%s', 'qtranslate'),'"id"', '"class"', '<a href="https://wordpress.org/support/plugin/qtranslate-x">','</a>'); ?></small>
+					<small><?php printf(__('All the fields of specified classes will respond to Language Switching Buttons. Be careful not to include a class, which would affect language-neutral fields. If you cannot uniquely identify a field needed neither by %s, nor by %s attribute, report the issue on %sSupport Forum%s', 'mqtranslate'),'"id"', '"class"', '<a href="https://wordpress.org/support/plugin/qtranslate-x">','</a>'); ?></small>
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php echo __('Custom Filters', 'qtranslate');?></th>
+				<th scope="row"><?php echo __('Custom Filters', 'mqtranslate');?></th>
 				<td>
 					<input type="text" name="text_field_filters" id="qtrans_text_field_filters" value="<?php echo implode(' ',$q_config['text_field_filters']); ?>" style="width:100%"><br>
-					<small><?php printf(__('Names of filters (which are enabled on theme or other plugins via %s function) to add translation to. For more information, read %sFAQ%s.', 'qtranslate'),'apply_filters()','<a href="https://wordpress.org/plugins/qtranslate-x/faq/">','</a>'); ?></small>
+					<small><?php printf(__('Names of filters (which are enabled on theme or other plugins via %s function) to add translation to. For more information, read %sFAQ%s.', 'mqtranslate'),'apply_filters()','<a href="https://wordpress.org/plugins/qtranslate-x/faq/">','</a>'); ?></small>
 				</td>
 			</tr>
 			<tr>
 				<th scope="row"><?php _e('Debugging Information', 'mqtranslate');?></th>
 				<td>
-					<p><?php printf(__('If you encounter any problems and you are unable to solve them yourself, you can visit the <a href="%s">Support Forum</a>. Posting the following Content will help other detect any misconfigurations.', 'mqtranslate'), 'http://www.qianqin.de/mqtranslate/forum/'); ?></p>
-					<textarea readonly="readonly" id="mqtranslate_debug"><?php
+					<p><?php printf(__('If you encounter any problems and you are unable to solve them yourself, you can visit the <a href="%s">Support Forum</a>. Posting the following Content will help other detect any misconfigurations.', 'mqtranslate'), 'http://www.qianqin.de/qtranslate/forum/'); ?></p>
+					<textarea readonly="readonly" id="qtranslate_debug"><?php
 						$q_config_copy = $q_config;
 						// remove information to keep data anonymous and other not needed things
 						unset($q_config_copy['url_info']);
@@ -821,7 +821,7 @@ function qtrans_conf() {
 			</tr>
 		</table>
 		<?php qtrans_admin_section_end('advanced'); ?>
-<?php do_action('mqtranslate_configuration', $clean_uri); ?>
+<?php do_action('qtranslate_configuration', $clean_uri); ?>
 		<p class="submit">
 			<input type="submit" name="submit" class="button-primary" value="<?php _e('Save Changes', 'mqtranslate') ?>" />
 		</p>

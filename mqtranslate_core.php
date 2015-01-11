@@ -41,7 +41,7 @@ function qtrans_init() {
 		$q_config['cookie_enabled'] = isset($_COOKIE[QT_COOKIE_NAME_FRONT]);
 	
 	$q_config['url_info'] = qtrans_detect_language($_SERVER['REQUEST_URI'], $_SERVER['HTTP_HOST'], isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
-	$q_config['language'] = apply_filters('mqtranslate_language', $q_config['url_info']['language']);
+	$q_config['language'] = apply_filters('qtranslate_language', $q_config['url_info']['language']);
 	
 	// Filter all options for language tags
 	if(!defined('WP_ADMIN') && !empty($q_config['filter_all_options'])) {
@@ -53,7 +53,7 @@ function qtrans_init() {
 	
 	// Disable CSS in head if applying
 	if ($q_config['disable_header_css'])
-		add_filter('mqtranslate_header_css', create_function('$a', "return '';"));
+		add_filter('qtranslate_header_css', create_function('$a', "return '';"));
 	
 	// load plugin translations
 	load_plugin_textdomain('mqtranslate', false, dirname(plugin_basename( __FILE__ )).'/lang');
@@ -345,12 +345,7 @@ function qtrans_loadConfig() {
 	$use_strftime = get_option('mqtranslate_use_strftime');
 	$ignore_file_types = get_option('mqtranslate_ignore_file_types');
 	$url_mode = get_option('mqtranslate_url_mode');
-	$detect_browser_language = get_option('mqtranslate_detect_browser_language');
-	$hide_untranslated = get_option('mqtranslate_hide_untranslated');
-	$show_displayed_language_prefix = get_option('mqtranslate_show_displayed_language_prefix');
-	$auto_update_mo = get_option('mqtranslate_auto_update_mo');
 	$term_name = get_option('mqtranslate_term_name');
-	$hide_default_language = get_option('mqtranslate_hide_default_language');
 	$allowed_custom_post_types = get_option('mqtranslate_allowed_custom_post_types');
 	$disable_header_css = get_option('mqtranslate_disable_header_css');
 	$disable_client_cookies = get_option('mqtranslate_disable_client_cookies');
@@ -426,11 +421,6 @@ function qtrans_loadConfig() {
 	$q_config['ignore_file_types'] = $val;
 	
 	$q_config['url_mode'] = $url_mode;
-	$q_config['detect_browser_language'] = $detect_browser_language;
-	$q_config['hide_untranslated'] = $hide_untranslated;
-	$q_config['auto_update_mo'] = $auto_update_mo;
-	$q_config['hide_default_language'] = $hide_default_language;
-	$q_config['show_displayed_language_prefix'] = $show_displayed_language_prefix;
 	$q_config['term_name'] = $term_name;
 	$q_config['allowed_custom_post_types'] = $allowed_custom_post_types;
 	$q_config['disable_header_css'] = $disable_header_css;
@@ -441,7 +431,7 @@ function qtrans_loadConfig() {
 	foreach ($q_config['text_field_filters'] as $nm)
 		add_filter($nm, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage', 0);
 	
-	do_action('mqtranslate_loadConfig');
+	do_action('qtranslate_loadConfig');
 }
 
 function qtrans_update_option($nm) {
@@ -471,7 +461,7 @@ function qtrans_saveConfig() {
 	update_option('mqtranslate_na_messages', $q_config['not_available']);
 	update_option('mqtranslate_date_formats', $q_config['date_format']);
 	update_option('mqtranslate_time_formats', $q_config['time_format']);
-	update_option('mqtranslate_ignore_file_types', $q_config['ignore_file_types']);
+	update_option('mqtranslate_ignore_file_types', implode(',', $q_config['ignore_file_types']));
 	update_option('mqtranslate_url_mode', $q_config['url_mode']);
 	update_option('mqtranslate_term_name', $q_config['term_name']);
 	update_option('mqtranslate_use_strftime', $q_config['use_strftime']);
@@ -494,7 +484,7 @@ function qtrans_saveConfig() {
 	qtrans_update_option_bool('use_secure_cookie');
 	qtrans_update_option_bool('filter_all_options');
 		
-	do_action('mqtranslate_saveConfig');
+	do_action('qtranslate_saveConfig');
 }
 
 function qtrans_updateGettextDatabaseFile($lcr,$mo){

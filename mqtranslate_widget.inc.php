@@ -62,7 +62,7 @@ class mqTranslateWidget extends WP_Widget {
 		if (empty($instance['hide-title'])) {
 			$title = $instance['title'];
 			if (empty($title))
-				$title=__('Language', 'qtranslate');
+				$title=__('Language', 'mqtranslate');
 			$title = apply_filters('qtrans_widget_title',$title.':');
 			echo $before_title . $title . $after_title;
 		}
@@ -99,7 +99,7 @@ class mqTranslateWidget extends WP_Widget {
 		<p><label for="<?php echo $this->get_field_id('type'); ?>2"><input type="radio" name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>2" value="image"<?php echo ($type=='image')?' checked="checked"':'' ?>/> <?php _e('Image only', 'mqtranslate'); ?></label></p>
 		<p><label for="<?php echo $this->get_field_id('type'); ?>3"><input type="radio" name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>3" value="both"<?php echo ($type=='both')?' checked="checked"':'' ?>/> <?php _e('Text and Image', 'mqtranslate'); ?></label></p>
 		<p><label for="<?php echo $this->get_field_id('type'); ?>4"><input type="radio" name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>4" value="dropdown"<?php echo ($type=='dropdown')?' checked="checked"':'' ?>/> <?php _e('Dropdown Box', 'mqtranslate'); ?></label></p>
-		<p><label for="<?php echo $this->get_field_id('widget-css'); ?>"><?php echo __('Widget CSS:', 'mqtranslate'); ?></label><br><textarea class="widefat" rows="6" name="<?php echo $this->get_field_name('widget-css'); ?>" id="<?php echo $this->get_field_id('widget-css'); ?>" /><?php echo esc_attr($widget_css); ?></textarea><br><small><?php _e('To reset to default, clear the text.','qtranslate'); ?></small></p>
+		<p><label for="<?php echo $this->get_field_id('widget-css'); ?>"><?php echo __('Widget CSS:', 'mqtranslate'); ?></label><br><textarea class="widefat" rows="6" name="<?php echo $this->get_field_name('widget-css'); ?>" id="<?php echo $this->get_field_id('widget-css'); ?>" /><?php echo esc_attr($widget_css); ?></textarea><br><small><?php _e('To reset to default, clear the text.','mqtranslate'); ?></small></p>
 <?php
 	}
 }

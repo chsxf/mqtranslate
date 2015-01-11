@@ -1,36 +1,4 @@
 <?php
-function mqtrans_import_settings_from_qtrans() {
-	global $wpdb;
-	
-	$option_names = $wpdb->get_col("SELECT `option_name` FROM {$wpdb->options} WHERE `option_name` LIKE 'qtranslate\_%'");
-	foreach ($option_names as $name)
-	{		
-		$opt = get_option($name);
-		
-		$nn = "m{$name}";
-		if ( false !== get_option($nn) )
-			update_option($nn, $opt);
-		else
-			add_option($nn, $opt);
-	}
-}
-
-function mqtrans_export_setting_to_qtrans($updateOnly = false) {
-	global $wpdb;
-	
-	$option_names = $wpdb->get_col("SELECT `option_name` FROM {$wpdb->options} WHERE `option_name` LIKE 'mqtranslate\_%'");
-	foreach ($option_names as $name)
-	{
-		$opt = get_option($name);
-	
-		$nn = substr($name, 1);
-		if ( false !== get_option($nn) )
-			update_option($nn, $opt);
-		else if (!$updateOnly)
-			add_option($nn, $opt);
-	}
-}
-
 function mqtrans_currentUserCanEdit($lang) {
 	global $q_config;
 	
@@ -181,7 +149,7 @@ function mqtrans_userProfileUpdate($user_id) {
 }
 
 function qtrans_isEmptyContent($value) {
-	$str = trim(strip_tags($value, '<img>,<embed>,<object>'));
+	$str = trim(strip_tags($value, '<img>,<embed>,<object>,<iframe>'));
 	return empty($str);
 }
 
@@ -296,24 +264,18 @@ function mqtrans_load_team_options() {
 }
 
 function mqtrans_save_team_options() {
-	qtrans_checkSetting('ul_lang_protection', true, QT_BOOLEAN);
-}
-
-function mqtrans_editorExpand() {
-	return false;
+	qtrans_updateSetting('ul_lang_protection', QT_BOOLEAN);
 }
 
 if (!defined('WP_ADMIN'))
 	add_filter('get_post_metadata', 'mqtrans_filterPostMetaData', 10, 4);
-else
-	add_filter('wp_editor_expand', 'mqtrans_editorExpand');
 
 add_action('edit_user_profile', 			'mqtrans_userProfile');
 add_action('show_user_profile',				'mqtrans_userProfile');
 add_action('profile_update',				'mqtrans_userProfileUpdate');
 add_action('post_updated',					'mqtrans_postUpdated', 10, 3);
 
-add_action('mqtranslate_configuration', 	'mqtrans_team_options', 9);
-add_action('mqtranslate_loadConfig',		'mqtrans_load_team_options');
-add_action('mqtranslate_saveConfig',		'mqtrans_save_team_options');
+add_action('qtranslate_configuration', 		'mqtrans_team_options', 9);
+add_action('qtranslate_loadConfig',			'mqtrans_load_team_options');
+add_action('qtranslate_saveConfig',			'mqtrans_save_team_options');
 ?>

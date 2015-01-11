@@ -24,14 +24,15 @@ qtrans_split = function(text)
 	if(blocks.length>1){//there are matches
 		lang_regex = /<!--:([a-z]{2})-->/gi;
 		for(var i = 0;i<blocks.length;++i){
+			lang_regex.lastIndex=0;
 			var b=blocks[i];
 			//c('blocks['+i+']='+b);
 			if(!b.length) continue;
-			matches = lang_regex.exec(b); lang_regex.lastIndex=0;
+			matches = lang_regex.exec(b);
 			//c('matches='+matches);
 			if(matches==null) continue;
 			lang = matches[1];
-			result[lang] += b.substring(10);
+			result[lang] += b.substring(lang_regex.lastIndex);
 			//c('text='+result[lang]);
 		}
 	}else{
@@ -289,7 +290,7 @@ var qTranslate=function()
 		var nameField=ge(prefix+'name');
 		var form=ge(formId);
 		if(!form || !nameField){
-			//alert('qTranslate-X cannot hook into the tag editor.\nPlease, report this incident to the developers.');
+			//alert('mqTranslate cannot hook into the tag editor.\nPlease, report this incident to the developers.');
 			return false;
 		}
 
@@ -599,7 +600,7 @@ var qTranslate=function()
 		// Add listeners for fields change
 		window.addEventListener('load', function(){
 				if (!window.tinyMCE){
-					//alert('qTranslate-X error: !window.tinyMCE. Please report this incident to the developers.');
+					//alert('mqTranslate error: !window.tinyMCE. Please report this incident to the developers.');
 					return;
 				}
 				for(var i=0; i<tinyMCE.editors.length; ++i){
@@ -680,7 +681,7 @@ function LanguageSwitch(target,initial_language)
 	{
 		var tabSwitch=this;
 		if (!tabSwitch.lang){
-			alert('qTranslate-X: This should not have happened: Please, report this incident to the developers: !tabSwitch.lang');
+			alert('mqTranslate: This should not have happened: Please, report this incident to the developers: !tabSwitch.lang');
 			return;
 		}
 		if ( activeLanguage === tabSwitch.lang ){
