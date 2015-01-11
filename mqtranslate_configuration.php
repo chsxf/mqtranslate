@@ -63,7 +63,9 @@ add_action('qtrans_init_begin','qtrans_update_config',10);
 
 function qtrans_add_admin_js ()
 {
-	wp_enqueue_script( 'qtranslate-script', plugins_url( '/qtranslate.js', __FILE__ ) );
+	global $q_config;
+	
+	wp_enqueue_script( 'qtranslate-script', plugins_url( '/mqtranslate.js', __FILE__ ) );
 	
 	wp_dequeue_script( 'autosave' );
 	wp_deregister_script( 'autosave' ); //autosave script saves the active language only and messes it up later in a hard way
@@ -347,7 +349,7 @@ function qtrans_useAdminTermLib($obj) {
 }
 
 function qtrans_admin_section_start($section, $nm) {
-	echo '<h3>'.$section.'<span id="qtrans-show-'.$nm.'"> ( <a name="qtranslate_'.$nm.'_settings" href="#" onclick="return toggleShowHide(\'qtranslate-admin-'.$nm.'\');">'.__('Show', 'qtranslate').' / '.__('Hide', 'qtranslate').'</a> )</span>';
+	echo '<h3>'.$section.'<span id="qtrans-show-'.$nm.'"> ( <a name="qtranslate_'.$nm.'_settings" href="#" onclick="return qtrans_toggleShowHide(\'qtranslate-admin-'.$nm.'\');">'.__('Show', 'qtranslate').' / '.__('Hide', 'qtranslate').'</a> )</span></h3>';
 }
 
 function qtrans_admin_section_end($nm) {
@@ -825,8 +827,6 @@ function qtrans_conf() {
 		</p>
 	</form>
 
-</div>
-<div class="wrap">
 
 <h2><?php _e('Languages', 'mqtranslate') ?></h2>
 <div id="col-container">
@@ -968,7 +968,7 @@ add_filter('get_term', 'qtrans_useAdminTermLib',0);
 add_filter('get_terms', 'qtrans_useAdminTermLib',0);
 
 add_action('admin_head', 'qtrans_add_css');
-add_action('admin_menu', 'qtrans_admin_head');
+add_action('admin_head', 'qtrans_admin_head');
 add_action('admin_head-nav-menus.php', 'qtrans_add_nav_menu_metabox');
 add_action('admin_menu', 'qtrans_adminMenu');
 add_action('admin_bar_menu', 'qtrans_add_language_menu', 999);

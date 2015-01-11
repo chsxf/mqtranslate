@@ -228,7 +228,7 @@ var qTranslate=function()
 	var activeLanguage=qtrans_get_cookie('wp_qtrans_edit_language');
 	if(!activeLanguage)
 		activeLanguage=qTranslateConfig.language;
-
+	
 	var contentHooks={};
 	function updateFusedValueH(id,value)
 	{

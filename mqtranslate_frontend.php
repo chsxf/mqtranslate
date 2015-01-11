@@ -28,7 +28,7 @@ function qtrans_get_nav_menu_items( $items, $menu, $args )
 {
 	global $q_config;
 	$language=$q_config['language'];
-	$flag_location=trailingslashit($q_config['WP_CONTENT_URL']).$q_config['flag_location'];
+	$flag_location=trailingslashit(WP_CONTENT_URL).$q_config['flag_location'];
 	$itemid=0;
 	$menu_order=0;
   	$qtransmenu=null;

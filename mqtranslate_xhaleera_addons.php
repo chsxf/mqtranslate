@@ -240,17 +240,6 @@ function mqtrans_postUpdated($post_ID, $after, $before) {
 	$wpdb->update($wpdb->posts, $data, $where);
 }
 
-function mqtrans_filterHomeURL($url, $path, $orig_scheme, $blog_id) {
-	if (defined('QTRANS_INIT'))
-	{
-		global $q_config;
-		$expDefaultLanguage = !empty($q_config['url_info']['explicit_default_language']);
-		return ((empty($path) && $q_config['url_mode'] == QT_URL_PATH) || $path == '/' || $expDefaultLanguage) ? qtrans_convertURL($url, '', false, $expDefaultLanguage) : $url;
-	}
-	else
-		return $url;
-}
-
 function mqtrans_filterPostMetaData($original_value, $object_id, $meta_key, $single) {
 	if ($meta_key == '_menu_item_url')
 	{
@@ -282,8 +271,8 @@ function mqtrans_filterPostMetaData($original_value, $object_id, $meta_key, $sin
 function mqtrans_team_options() {
 	global $q_config;
 ?>
-	<h3><?php _e('mqTranslate Team Settings', 'mqtranslate') ?><span id="mqtranslate-show-team"> (<a name="mqtranslate_team_settings" href="#" onclick="return showTeamSettings();"><?php _e('Show / Hide', 'mqtranslate'); ?></a>)</span></h3>
-	<table class="form-table" id="mqtranslate-team" style="display: none">
+	<?php qtrans_admin_section_start(__('mqTranslate Team Settings', 'mqtranslate'), 'team'); ?>
+	<table class="form-table" id="qtranslate-admin-team" style="display: none">
 			<tr>
 				<th scope="row"><?php _e('User-level Language Protection', 'mqtranslate') ?></th>
 				<td>
@@ -293,19 +282,8 @@ function mqtrans_team_options() {
 				</td>
 			</tr>
 	</table>
-	<script type="text/javascript">
-	// <![CDATA[
-		function showTeamSettings() {
-			var el = document.getElementById('mqtranslate-team');
-			if (el.style.display == 'block')
-				el.style.display = 'none';
-			else
-				el.style.display='block';
-			return false;
-		}
-	// ]]>
-	</script>
 <?php
+	qtrans_admin_section_end('team');
 }
 
 function mqtrans_load_team_options() {
@@ -326,10 +304,7 @@ function mqtrans_editorExpand() {
 }
 
 if (!defined('WP_ADMIN'))
-{
-	add_filter('home_url', 'mqtrans_filterHomeURL', 10, 4);
 	add_filter('get_post_metadata', 'mqtrans_filterPostMetaData', 10, 4);
-}
 else
 	add_filter('wp_editor_expand', 'mqtrans_editorExpand');
 
