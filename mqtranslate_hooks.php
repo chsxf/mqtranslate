@@ -17,32 +17,10 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA02110-1301USA
 */
 
-/* mqTranslate Hooks */
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
 
-function qtrans_header(){
-	global $q_config;
-	echo "\n<meta http-equiv=\"Content-Language\" content=\"".str_replace('_','-',$q_config['locale'][$q_config['language']])."\" />\n";
-	$css = "<style type=\"text/css\" media=\"screen\">\n";
-	$css .=".qtrans_flag span { display:none }\n";
-	$css .=".qtrans_flag { height:12px; width:18px; display:block }\n";
-	$css .=".qtrans_flag_and_text { padding-left:20px }\n";
-	$baseurl = WP_CONTENT_URL;
-	if(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == '1' || $_SERVER['HTTPS'] == 'on')) {
-		$baseurl = preg_replace('#^http://#','https://', $baseurl);
-	}
-	foreach($q_config['enabled_languages'] as $language) {
-		$css .=".qtrans_flag_".$language." { background:url(".$baseurl.'/'.$q_config['flag_location'].$q_config['flag'][$language].") no-repeat }\n";
-	}
-	$css .="</style>\n";
-	
-	// skip the rest if 404
-	if(is_404()) return;
-	// set links to translations of current page
-	foreach($q_config['enabled_languages'] as $language) {
-		if($language != qtrans_getLanguage())
-			echo '<link hreflang="'.$language.'" href="'.qtrans_convertURL('',$language).'" rel="alternate" />'."\n";
-	}	
-}
+/* mqTranslate Hooks */
 
 function qtrans_localeForCurrentLanguage($locale) {
 	if (!defined('QTRANS_INIT'))
@@ -50,59 +28,20 @@ function qtrans_localeForCurrentLanguage($locale) {
 	
 	global $q_config;
 	// try to figure out the correct locale
+	$lang = $q_config['language'];
+	$locale_lang = $q_config['locale'][$lang];
 	$locale = array();
-	$locale[] = $q_config['locale'][$q_config['language']].".utf8";
-	$locale[] = $q_config['locale'][$q_config['language']]."@euro";
-	$locale[] = $q_config['locale'][$q_config['language']];
-	$locale[] = $q_config['windows_locale'][$q_config['language']];
-	$locale[] = $q_config['language'];
+	$locale[] = $locale_lang.".utf8";
+	$locale[] = $locale_lang."@euro";
+	$locale[] = $locale_lang;
+	$locale[] = $q_config['windows_locale'][$lang];
+	$locale[] = $lang;
 	
 	// return the correct locale and most importantly set it (wordpress doesn't, which is bad)
 	// only set LC_TIME as everyhing else doesn't seem to work with windows
 	setlocale(LC_TIME, $locale);
 	
-	return $q_config['locale'][$q_config['language']];
-}
-
-function qtrans_optionFilter($do = true) {
-	$options = array(	'option_widget_pages',
-						'option_widget_archives',
-						'option_widget_meta',
-						'option_widget_calendar',
-						'option_widget_text',
-						'option_widget_categories',
-						'option_widget_recent_entries',
-						'option_widget_recent_comments',
-						'option_widget_rss',
-						'option_widget_tag_cloud'
-					);
-	
-	foreach ($options as $option) {
-		if ($do)
-			add_filter($option, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
-		else
-			remove_filter($option, 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage');
-	}
-}
-
-function qtrans_adminHeader() {
-	echo "<style type=\"text/css\" media=\"screen\">\n";
-	echo ".qtrans_title_input { border:0pt none; font-size:1.7em; outline-color:invert; outline-style:none; outline-width:medium; padding: 3px 8px; width:100%; }\n";
-	echo ".qtrans_title_wrap { border: 0 none; padding: 0; }\n";
-	echo "#qtrans_textarea_content { padding:6px; border:0 none; line-height:150%; outline: none; margin:0pt; width:100%; -moz-box-sizing: border-box;";
-	echo	"-webkit-box-sizing: border-box; -khtml-box-sizing: border-box; box-sizing: border-box; }\n";
-	echo ".qtrans_title { -moz-border-radius: 6px 6px 0 0;";
-	echo	"-webkit-border-top-right-radius: 6px; -webkit-border-top-left-radius: 6px; -khtml-border-top-right-radius: 6px; -khtml-border-top-left-radius: 6px;";
-	echo	"border-top-right-radius: 6px; border-top-left-radius: 6px; }\n";
-	echo ".hide-if-no-js.wp-switch-editor.switch-tmce { margin-left:6px !important;}";
-	echo "#mqtranslate_debug { width:100%; height:200px }";
-	echo "#postexcerpt textarea { height:4em; margin:0; width:98% }";
-	echo ".mqtranslate_lang_div { float:right; height:12px; width:18px; padding:6px 5px 8px 5px; cursor:pointer }";
-	echo ".mqtranslate_lang_div.active { background: #DFDFDF; border-left:1px solid #D0D0D0; border-right: 1px solid #F7F7F7; padding:6px 4px 8px 4px }";
-	echo "#post-body-content .postarea { margin-bottom: 10px; }";
-	do_action('mqtranslate_css');
-	echo "</style>\n";
-	return qtrans_optionFilter(false);
+	return $$locale_lang;
 }
 
 function qtrans_useCurrentLanguageIfNotFoundShowAvailable($content) {
@@ -126,14 +65,6 @@ function qtrans_useDefaultLanguage($content) {
 	return qtrans_use($q_config['default_language'], $content, false);
 }
 
-function qtrans_excludeUntranslatedPosts($where) {
-	global $q_config, $wpdb;
-	if($q_config['hide_untranslated'] && !is_singular()) {
-		$where .= " AND $wpdb->posts.post_content LIKE '%<!--:".qtrans_getLanguage()."-->%'";
-	}
-	return $where;
-}
-
 function qtrans_excludePages($pages) {
 	global $wpdb, $q_config;
 	static $exclude = 0;
@@ -146,16 +77,6 @@ function qtrans_excludePages($pages) {
 		$exclude[] = $page->id;
 	}
 	return array_merge($exclude, $pages);
-}
-
-function qtrans_postsFilter($posts) {
-	if(is_array($posts)) {
-		foreach($posts as $post) {
-			$post->post_content = qtrans_useCurrentLanguageIfNotFoundShowAvailable($post->post_content);
-			$post = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($post);
-		}
-	}
-	return $posts;
 }
 
 function qtrans_links($links, $file){ // copied from Sociable Plugin
@@ -203,10 +124,6 @@ function qtrans_versionLocale() {
 	return 'en_US';
 }
 
-function qtrans_esc_html($text) {
-	return qtrans_useDefaultLanguage($text);
-}
-
 function qtrans_useRawTitle($title, $raw_title = '', $context = 'save') {
 	if($raw_title=='') $raw_title = $title;
 	if('save'==$context) {
@@ -248,16 +165,27 @@ function qtrans_supercache_dir($uri) {
 }
 add_filter('supercache_dir',					'qtrans_supercache_dir',0);
 
+function qtrans_gettext($translated_text) {
+	global $q_config;
+	if (!isset($q_config['language']))
+		return $translated_text;
+	return qtrans_use($q_config['language'], $translated_text, false);
+}
+
+function qtrans_gettext_with_context($translated_text) {
+	global $q_config;
+	if(!isset($q_config['language']))
+		return $translated_text;
+	return qtrans_use($q_config['language'], $translated_text, false);
+}
+
 // Hooks (Actions)
-add_action('wp_head',						'qtrans_header');
 add_action('widgets_init',					'qtrans_widget_init'); 
 add_action('plugins_loaded',				'qtrans_init', 2);
-add_action('init', 							'qtrans_postInit');
-add_action('admin_head',					'qtrans_adminHeader');
-add_action('admin_menu',					'qtrans_adminMenu');
-add_action('wp_before_admin_bar_render',	'qtrans_fixAdminBar');
 
 // Hooks (execution time critical filters) 
+add_filter('gettext',						'qtrans_gettext',0);
+add_filter('gettext_with_context',			'qtrans_gettext_with_context',0);
 add_filter('the_content',					'qtrans_useCurrentLanguageIfNotFoundShowAvailable', 0);
 add_filter('the_excerpt',					'qtrans_useCurrentLanguageIfNotFoundShowAvailable', 0);
 add_filter('the_excerpt_rss',				'qtrans_useCurrentLanguageIfNotFoundShowAvailable', 0);
@@ -303,6 +231,10 @@ add_filter( "_wp_post_revision_field_post_content", 'qtrans_showAllSeperated', 0
 add_filter( "_wp_post_revision_field_post_excerpt", 'qtrans_showAllSeperated', 0);
 add_filter('get_the_author_description', 	'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage');
 
+add_filter('_wp_post_revision_field_post_title', 'qtrans_showAllSeperated', 0);
+add_filter('_wp_post_revision_field_post_content', 'qtrans_showAllSeperated', 0);
+add_filter('_wp_post_revision_field_post_excerpt', 'qtrans_showAllSeperated', 0);
+
 // Hooks (execution time non-critical filters) 
 add_filter('author_feed_link',				'qtrans_convertURL');
 add_filter('author_link',					'qtrans_convertURL');
@@ -336,49 +268,3 @@ add_filter('plugin_action_links', 			'qtrans_links', 10, 2);
 add_filter('manage_language_columns',		'qtrans_language_columns');
 add_filter('core_version_check_locale',		'qtrans_versionLocale');
 add_filter('redirect_canonical',			'qtrans_checkCanonical', 10, 2);
-
-// skip this filters if on backend
-if (defined('WP_ADMIN')) {
-	add_action('admin_bar_menu',			'add_language_menu', 999);
-	
-	add_filter('admin_head',				'qtrans_add_css');
-	add_filter('admin_head',				'qtrans_add_admin_lang_icons');
-	
-	add_filter('admin_head',				'qtrans_add_config');
-	add_filter('admin_head',				'qtrans_add_js');
-	
-	add_filter('get_term',					'qtrans_useAdminTermLib',0);
-	add_filter('get_terms',					'qtrans_useAdminTermLib',0);
-}
-else {
-	add_filter('wp_head',					'qtrans_add_css');
-	add_filter('wp_head',					'qtrans_add_lang_icons');
-		
-	add_filter('the_posts',					'qtrans_postsFilter');
-	add_filter('wp_setup_nav_menu_item',	'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage');
-	
-	// Compability with Default Widgets
-	qtrans_optionFilter();
-	add_filter('widget_title',				'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
-	add_filter('widget_text',				'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
-	
-	// filter options
-	add_filter('esc_html',					'qtrans_esc_html', 0);
-	// don't filter untranslated posts in admin
-	add_filter('posts_where_request',		'qtrans_excludeUntranslatedPosts');
-	
-	// leave terms in default language
-	add_filter('cat_row',					'qtrans_useTermLib',0);
-	add_filter('cat_rows',					'qtrans_useTermLib',0);
-	add_filter('wp_get_object_terms',		'qtrans_useTermLib',0);
-	add_filter('single_tag_title',			'qtrans_useTermLib',0);
-	add_filter('single_cat_title',			'qtrans_useTermLib',0);
-	add_filter('the_category',				'qtrans_useTermLib',0);
-	add_filter('get_term',					'qtrans_useTermLib',0);
-	add_filter('get_terms',					'qtrans_useTermLib',0);
-	add_filter('get_category',				'qtrans_useTermLib',0);
-	add_filter('get_comment_author',		'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
-	add_filter('the_author',				'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
-	
-	add_filter('tml_title',					'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage',0);
-}

@@ -33,16 +33,14 @@
 
 /* Language menu items */
 
-.qtrans-lang-menu
+.qtrans-lang-menu img
 {
-	background-position: 8px 15px;
-	padding-left: 32px;
+	vertical-align: middle;
 }
 
-.qtrans-lang-menu-item
+.qtrans-lang-menu-item img
 {
-	padding-left: 32px;
-	background-position: 8px;
+	vertical-align: middle;
 }
 
 /* Admin bar language icons */
@@ -77,38 +75,8 @@
 
 /* qtranslate widget */
 
-.top-widget
-{
+.top-widget {
 	width: auto;
-}
-.widget_qtranslate ul li
-{
-	display: inline;
-	list-style-type: none;
-	opacity: 0.5;
-	-o-transition: 1s ease opacity;
-	-moz-transition: 1s ease opacity;
-	-webkit-transition: 1s ease opacity;
-	transition: 1s ease opacity;
-}
-.widget_qtranslate ul
-{
-	margin: 0;
-}
-
-.widget_qtranslate ul li.active
-{
-	opacity: 0.8;
-}
-.widget_qtranslate ul li:hover
-{
-	opacity: 1;
-}
-
-.widget_qtranslate img
-{
-	box-shadow: none;
-	vertical-align: middle;
 }
 
 #qtranslate_languages_menu img {

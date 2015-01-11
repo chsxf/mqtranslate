@@ -17,6 +17,117 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+if ( !defined('ABSPATH') ) exit;
+
+require_once(dirname(__FILE__)."/admin/import_export.php");
+require_once(dirname(__FILE__)."/admin/activation_hook.php");
+
+function qtrans_update_config()
+{
+	//if(!defined('WP_ADMIN')) return;
+	if(!current_user_can('manage_options')) return;
+	if(isset($_POST['mqtranslate_reset']) && isset($_POST['mqtranslate_reset2'])) {
+		// reset all settings
+		delete_option('mqtranslate_language_names');
+		delete_option('mqtranslate_enabled_languages');
+		delete_option('mqtranslate_default_language');
+		delete_option('mqtranslate_flag_location');
+		delete_option('mqtranslate_flags');
+		delete_option('mqtranslate_locales');
+		delete_option('mqtranslate_na_messages');
+		delete_option('mqtranslate_date_formats');
+		delete_option('mqtranslate_time_formats');
+		delete_option('mqtranslate_use_strftime');
+		delete_option('mqtranslate_ignore_file_types');
+		delete_option('mqtranslate_url_mode');
+		delete_option('mqtranslate_detect_browser_language');
+		delete_option('mqtranslate_hide_untranslated');
+		delete_option('mqtranslate_show_displayed_language_prefix');
+		delete_option('mqtranslate_auto_update_mo');
+		delete_option('mqtranslate_next_update_mo');
+		delete_option('mqtranslate_hide_default_language');
+		delete_option('mqtranslate_custom_fields');
+		delete_option('mqtranslate_ul_lang_protection');
+		delete_option('mqtranslate_allowed_custom_post_types');
+		delete_option('mqtranslate_disable_header_css');
+		delete_option('mqtranslate_disable_client_cookies');
+		delete_option('mqtranslate_use_secure_cookie');
+		delete_option('mqtranslate_filter_all_options');
+		if(isset($_POST['mqtranslate_reset3'])) {
+			delete_option('mqtranslate_term_name');
+			delete_option('mqtranslate_widget_css');
+		}
+	}
+}
+add_action('qtrans_init_begin','qtrans_update_config',10);
+
+function qtrans_add_admin_js ()
+{
+	wp_enqueue_script( 'qtranslate-script', plugins_url( '/qtranslate.js', __FILE__ ) );
+	
+	wp_dequeue_script( 'autosave' );
+	wp_deregister_script( 'autosave' ); //autosave script saves the active language only and messes it up later in a hard way
+	
+	$keys = array('enabled_languages','default_language','language','term_name','custom_fields','custom_field_classes','url_mode');
+	foreach ($keys as $key)
+		$config[$key]=$q_config[$key];
+	$config['url_info_home']=$q_config['url_info']['home'];
+	$config['flag_location']=trailingslashit(WP_CONTENT_URL).$q_config['flag_location'];
+	$config['flag']=array();
+	$config['language_name']=array();
+	if (is_array($q_config['enabled_languages'])) {
+		foreach($q_config['enabled_languages'] as $lang) {
+			$config['flag'][$lang]=$q_config['flag'][$lang];
+			$config['language_name'][$lang]=$q_config['language_name'][$lang];
+		}
+	}
+?>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		var qTranslateConfig=<?php echo json_encode($config); ?>;
+		function qtrans_getcookie(cname)
+		{
+			var nm = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++) {
+				var c = ca[i];
+				var p = c.indexOf(nm);
+				if (p >= 0) return c.substring(p+nm.length,c.length);
+			}
+			return '';
+		}
+		function qtrans_delcookie(cname)
+		{
+			var date = new Date();
+			date.setTime(date.getTime()-(24*60*60*1000));
+			document.cookie=cname+'=; expires='+date.toGMTString();
+		}
+		function qtrans_readShowHideCookie(id) {
+			var e=document.getElementById(id);
+			if(!e) return;
+			if(qtrans_getcookie(id)){
+				e.style.display='block';
+			}else{
+				e.style.display='none';
+			}
+		}
+		function qtrans_toggleShowHide(id) {
+			var e = document.getElementById(id);
+			if (e.style.display == 'block'){
+				qtrans_delcookie(id);
+				e.style.display = 'none';
+			}else{
+				document.cookie=id+'=1';
+				e.style.display='block';
+			}
+			return false;
+		}
+	<?php do_action('qtranslate_js'); ?>
+	/* ]]> */
+	</script>
+<?php
+}
+
 function qtrans_add_admin_lang_icons ()
 {
 	global $q_config;
@@ -36,13 +147,27 @@ function qtrans_add_admin_lang_icons ()
 <?php 
 }
 
+function qtrans_add_admin_css() {
+	qtrans_add_admin_lang_icons();
+	echo "<style type=\"text/css\" media=\"screen\">\n";
+	do_action('qtranslate_css');
+	echo "</style>\n";
+}
+
+function qtrans_admin_head() {
+	wp_enqueue_style( 'qtranslate-admin-style', plugins_url('mqtranslate_configuration.css', __FILE__) );
+	qtrans_add_admin_css();
+	qtrans_add_admin_js();
+	qtrans_optionFilter('disable');
+}
+
 /* mqTranslate Management Interface */
 function qtrans_adminMenu() {
 	/* Configuration Page */
-	add_options_page(__('Language Management', 'mqtranslate'), __('Languages', 'mqtranslate'), 'manage_options', 'mqtranslate', 'mqtranslate_conf');
+	add_options_page(__('Language Management', 'mqtranslate'), __('Languages', 'mqtranslate'), 'manage_options', 'mqtranslate', 'qtrans_conf');
 }
 
-function mqtranslate_language_form($lang = '', $language_code = '', $language_name = '', $language_locale = '', $language_date_format = '', $language_time_format = '', $language_flag ='', $language_na_message = '', $language_default = '', $original_lang='') {
+function qtrans_language_form($lang = '', $language_code = '', $language_name = '', $language_locale = '', $language_date_format = '', $language_time_format = '', $language_flag ='', $language_na_message = '', $language_default = '', $original_lang='') {
 	global $q_config;
 ?>
 <input type="hidden" name="original_lang" value="<?php echo $original_lang; ?>" />
@@ -127,57 +252,81 @@ function mqtranslate_language_form($lang = '', $language_code = '', $language_na
 <?php
 }
 
-function qtrans_checkSetting($var, $updateOption = false, $type = QT_STRING) {
+function qtrans_updateSetting($var, $type = QT_STRING) {
 	global $q_config;
-	switch($type) {
+	if (!isset($_POST['submit']))
+		return false;
+	switch ($type) {
 		case QT_URL:
-			$_POST[$var] = trailingslashit($_POST[$var]);
 		case QT_LANGUAGE:
 		case QT_STRING:
-			if(isset($_POST['submit']) && isset($_POST[$var])) {
-				if($type != QT_LANGUAGE || qtrans_isEnabled($_POST[$var])) {
-					$q_config[$var] = $_POST[$var];
-				}
-				if($updateOption) {
-					update_option('mqtranslate_'.$var, $q_config[$var]);
-				}
+			if (isset($_POST[$var])) {
+				if ($type == QT_URL)
+					$_POST[$var] = trailingslashit($_POST[$var]);
+				if ($q_config[$var] == $_POST[$var] || ($type == QT_LANGUAGE && !qtrans_isEnabled($_POST[$var])))
+					return false;
+				$q_config[$var] = $_POST[$var];
+				update_option('mqtranslate_'.$var, $q_config[$var]);
 				return true;
-			} else {
-				return false;
+			}
+			break;
+		case QT_ARRAY:
+			if (isset($_POST[$var])) {
+				$val = preg_split('/[\s,]+/',$_POST[$var]);
+				if (qtrans_array_compare($q_config[$var], $val))
+					return false;
+				$q_config[$var] = $val;
+				update_option('mqtranslate_'.$var, $q_config[$var]);
+				return true;
 			}
 			break;
 		case QT_BOOLEAN:
-			if(isset($_POST['submit'])) {
-				if(isset($_POST[$var])&&$_POST[$var]==1) {
-					$q_config[$var] = true;
-				} else {
-					$q_config[$var] = false;
-				}
-				if($updateOption) {
-					if($q_config[$var]) {
-						update_option('mqtranslate_'.$var, '1');
-					} else {
-						update_option('mqtranslate_'.$var, '0');
-					}
-				}
+			if (isset($_POST[$var])) {
+				if (empty($q_config[$var]) == empty($_POST[$var]))
+					return false;
+				$q_config[$var] = !empty($_POST[$var]);
+				update_option('mqtranslate_'.$var, empty($q_config[$var]) ? '0' : '1');
 				return true;
-			} else {
-				return false;
 			}
 			break;
 		case QT_INTEGER:
-			if(isset($_POST['submit']) && isset($_POST[$var])) {
-				$q_config[$var] = intval($_POST[$var]);
-				if($updateOption) {
-					update_option('mqtranslate_'.$var, $q_config[$var]);
-				}
+			if (isset($_POST[$var])) {
+				$val = intval($_POST[$var]);
+				if ($q_config[$var] == $val)
+					return false;
+				$q_config[$var] = $val;
+				update_option('mqtranslate_'.$var, $q_config[$var]);
 				return true;
-			} else {
-				return false;
 			}
 			break;
 	}
 	return false;
+}
+
+function qtrans_updateSettingIgnoreFileTypes() {
+	global $q_config;
+	if(!isset($_POST['submit'])) return false;
+	$var='ignore_file_types';
+	if(!isset($_POST[$var])) return false;
+	$posted=preg_split('/[\s,]+/',strtolower($_POST[$var]));
+	$val=explode(',',QT_IGNORE_FILE_TYPES);
+	foreach($posted as $v){
+		if(empty($v)) continue;
+		if(in_array($v,$val)) continue;
+		$val[]=$v;
+	}
+	if( qtrans_array_compare($q_config[$var],$val) ) return false;
+	$q_config[$var] = $val;
+	update_option('mqtranslate_'.$var, implode(',',$val));
+	return true;
+}
+
+function qtrans_array_compare($a,$b) {
+	if(count($a)!=count($b)) return false;
+	//can be optimized
+	$diff_a = array_diff($a,$b);
+	$diff_b = array_diff($b,$a);
+	return empty($diff_a) && empty($diff_b);
 }
 
 function qtrans_language_columns($columns) {
@@ -190,7 +339,28 @@ function qtrans_language_columns($columns) {
 				);
 }
 
-function mqtranslate_conf() {
+function qtrans_useAdminTermLib($obj) {
+	if ($_SERVER["SCRIPT_NAME"]==="/wp-admin/edit-tags.php" && strstr($_SERVER["QUERY_STRING"], "action=edit" ))
+		return $obj;
+	else
+		return qtrans_useTermLib($obj);
+}
+
+function qtrans_admin_section_start($section, $nm) {
+	echo '<h3>'.$section.'<span id="qtrans-show-'.$nm.'"> ( <a name="qtranslate_'.$nm.'_settings" href="#" onclick="return toggleShowHide(\'qtranslate-admin-'.$nm.'\');">'.__('Show', 'qtranslate').' / '.__('Hide', 'qtranslate').'</a> )</span>';
+}
+
+function qtrans_admin_section_end($nm) {
+?>
+<script type="text/javascript">
+/* <![CDATA[ */
+	qtrans_readShowHideCookie('qtranslate-admin-<?php echo $nm; ?>');
+/* ]]> */
+</script>
+<?php
+}
+
+function qtrans_conf() {
 	global $q_config, $wpdb;
 	
 	// do redirection for dashboard
@@ -219,20 +389,23 @@ function mqtranslate_conf() {
 		$message = __('mqTranslate has been reset.', 'mqtranslate');
 	} elseif(isset($_POST['default_language'])) {
 		// save settings
-		qtrans_checkSetting('default_language',			true, QT_LANGUAGE);
-		qtrans_checkSetting('flag_location',			true, QT_URL);
-		qtrans_checkSetting('ignore_file_types',		true, QT_STRING);
-		qtrans_checkSetting('detect_browser_language',	true, QT_BOOLEAN);
-		qtrans_checkSetting('hide_untranslated',		true, QT_BOOLEAN);
-		qtrans_checkSetting('show_displayed_language_prefix', true, QT_BOOLEAN);
-		qtrans_checkSetting('use_strftime',				true, QT_INTEGER);
-		qtrans_checkSetting('url_mode',					true, QT_INTEGER);
-		qtrans_checkSetting('auto_update_mo',			true, QT_BOOLEAN);
-		qtrans_checkSetting('hide_default_language',	true, QT_BOOLEAN);
-		qtrans_checkSetting('disable_header_css',		true, QT_BOOLEAN);
-		qtrans_checkSetting('disable_client_cookies',	true, QT_BOOLEAN);
-		qtrans_checkSetting('use_secure_cookie', 		true, QT_BOOLEAN);
-		qtrans_checkSetting('filter_all_options', 		true, QT_BOOLEAN);
+		qtrans_updateSetting('default_language',		QT_LANGUAGE);
+		qtrans_updateSetting('flag_location',			QT_URL);
+		qtrans_updateSettingIgnoreFileTypes();
+		qtrans_updateSetting('detect_browser_language',	QT_BOOLEAN);
+		qtrans_updateSetting('hide_untranslated',		QT_BOOLEAN);
+		qtrans_updateSetting('show_displayed_language_prefix', QT_BOOLEAN);
+		qtrans_updateSetting('use_strftime',			QT_INTEGER);
+		qtrans_updateSetting('url_mode',				QT_INTEGER);
+		qtrans_updateSetting('auto_update_mo',			QT_BOOLEAN);
+		qtrans_updateSetting('hide_default_language',	QT_BOOLEAN);
+		qtrans_updateSetting('custom_fields', 			QT_ARRAY);
+		qtrans_updateSetting('custom_field_classes', 	QT_ARRAY);
+		qtrans_updateSetting('text_field_filters', 		QT_ARRAY);
+		qtrans_updateSetting('disable_header_css',		QT_BOOLEAN);
+		qtrans_updateSetting('disable_client_cookies',	QT_BOOLEAN);
+		qtrans_updateSetting('use_secure_cookie', 		QT_BOOLEAN);
+		qtrans_updateSetting('filter_all_options', 		QT_BOOLEAN);
 		
 		if (isset($_POST['allowed_custom_post_types']))
 		{
@@ -430,7 +603,7 @@ function mqtranslate_conf() {
 			@unlink(trailingslashit(WP_LANG_DIR).'mqtranslate.test');
 		}
 	}
-	// don't accidently delete/enable/disable twice
+	// don't accidentally delete/enable/disable twice
 	$clean_uri = preg_replace("/&(delete|enable|disable|convert|markdefault|moveup|movedown)=[^&#]*/i","",$_SERVER['REQUEST_URI']);
 	$clean_uri = apply_filters('mqtranslate_clean_uri', $clean_uri);
 
@@ -448,7 +621,7 @@ function mqtranslate_conf() {
 <div class="wrap">
 <h2><?php _e('Edit Language', 'mqtranslate'); ?></h2>
 <form action="" method="post" id="mqtranslate-edit-language">
-<?php mqtranslate_language_form($language_code, $language_code, $language_name, $language_locale, $language_date_format, $language_time_format, $language_flag, $language_na_message, $language_default, $original_lang); ?>
+<?php qtrans_language_form($language_code, $language_code, $language_name, $language_locale, $language_date_format, $language_time_format, $language_flag, $language_na_message, $language_default, $original_lang); ?>
 <p class="submit"><input type="submit" name="submit" value="<?php _e('Save Changes &raquo;', 'mqtranslate'); ?>" /></p>
 </form>
 </div>
@@ -457,8 +630,8 @@ function mqtranslate_conf() {
 <h2><?php _e('Language Management (mqTranslate Configuration)', 'mqtranslate'); ?></h2> 
 <div class="tablenav"><?php printf(__('For help on how to configure mqTranslate correctly, take a look at the <a href="%1$s">qTranslate FAQ</a> and the <a href="%2$s">Support Forum</a>.', 'mqtranslate'), 'http://www.qianqin.de/qtranslate/faq/', 'http://www.qianqin.de/qtranslate/forum/viewforum.php?f=3'); ?></div>
 	<form action="<?php echo $clean_uri;?>" method="post">
-		<h3><?php _e('General Settings', 'mqtranslate') ?></h3>
-		<table class="form-table">
+		<?php qtrans_admin_section_start(__('General Settings', 'mqtranslate'), 'general'); ?>
+		<table class="form-table" id="qtranslate-admin-general">
 			<tr>
 				<th scope="row"><?php _e('Default Language / Order', 'mqtranslate') ?></th>
 				<td>
@@ -477,7 +650,7 @@ function mqtranslate_conf() {
 					}
 				?>
 					</br>
-					<?php printf(__('Choose the default language of your blog. This is the language which will be shown on %s. You can also change the order the languages by clicking on the arrows above.', 'mqtranslate'), get_bloginfo('url')); ?>
+					<small><?php printf(__('Choose the default language of your blog. This is the language which will be shown on %s. You can also change the order the languages by clicking on the arrows above.', 'mqtranslate'), get_bloginfo('url')); ?></small>
 					</fieldset>
 				</td>
 			</tr>
@@ -506,15 +679,18 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 		</table>
-		<h3><?php _e('Advanced Settings', 'mqtranslate') ?><span id="mqtranslate-show-advanced"> (<a name="advanced_settings" href="#" onclick="return showAdvanced();"><?php _e('Show / Hide', 'mqtranslate'); ?></a>)</span></h3>
-		<table class="form-table" id="mqtranslate-advanced" style="display: none">
+		<?php
+			qtrans_admin_section_end('general');
+			qtrans_admin_section_start(__('Advanced Settings', 'mqtranslate'), 'advanced');
+		?>
+		<table class="form-table" id="qtranslate-admin-advanced" style="display: none">
 			<tr>
 				<th scope="row"><?php _e('URL Modification Mode', 'mqtranslate') ?></th>
 				<td>
 					<fieldset><legend class="hidden"><?php _e('URL Modification Mode', 'mqtranslate') ?></legend>
-						<label title="Query Mode"><input type="radio" name="url_mode" value="<?php echo QT_URL_QUERY; ?>" <?php echo ($q_config['url_mode']==QT_URL_QUERY)?"checked=\"checked\"":""; ?> /> <?php _e('Use Query Mode (?lang=en)', 'mqtranslate'); ?></label><br />
-						<label title="Pre-Path Mode"><input type="radio" name="url_mode" value="<?php echo QT_URL_PATH; ?>" <?php echo ($q_config['url_mode']==QT_URL_PATH)?"checked=\"checked\"":""; ?> /> <?php _e('Use Pre-Path Mode (Default, puts /en/ in front of URL)', 'mqtranslate'); ?></label><br />
-						<label title="Pre-Domain Mode"><input type="radio" name="url_mode" value="<?php echo QT_URL_DOMAIN; ?>" <?php echo ($q_config['url_mode']==QT_URL_DOMAIN)?"checked=\"checked\"":""; ?> /> <?php _e('Use Pre-Domain Mode (uses http://en.yoursite.com)', 'mqtranslate'); ?></label><br />
+						<label title="Pre-Path Mode"><input type="radio" name="url_mode" value="<?php echo QT_URL_PATH; ?>" <?php echo ($q_config['url_mode']==QT_URL_PATH)?"checked=\"checked\"":""; ?> /> <?php _e('Use Pre-Path Mode (Default, puts /en/ in front of URL) - SEO friendly', 'mqtranslate'); ?></label><br />
+						<label title="Pre-Domain Mode"><input type="radio" name="url_mode" value="<?php echo QT_URL_DOMAIN; ?>" <?php echo ($q_config['url_mode']==QT_URL_DOMAIN)?"checked=\"checked\"":""; ?> /> <?php _e('Use Pre-Domain Mode (uses http://en.yoursite.com) - You will need to configure sub-domains on your site.', 'mqtranslate'); ?></label><br />
+						<label title="Query Mode"><input type="radio" name="url_mode" value="<?php echo QT_URL_QUERY; ?>" <?php echo ($q_config['url_mode']==QT_URL_QUERY)?"checked=\"checked\"":""; ?> /> <?php _e('Use Query Mode (?lang=en) - Least SEO friendly, not recommended', 'mqtranslate'); ?></label><br />
 					</fieldset>
 					<small>
 					<?php _e('Pre-Path and Pre-Domain mode will only work with mod_rewrite/pretty permalinks. Additional Configuration is needed for Pre-Domain mode!', 'mqtranslate'); ?>
@@ -599,35 +775,30 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><?php _e('Reset mqTranslate', 'mqtranslate');?></th>
+				<th scope="row"><?php _e('Custom Fields', 'qtranslate');?></th>
 				<td>
-					<label for="mqtranslate_reset"><input type="checkbox" name="mqtranslate_reset" id="mqtranslate_reset" value="1"/> <?php _e('Check this box and click Save Changes to reset all mqTranslate settings.', 'mqtranslate'); ?></label>
-					<br/>
-					<label for="mqtranslate_reset2"><input type="checkbox" name="mqtranslate_reset2" id="mqtranslate_reset2" value="1"/> <?php _e('Yes, I really want to reset mqTranslate.', 'mqtranslate'); ?></label>
-					<br/>
-					<label for="mqtranslate_reset3"><input type="checkbox" name="mqtranslate_reset3" id="mqtranslate_reset3" value="1"/> <?php _e('Also delete Translations for Categories/Tags/Link Categories.', 'mqtranslate'); ?></label>
-					<br/>
-					<small><?php _e('If something isn\'t working correctly, you can always try to reset all mqTranslate settings. A Reset won\'t delete any posts but will remove all settings (including all languages added).', 'mqtranslate'); ?></small>
+					<?php printf(__('Enter "id" or "class" attribute of text fields from your theme, which you wish to translate. This applies to post, page and media editors (/wp-admin/post*). To lookup "id" or "class", right-click on the field in the post or the page editor and choose "Inspect Element". Look for an attribute of the field named "id" or "class". Enter it below, as many as you need, space- or comma-separated. After saving configuration, these fields will start responding to the language switching buttons, and you can enter different text for each language. The input fields of type %s will be parsed using %s syntax, while single line text fields will use %s syntax. If you need to override this behaviour, prepend prefix %s or %s to the name of the field to specify which syntax to use. For more information, read %sFAQ%s.', 'qtranslate'),'\'textarea\'',esc_html('<!--:-->'),'[:]','\'<\'','\'[\'','<a href="https://wordpress.org/plugins/qtranslate-x/faq/">','</a>'); ?>
 				</td>
 			</tr>
-			<tr>
-				<th scope="row"><?php _e('Convert Database', 'mqtranslate');?></th>
+			<tr valign="top">
+				<th scope="row" style="text-align: right">id:</th>
 				<td>
-					<?php printf(__('If you are updating from qTranslate 1.x or Polyglot, <a href="%s">click here</a> to convert posts to the new language tag format.', 'mqtranslate'), $clean_uri.'&convert=true'); ?>
-					<?php printf(__('If you have installed mqTranslate for the first time on a Wordpress with existing posts, you can either go through all your posts manually and save them in the correct language or <a href="%s">click here</a> to mark all existing posts as written in the default language.', 'mqtranslate'), $clean_uri.'&markdefault=true'); ?>
-					<?php _e('Both processes are <b>irreversible</b>! Be sure to make a full database backup before clicking one of the links.', 'mqtranslate'); ?>
+					<input type="text" name="custom_fields" id="qtrans_custom_fields" value="<?php echo implode(' ',$q_config['custom_fields']); ?>" style="width:100%"><br />
+					<small><?php _e('The value of "id" attribute is normally unique within one page, otherwise the first field found, having an id specified, is picked up.', 'qtranslate'); ?></small>
 				</td>
 			</tr>
-			<tr>
-				<th scope="row"><?php _e('Settings Migration', 'mqtranslate');?></th>
+			<tr valign="top">
+				<th scope="row" style="text-align: right">class:</th>
 				<td>
-					<label for="mqtranslate_no_migration"><input type="radio" name="mqtranslate_migration" id="mqtranslate_no_migration" value="none" checked /> <?php _e('Do not migrate any setting', 'mqtranslate'); ?></label>
-					<br/>
-					<label for="mqtranslate_import_migration"><input type="radio" name="mqtranslate_migration" id="mqtranslate_import_migration" value="import" /> <?php _e('Import settings from qTranslate', 'mqtranslate'); ?></label>
-					<br/>
-					<label for="mqtranslate_export_migration"><input type="radio" name="mqtranslate_migration" id="mqtranslate_export_migration" value="export" /> <?php _e('Export settings to qTranslate', 'mqtranslate'); ?></label>
-					<br/>
-					<label for="mqtranslate_export_migration_option"><input type="checkbox" name="mqtranslate_export_migration_option" id="mqtranslate_export_migration_option" value="1" checked /> <?php _e('Export settings only if qTranslate is installed.', 'mqtranslate'); ?></label>
+					<input type="text" name="custom_field_classes" id="qtrans_custom_field_classes" value="<?php echo implode(' ',$q_config['custom_field_classes']); ?>" style="width:100%"><br>
+					<small><?php printf(__('All the fields of specified classes will respond to Language Switching Buttons. Be careful not to include a class, which would affect language-neutral fields. If you cannot uniquely identify a field needed neither by %s, nor by %s attribute, report the issue on %sSupport Forum%s', 'qtranslate'),'"id"', '"class"', '<a href="https://wordpress.org/support/plugin/qtranslate-x">','</a>'); ?></small>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"><?php echo __('Custom Filters', 'qtranslate');?></th>
+				<td>
+					<input type="text" name="text_field_filters" id="qtrans_text_field_filters" value="<?php echo implode(' ',$q_config['text_field_filters']); ?>" style="width:100%"><br>
+					<small><?php printf(__('Names of filters (which are enabled on theme or other plugins via %s function) to add translation to. For more information, read %sFAQ%s.', 'qtranslate'),'apply_filters()','<a href="https://wordpress.org/plugins/qtranslate-x/faq/">','</a>'); ?></small>
 				</td>
 			</tr>
 			<tr>
@@ -647,46 +818,7 @@ function mqtranslate_conf() {
 				</td>
 			</tr>
 		</table>
-		<script type="text/javascript">
-		// <![CDATA[
-			function qtrans_getcookie(cname)
-			{
-				var nm = cname + "=";
-				var ca = document.cookie.split(';');
-				for (var i = 0; i < ca.length; i++) {
-					var c = ca[i];
-					var p = c.indexOf(nm);
-					if (p >= 0) return c.substring(p + nm.length, c.length);
-				}
-				return '';
-			}
-			
-			function qtrans_delcookie(cname)
-			{
-				var date = new Date();
-				date.setTime(date.getTime()-(24*60*60*1000));
-				document.cookie=cname+'=; expires='+date.toGMTString();
-			}
-			
-			function showAdvanced() {
-				var el = document.getElementById('qtranslate-advanced');
-				if (el.style.display == 'block') {
-					qtrans_delcookie('ShowAdvanced');
-					el.style.display = 'none';
-				}
-				else {
-					document.cookie='ShowAdvanced=1';
-					el.style.display='block';
-				}
-				return false;
-			}
-			
-			if (qtrans_getcookie('ShowAdvanced'))
-				document.getElementById('qtranslate-advanced').style.display='block';
-			else
-				document.getElementById('qtranslate-advanced').style.display='none';
-		// ]]>
-		</script>
+		<?php qtrans_admin_section_end('advanced'); ?>
 <?php do_action('mqtranslate_configuration', $clean_uri); ?>
 		<p class="submit">
 			<input type="submit" name="submit" class="button-primary" value="<?php _e('Save Changes', 'mqtranslate') ?>" />
@@ -736,7 +868,7 @@ function mqtranslate_conf() {
 <div class="form-wrap">
 <h3><?php _e('Add Language', 'mqtranslate'); ?></h3>
 <form name="addcat" id="addcat" method="post" class="add:the-list: validate">
-<?php mqtranslate_language_form($language_code, $language_code, $language_name, $language_locale, $language_date_format, $language_time_format, $language_flag, $language_default, $language_na_message); ?>
+<?php qtrans_language_form($language_code, $language_code, $language_name, $language_locale, $language_date_format, $language_time_format, $language_flag, $language_default, $language_na_message); ?>
 <p class="submit"><input type="submit" class="button-primary" name="submit" value="<?php _e('Add Language &raquo;', 'mqtranslate'); ?>" /></p>
 </form></div>
 </div>
@@ -787,7 +919,7 @@ function qtrans_nav_menu_metabox( $object )
 	<span class="list-controls hide-if-no-js">
 		<a href="javascript:void(0);" class="help" onclick="jQuery( '#help-login-links' ).toggle();"><?php _e( 'Help' ); ?></a>
 		<span class="hide-if-js" id="help-login-links"><br /><a name="help-login-links"></a>
-		Menu item added is replaced with a sub-menu of available languages when menu is rendered. No customization is available, except class entries in qtranslate.css for .qtrans-lang-menu and .qtrans-lang-menu-item.
+		Menu item added is replaced with a sub-menu of available languages when menu is rendered. Depending on how your theme renders menu you may need to override and customize css entries .qtrans-lang-menu and .qtrans-lang-menu-item, originally defined in qtranslate.css.
 		</span>
 	</span>
 	<p class="button-controls">
@@ -804,4 +936,40 @@ function qtrans_add_nav_menu_metabox()
 {
 	add_meta_box( 'add-qtrans-language-switcher', __( 'Language Switcher' ), 'qtrans_nav_menu_metabox', 'nav-menus', 'side', 'default' );
 }
+function qtrans_add_language_menu( $wp_admin_bar ) 
+{
+	global $q_config;
+	if ( !is_admin() || !is_admin_bar_showing() )
+		return;
+
+	$wp_admin_bar->add_menu( array(
+			'id'   => 'language',
+			'parent' => 'top-secondary',
+			//'meta' => array('class'),
+			'title' => $q_config['language_name'][$q_config['language']]
+		)
+	);
+
+	foreach($q_config['enabled_languages'] as $language)
+	{
+		$wp_admin_bar->add_menu( 
+			array
+			(
+				'id'	 => $language,
+				'parent' => 'language',
+				'title'  => $q_config['language_name'][$language],
+				'href'   => add_query_arg('lang', $language)
+			)
+		);
+	}
+}
+
+add_filter('get_term', 'qtrans_useAdminTermLib',0);
+add_filter('get_terms', 'qtrans_useAdminTermLib',0);
+
+add_action('admin_head', 'qtrans_add_css');
+add_action('admin_menu', 'qtrans_admin_head');
 add_action('admin_head-nav-menus.php', 'qtrans_add_nav_menu_metabox');
+add_action('admin_menu', 'qtrans_adminMenu');
+add_action('admin_bar_menu', 'qtrans_add_language_menu', 999);
+add_action('wp_before_admin_bar_render', 'qtrans_fixAdminBar');
