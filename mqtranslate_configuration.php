@@ -340,7 +340,7 @@ function qtrans_array_compare($a,$b) {
 
 function qtrans_language_columns($columns) {
 	return array(
-				'flag' => 'Flag',
+				'flag' => __('Flag', 'mqtranslate'),
 				'name' => __('Name', 'mqtranslate'),
 				'status' => __('Action', 'mqtranslate'),
 				'status2' => '',
