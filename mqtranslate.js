@@ -659,7 +659,7 @@ var qTranslate=function()
 		default: return;
 	}
 
-	var langSwitchWrap=qtrans_ce('ul', {className: 'qtrans-lang-switch-wrap'});
+	var langSwitchWrap=qtrans_ce('ul', {className: 'qtrans-lang-switch-wrap wp-ui-primary'});
 	{
 		//var header=w.getElementsByTagName('h2')[0];
 		//header.parentNode.insertBefore(langSwitchWrap, header.nextElementSibling);
@@ -688,11 +688,9 @@ function LanguageSwitch(target,initial_language)
 			return;
 		}
 		if (activeLanguage)
-		{
-			tabSwitches[activeLanguage].classList.remove('active');
-		}
+			tabSwitches[activeLanguage].classList.remove('wp-ui-highlight');
 		activeLanguage=tabSwitch.lang;
-		tabSwitch.classList.add('active');
+		tabSwitch.classList.add('wp-ui-highlight');
 		for(var i=0; i<onTabSwitch.length; ++i)
 		{
 			onTabSwitch[i].call(this);
@@ -709,7 +707,7 @@ function LanguageSwitch(target,initial_language)
 		qtrans_ce('span', {innerHTML: langNames[lang]}, tabSwitch);
 		tabSwitches[lang]=tabSwitch;
 		if ( activeLanguage == lang )
-			tabSwitch.classList.add('active');
+			tabSwitch.classList.add('wp-ui-highlight');
 	}
 	this.getActiveLanguage=function()
 	{

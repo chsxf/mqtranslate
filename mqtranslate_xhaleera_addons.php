@@ -239,7 +239,7 @@ function mqtrans_filterPostMetaData($original_value, $object_id, $meta_key, $sin
 function mqtrans_team_options() {
 	global $q_config;
 ?>
-	<?php qtrans_admin_section_start(__('mqTranslate Team Settings', 'mqtranslate'), 'team'); ?>
+	<?php qtrans_admin_section_start(__('Team Settings', 'mqtranslate'), 'team'); ?>
 	<table class="form-table" id="qtranslate-admin-team" style="display: none">
 			<tr>
 				<th scope="row"><?php _e('User-level Language Protection', 'mqtranslate') ?></th>
@@ -275,7 +275,7 @@ add_action('show_user_profile',				'mqtrans_userProfile');
 add_action('profile_update',				'mqtrans_userProfileUpdate');
 add_action('post_updated',					'mqtrans_postUpdated', 10, 3);
 
-add_action('qtranslate_configuration', 		'mqtrans_team_options', 9);
+add_action('qtranslate_configuration_after-general', 		'mqtrans_team_options', 9);
 add_action('qtranslate_loadConfig',			'mqtrans_load_team_options');
 add_action('qtranslate_saveConfig',			'mqtrans_save_team_options');
 ?>

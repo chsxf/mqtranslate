@@ -5,20 +5,10 @@
 
 .qtrans-lang-switch
 {
-	border: 1px solid  #ccc;
-	background-image: linear-gradient(to top,#e5e5e5,#f4f4f4);
-	padding: 3px 8px;
-	margin-right: 4px;
-	cursor: default;
+	padding: 3px 8px 5px 8px;
+	margin: 6px 4px 0 4px;
 	display: inline-block;
-}
-
-.qtrans-lang-switch.active
-{
-	border-color: #888;
-	background-image: none;
-	background-color: #bbb;
-	color: #555;
+	cursor: pointer;
 }
 
 .qtrans-lang-switch > *

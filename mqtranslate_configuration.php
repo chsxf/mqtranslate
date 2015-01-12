@@ -283,10 +283,10 @@ function qtrans_updateSetting($var, $type = QT_STRING) {
 			}
 			break;
 		case QT_BOOLEAN:
-			if (isset($_POST[$var])) {
-				if (empty($q_config[$var]) == empty($_POST[$var]))
-					return false;
-				$q_config[$var] = !empty($_POST[$var]);
+			$val = (isset($_POST[$var]) && !empty($_POST[$var]));
+			if (!empty($q_config[$var]) != $val)
+			{
+				$q_config[$var] = $val;
 				update_option('mqtranslate_'.$var, empty($q_config[$var]) ? '0' : '1');
 				return true;
 			}
@@ -349,6 +349,7 @@ function qtrans_useAdminTermLib($obj) {
 }
 
 function qtrans_admin_section_start($section, $nm) {
+	do_action("qtranslate_configuration_before-{$nm}");
 	echo '<h3>'.$section.'<span id="qtrans-show-'.$nm.'"> ( <a name="qtranslate_'.$nm.'_settings" href="#" onclick="return qtrans_toggleShowHide(\'qtranslate-admin-'.$nm.'\');">'.__('Show', 'mqtranslate').' / '.__('Hide', 'mqtranslate').'</a> )</span></h3>';
 }
 
@@ -360,6 +361,7 @@ function qtrans_admin_section_end($nm) {
 /* ]]> */
 </script>
 <?php
+	do_action("qtranslate_configuration_after-{$nm}");
 }
 
 function qtrans_conf() {

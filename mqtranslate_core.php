@@ -324,8 +324,7 @@ function qtrans_load_option_array($nm) {
 function qtrans_load_option_bool($nm) {
 	global $q_config;
 	$val = get_option('mqtranslate_'.$nm);
-	if($val==='0') $q_config[$nm] = false;
-	elseif($val==='1') $q_config[$nm] = true;
+	$q_config[$nm] = ($val === '1');
 }
 
 // loads config via get_option and defaults to values set on top
@@ -346,8 +345,8 @@ function qtrans_loadConfig() {
 	$ignore_file_types = get_option('mqtranslate_ignore_file_types');
 	$url_mode = get_option('mqtranslate_url_mode');
 	$term_name = get_option('mqtranslate_term_name');
+	
 	$allowed_custom_post_types = get_option('mqtranslate_allowed_custom_post_types');
-	$disable_header_css = get_option('mqtranslate_disable_header_css');
 	$disable_client_cookies = get_option('mqtranslate_disable_client_cookies');
 	$use_secure_cookie = get_option('mqtranslate_use_secure_cookie');
 	$filter_all_options = get_option('mqtranslate_filter_all_options');
@@ -383,9 +382,10 @@ function qtrans_loadConfig() {
 	qtrans_load_option_bool('hide_untranslated');
 	qtrans_load_option_bool('show_displayed_language_prefix');
 	qtrans_load_option_bool('auto_update_mo');
-	qtrans_load_option_bool('hide_default_language');	
+	qtrans_load_option_bool('hide_default_language');
+
+	qtrans_load_option_bool('disable_header_css');
 	
-	$disable_header_css = qtrans_validateBool($disable_header_css, $q_config['disable_header_css']);
 	$disable_client_cookies = qtrans_validateBool($disable_client_cookies, $q_config['disable_client_cookies']);
 	$use_secure_cookie = qtrans_validateBool($use_secure_cookie, $q_config['use_secure_cookie']);
 	$filter_all_options = qtrans_validateBool($filter_all_options, $q_config['filter_all_options']);
@@ -422,8 +422,8 @@ function qtrans_loadConfig() {
 	
 	$q_config['url_mode'] = $url_mode;
 	$q_config['term_name'] = $term_name;
+	
 	$q_config['allowed_custom_post_types'] = $allowed_custom_post_types;
-	$q_config['disable_header_css'] = $disable_header_css;
 	$q_config['disable_client_cookies'] = $disable_client_cookies;
 	$q_config['use_secure_cookie'] = $use_secure_cookie;
 	$q_config['filter_all_options'] = $filter_all_options;

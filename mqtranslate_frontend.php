@@ -4,15 +4,30 @@ if ( !defined( 'ABSPATH' ) ) exit;
 function qtrans_add_lang_icons_css ()
 {
 	global $q_config;
-	echo '<style type="text/css">'.PHP_EOL;
-	foreach($q_config['enabled_languages'] as $lang) 
-		echo '.qtrans_flag_'.$lang.' {background-image: url('.trailingslashit(WP_CONTENT_URL).$q_config['flag_location'].$q_config['flag'][$lang].'); background-repeat: no-repeat;}'.PHP_EOL;
+	
+	if ($q_config['disable_header_css'])
+		return;
+?>
+<style type="text/css">
+/* <![CDATA[ */
+<?php foreach($q_config['enabled_languages'] as $lang) : ?>
+.qtrans_flag_<?= $lang ?> {
+	background-image: url('<?= trailingslashit(WP_CONTENT_URL).$q_config['flag_location'].$q_config['flag'][$lang] ?>');
+	background-repeat: no-repeat;
+}
+<?php 
+	endforeach;
 	do_action('qtrans_head_add_css');
-	echo '</style>'.PHP_EOL;
+?>
+/* ]]> */
+</style>
+<?php
 }
 
 function qtrans_head(){
 	global $q_config;
+?>
+<?php
 	echo "\n<meta http-equiv=\"Content-Language\" content=\"".str_replace('_','-',$q_config['locale'][$q_config['language']])."\" />\n";
 	qtrans_add_lang_icons_css();
 
@@ -103,18 +118,6 @@ function qtrans_get_nav_menu_items( $items, $menu, $args )
 	return $items;
 }
 add_filter( 'wp_get_nav_menu_items',  'qtrans_get_nav_menu_items', 0, 3 );
-
-function qtrans_add_lang_icons ()
-{
-	global $q_config;
-	echo "<style>\n";
-	foreach($q_config['enabled_languages'] as $lang) 
-	{
-		echo '.qtrans-flag-'.$lang.' {background-image: url('.trailingslashit(WP_CONTENT_URL).$q_config['flag_location'].$q_config['flag'][$lang]."); background-repeat: no-repeat;}\n";
-	}
-	echo "</style>\n";
-}
-add_filter('wp_head', 'qtrans_add_lang_icons');
 
 function qtrans_get_attachment_image_attributes($attr, $attachment, $size)
 {
