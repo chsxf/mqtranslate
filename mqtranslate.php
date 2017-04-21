@@ -55,7 +55,7 @@ Tags: multilingual, multi, language, admin, tinymce, qtranslate, mqTranslate, Po
 	Plugin Translation Contributers
 	===============================
 	en, de by Qian Qin
-	es_ES by Alejandro Urrutia
+	es_ES by Alejandro Urrutia, Andres Gomez
 	fr by eriath
 	tr by freeuser
 	it by shecky
