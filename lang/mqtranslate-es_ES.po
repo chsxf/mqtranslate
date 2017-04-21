@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 16:30+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Alejandro Urrutia <alejandro@theindependentproject.com>\n"
+"Last-Translator: Andres Gomez <tanty0@gmail.com>\n"
 "Language-Team: The Independent Project <alejandro@theindependentproject."
 "com>\n"
 "Language: \n"
@@ -958,7 +958,7 @@ msgstr "Selector de idioma qTranslate"
 
 #: ../mqtranslate_widget.inc.php:32
 msgid "Language"
-msgstr "idioma"
+msgstr "Idioma"
 
 #: ../mqtranslate_widget.inc.php:57
 msgid "Title:"
